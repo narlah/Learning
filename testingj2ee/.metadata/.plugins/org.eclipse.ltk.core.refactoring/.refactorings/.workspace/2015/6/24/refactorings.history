@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="Delete resource &apos;Hybernate4HelloWorldProject&apos;" deleteContents="false" description="Delete resource &apos;Hybernate4HelloWorldProject&apos;" element1="/Hybernate4HelloWorldProject" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1433829876448"/>&#x0A;<refactoring comment="Delete resource &apos;SpringMVCHelloWorldProject&apos;" deleteContents="false" description="Delete resource &apos;SpringMVCHelloWorldProject&apos;" element1="/SpringMVCHelloWorldProject" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1433829894552"/>
-</session>
