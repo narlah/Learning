@@ -26,55 +26,6 @@ public class FindNumberSumElementsInARow {
 			}
 		}
 
-		/* (non-Javadoc)
-		 * @see java.lang.Object#hashCode()
-		 */
-		@Override
-		public int hashCode() {
-			final int prime = 479001599;
-			int result = 1;
-			result = prime * result + getOuterType().hashCode();
-			result = prime * result + ((currentName == null) ? 0 : currentName.hashCode());
-			result = prime * result + currentSum;
-			result = prime * result + endIndex;
-			result = prime * result + findThisSum;
-			result = prime * result + Arrays.hashCode(massive);
-			result = prime * result + startIndex;
-			return result;
-		}
-
-		/* (non-Javadoc)
-		 * @see java.lang.Object#equals(java.lang.Object)
-		 */
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj)
-				return true;
-			if (obj == null)
-				return false;
-			if (!(obj instanceof Current))
-				return false;
-			Current other = (Current) obj;
-			if (!getOuterType().equals(other.getOuterType()))
-				return false;
-			if (currentName == null) {
-				if (other.currentName != null)
-					return false;
-			} else if (!currentName.equals(other.currentName))
-				return false;
-			if (currentSum != other.currentSum)
-				return false;
-			if (endIndex != other.endIndex)
-				return false;
-			if (findThisSum != other.findThisSum)
-				return false;
-			if (!Arrays.equals(massive, other.massive))
-				return false;
-			if (startIndex != other.startIndex)
-				return false;
-			return true;
-		}
-
 		public void findCurrent() {
 			if (massive == null || massive.length == 0) {
 				System.out.println("No valid current in a invalid massive.");
@@ -102,8 +53,7 @@ public class FindNumberSumElementsInARow {
 					do {// reduce sum, sI++
 						currentSum -= massive[startIndex];
 						startIndex++;
-						if (startIndex == endIndex && massive[startIndex] > findThisSum
-								&& startIndex < lenght - 1) {
+						if (startIndex == endIndex && massive[startIndex] > findThisSum && startIndex < lenght - 1) {
 							startIndex++;
 							endIndex++;
 							currentSum = massive[startIndex];
@@ -116,12 +66,10 @@ public class FindNumberSumElementsInARow {
 		public void printCurrent() {
 			if (massive == null || massive.length == 0) {
 				System.out.println("Fill the massive first, before printing!");
-			} else if ((startIndex == endIndex && endIndex == massive.length && findThisSum != massive[endIndex])
-					|| currentSum != findThisSum) {
+			} else if ((startIndex == endIndex && endIndex == massive.length && findThisSum != massive[endIndex]) || currentSum != findThisSum) {
 				System.out.println("Could not find one!");
 			} else {
-				System.out.printf("The sum %d is found between position %d and %d : ", findThisSum,
-						startIndex, endIndex);
+				System.out.printf("The sum %d is found between position %d and %d : ", findThisSum, startIndex, endIndex);
 				for (int i = startIndex; i <= endIndex; i++) {
 					System.out.print(massive[i] + " ");
 				}
@@ -145,16 +93,13 @@ public class FindNumberSumElementsInARow {
 		Current current = Enclosing.new Current(null, "Поток Двойки, Празен конструктор", -1);
 		current.findCurrent();
 		current.printCurrent();
-		System.out.println("hash : " + current.hashCode());
 		// *************** single element
 		int findSingleN = 110;
 		int[] singleElementTest = { -90, -10, 1, 1, 8, 100 };
-		Current currenSingleElement = Enclosing.new Current(singleElementTest, "Единичен елемент",
-				findSingleN);
+		Current currenSingleElement = Enclosing.new Current(singleElementTest, "Единичен елемент", findSingleN);
 		printStartInfo(singleElementTest, findSingleN + "");
 		currenSingleElement.findCurrent();
 		currenSingleElement.printCurrent();
-		System.out.println("hash : "+currenSingleElement.hashCode());
 		// *************** mass
 		Random rand = new Random();
 		final int MASS_TEST_NUM = 10000;
@@ -167,16 +112,14 @@ public class FindNumberSumElementsInARow {
 		// massTestMatrix[6] = 12;
 		// massTestMatrix[7] = 12;
 		int findMassN = 545454;
-		Current massTestCurrent = Enclosing.new Current(massTestMatrix,
-				"Масов Тест с 10000 елемента (1-1000)!", findMassN);
+		Current massTestCurrent = Enclosing.new Current(massTestMatrix, "Масов Тест с 10000 елемента (1-1000)!", findMassN);
 		printStartInfo(massTestMatrix, findMassN + "");
 		massTestCurrent.findCurrent();
 		massTestCurrent.printCurrent();
 		// *************** normal
 		int findNormalN = 12;// rand.nextInt(50);
 		int[] currArray = { 2, 1, 1, 2, -4, -6, 2, 2, 2, -1, 3, 3, 8, 2, 2, 1, 7, -1, 7, 7, 1, 1, 1, 1, 1, 1 };
-		Current normalWorkTest = Enclosing.new Current(currArray, "Нормална работа , предполагаме 2-ки",
-				findNormalN);
+		Current normalWorkTest = Enclosing.new Current(currArray, "Нормална работа , предполагаме 2-ки", findNormalN);
 		printStartInfo(currArray, findNormalN + "");
 		normalWorkTest.findCurrent();
 		normalWorkTest.printCurrent();

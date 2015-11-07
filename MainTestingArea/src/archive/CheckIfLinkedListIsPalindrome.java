@@ -6,10 +6,10 @@ public class CheckIfLinkedListIsPalindrome {
 	public static void main(String[] args) {
 		CheckIfLinkedListIsPalindrome maine = new CheckIfLinkedListIsPalindrome();
 		int[] arr = { 1, 2, 3, 4, 5, 6 };
-		node root = new node(arr[0]);
-		node tail = root;
+		simpleNode root = new simpleNode(arr[0]);
+		simpleNode tail = root;
 		for (int i = 1; i <= arr.length - 1; i++) {
-			tail.extedTail(new node(arr[i]));
+			tail.extedTail(new simpleNode(arr[i]));
 		}
 		// printLL(root);
 
@@ -17,7 +17,7 @@ public class CheckIfLinkedListIsPalindrome {
 		System.out.println(flag);
 	}
 
-	private static node printLL(node nod) {
+	private static simpleNode printLL(simpleNode nod) {
 		while (nod != null) {
 			System.out.println(nod.data);
 			nod = nod.next;
@@ -25,8 +25,8 @@ public class CheckIfLinkedListIsPalindrome {
 		return nod;
 	}
 
-	private node isPalindrome(node n) {
-		node n1;
+	private simpleNode isPalindrome(simpleNode n) {
+		simpleNode n1;
 		if (n.next == null) {
 			System.out.println("->" + n.data);
 			return n;
@@ -42,17 +42,17 @@ public class CheckIfLinkedListIsPalindrome {
 	}
 }
 
-class node {
-	public node(int a) {
+class simpleNode {
+	public simpleNode(int a) {
 		this.data = a;
 		next = null;
 	}
 
-	node next;
+	simpleNode next;
 	int data;
 
-	void extedTail(node in) {
-		node temp = this;
+	void extedTail(simpleNode in) {
+		simpleNode temp = this;
 		while (temp.next != null) {
 			temp = temp.next;
 		}
@@ -67,7 +67,7 @@ class node {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		node other = (node) obj;
+		simpleNode other = (simpleNode) obj;
 		if (data != other.data)
 			return false;
 		if (next == null) {
