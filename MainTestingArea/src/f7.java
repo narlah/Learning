@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.json.JSONException;
 
@@ -6,16 +7,11 @@ public class f7 {
 	// ***************************f6**********************************
 
 	// ***************************f6**********************************
-	public static void main(String[] args) throws JSONException {
+	public static void main(String[] args) {
 		// ***************************f6**********************************
-ArrayList a = new ArrayList(10);
-a.add(0,1);
-a.add(1,1);
-a.add(2,1);
-a.add(3,1);
-a.add(4,1);
+		Date d = new Date("01/01/2015");
+		System.out.println(d.toString());
 
-a.add(5,5);
 		// ***************************************************************
 
 	}
