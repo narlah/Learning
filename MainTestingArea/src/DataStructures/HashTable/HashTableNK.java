@@ -63,18 +63,18 @@ class HashTableNK<K, V> {
         return current == null ? null : (V) current.getValue();
     }
 
-//    public V remove(K key) {
-//        int index = indexFor(hash(key), storage.length);
-//        EntryNK<K, V> current = storage[index];
-//        if (current == null) return null; //nothing to remove
-//        EntryNK<K, V> prev = null;
-//        if (current.getKey().equals(key)) {
-//            if (current.next != null) {
-//                storage[index] = current.next;
-//            }
-//        }
-//        return null;
-//    }
+    public V remove(K key) {
+        int index = indexFor(hash(key), storage.length);
+        EntryNK<K, V> current = storage[index];
+        if (current == null) return null; //nothing to remove
+        EntryNK<K, V> prev = null;
+        if (current.getKey().equals(key)) {
+            if (current.next != null) {
+                storage[index] = current.next;
+            }
+        }
+        return null;
+    }
 
     public boolean containsKey(K key) {
         EntryNK current = getElementForKey(key);
