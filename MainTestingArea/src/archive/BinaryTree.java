@@ -1,4 +1,4 @@
-package archive;
+package DataStructures.Trees;
 
 import java.io.IOException;
 import java.io.PrintStream;

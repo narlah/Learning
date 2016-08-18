@@ -2,7 +2,6 @@ package DataStructures.HashTable;
 
 import org.junit.Test;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import static junit.framework.TestCase.assertFalse;
