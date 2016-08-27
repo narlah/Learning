@@ -1,8 +1,10 @@
 package RandomizeMusic;
 
-import java.awt.BorderLayout;
-import java.awt.Font;
-import java.awt.Toolkit;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.advanced.AdvancedPlayer;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -13,208 +15,190 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Vector;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.JScrollPane;
-import javax.swing.SwingConstants;
-
-import javazoom.jl.decoder.JavaLayerException;
-import javazoom.jl.player.advanced.AdvancedPlayer;
-
 public class SwingRandomiseMusic extends JFrame {
-	public static final long serialVersionUID = 1;
+    public static final long serialVersionUID = 1;
 
-	private RandomizerEngine randEngine;
-	// private String initialDir = "e:\\";
-	private String initialDir = "C:\\";
-	private Vector<String> fileList;
+    private RandomizerEngine randEngine;
 
-	private JList<String> original_list;
-	private JFileChooser fileChooser;
-	private JPanel panel;
-	private JButton btnPlay;
-	private JButton btnStop;
-	private JCheckBox ckBox;
-	private JLabel currentDir;
-	private JLabel statusBar;
+    private JList<String> original_list;
+    private JFileChooser fileChooser;
+    private JButton btnPlay;
+    private JButton btnStop;
+    private JCheckBox ckBox;
+    private JLabel currentDir;
+    private JLabel statusBar;
 
-	private Thread playerThread;
-	private FileInputStream fis = null;
-	private AdvancedPlayer player;
-	private JProgressBar progressBar;
+    private Thread playerThread;
+    private FileInputStream fis = null;
+    private AdvancedPlayer player;
+    private JProgressBar progressBar;
 
-	public SwingRandomiseMusic() {
-		setResizable(false);
+    SwingRandomiseMusic() {
+        setResizable(false);
 
-		setTitle("Randomize music");
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage(
-				SwingRandomiseMusic.class.getResource("/com/sun/java/swing/plaf/windows/icons/ListView.gif")));
-		setSize(760, 850);
-		setLocationRelativeTo(null);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		initUI();
-	}
+        setTitle("Randomize music");
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(
+                SwingRandomiseMusic.class.getResource("/com/sun/java/swing/plaf/windows/icons/ListView.gif")));
+        setSize(760, 850);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        initUI();
+    }
 
-	/**
-	 * Initialises UI only
-	 */
-	private void initUI() {
-		randEngine = new RandomizerEngine(initialDir);
-		panel = new JPanel();
-		getContentPane().add(panel, BorderLayout.CENTER);
-		// File chooser
-		final JButton openButton = new JButton("Choose dir");
-		openButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		openButton.setIcon(new ImageIcon(SwingRandomiseMusic.class.getResource("/com/sun/java/swing/plaf/windows/icons/Directory.gif")));
-		openButton.setBounds(20, 11, 105, 30);
-		openButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent event) {
-				fileChooser = new JFileChooser();
-				fileChooser.setCurrentDirectory(new File(randEngine.exposeStartDirectoryParent()));
-				fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-				fileChooser.setAcceptAllFileFilterUsed(false);
-				int returnVal = fileChooser.showOpenDialog(SwingRandomiseMusic.this);
+    /**
+     * Initialises UI only
+     */
+    private void initUI() {
+        String initialDir = "C:\\";
+        randEngine = new RandomizerEngine(initialDir);
+        JPanel panel = new JPanel();
+        getContentPane().add(panel, BorderLayout.CENTER);
+        // File chooser
+        final JButton openButton = new JButton("Choose dir");
+        openButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        openButton.setIcon(new ImageIcon(SwingRandomiseMusic.class.getResource("/com/sun/java/swing/plaf/windows/icons/Directory.gif")));
+        openButton.setBounds(20, 11, 105, 30);
+        openButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent event) {
+                fileChooser = new JFileChooser();
+                fileChooser.setCurrentDirectory(new File(randEngine.exposeStartDirectoryParent()));
+                fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                fileChooser.setAcceptAllFileFilterUsed(false);
+                int returnVal = fileChooser.showOpenDialog(SwingRandomiseMusic.this);
 
-				if (returnVal == JFileChooser.APPROVE_OPTION) {
-					File newSelectedDir = fileChooser.getSelectedFile();
-					randEngine.changeDirectory(newSelectedDir.getAbsolutePath());
-					Vector<String> newVector = randEngine.exposeMusicFileList();
-					original_list.setListData(newVector);
-					currentDir.setText(newSelectedDir.getAbsolutePath());
-				}
-			}
-		});
-		fileList = randEngine.exposeMusicFileList();
-		panel.setLayout(null);
-		panel.add(openButton);
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    File newSelectedDir = fileChooser.getSelectedFile();
+                    randEngine.changeDirectory(newSelectedDir.getAbsolutePath());
+                    Vector<String> newVector = randEngine.exposeMusicFileList();
+                    original_list.setListData(newVector);
+                    currentDir.setText(newSelectedDir.getAbsolutePath());
+                }
+            }
+        });
+        Vector<String> fileList = randEngine.exposeMusicFileList();
+        panel.setLayout(null);
+        panel.add(openButton);
 
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(20, 52, 700, 728);
-		panel.add(scrollPane);
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBounds(20, 52, 700, 728);
+        panel.add(scrollPane);
 
-		original_list = new JList<String>(fileList);
-		scrollPane.setViewportView(original_list);
-		scrollPane.setViewportView(original_list);
-		// Double click
-		original_list.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent evt) {
-				if (evt.getClickCount() == 2) {
-					stopPlay();
-					String selectedName = original_list.getSelectedValue();
-					File readyToPlay = new File(randEngine.exposeStartDirectory() + "//" + selectedName);
-					playFile(readyToPlay);
-				}
-			}
-		});
-		// Shuffle
-		JButton shuffleButton = new JButton("Shuffle");
-		shuffleButton.setBounds(640, 11, 80, 30);
-		panel.add(shuffleButton);
-		shuffleButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent event) {
-				try {
-					new ProgressBarWorker(progressBar, randEngine.exposeMusicFileList().size(), new JLabel("Label"), randEngine, ckBox.isSelected(),
-							original_list).execute();
-					// randEngine.randomizeDir(ckBox.isSelected(), progressBar);
-					// randEngine.changeDirectory(randEngine.exposeStartDirectory());
-					// Vector<String> newVector = randEngine.exposeMusicFileList();
-					// original_list.setListData(newVector);
-				} catch (IOException ioException) {
-					statusBar.setText("!!! IO Error during shuffle!!!");
-				}
+        original_list = new JList<String>(fileList);
+        scrollPane.setViewportView(original_list);
+        scrollPane.setViewportView(original_list);
+        // Double click
+        original_list.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                if (evt.getClickCount() == 2) {
+                    stopPlay();
+                    String selectedName = original_list.getSelectedValue();
+                    File readyToPlay = new File(randEngine.exposeStartDirectory() + "//" + selectedName);
+                    playFile(readyToPlay);
+                }
+            }
+        });
+        // Shuffle
+        JButton shuffleButton = new JButton("Shuffle");
+        shuffleButton.setBounds(640, 11, 80, 30);
+        panel.add(shuffleButton);
+        shuffleButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent event) {
+                try {
+                    new ProgressBarWorker(progressBar, randEngine.exposeMusicFileList().size(), new JLabel("Label"), randEngine, ckBox.isSelected(),
+                            original_list).execute();
+                    // randEngine.randomizeDir(ckBox.isSelected(), progressBar);
+                    // randEngine.changeDirectory(randEngine.exposeStartDirectory());
+                    // Vector<String> newVector = randEngine.exposeMusicFileList();
+                    // original_list.setListData(newVector);
+                } catch (IOException ioException) {
+                    statusBar.setText("!!! IO Error during shuffle!!!");
+                }
 
-			}
-		});
+            }
+        });
 
-		statusBar = new JLabel("Change the directory or shuffle the selected files.");
-		statusBar.setBounds(20, 779, 360, 22);
-		panel.add(statusBar);
+        statusBar = new JLabel("Change the directory or shuffle the selected files.");
+        statusBar.setBounds(20, 779, 360, 22);
+        panel.add(statusBar);
 
-		currentDir = new JLabel(initialDir);
-		currentDir.setBounds(186, 15, 366, 22);
-		panel.add(currentDir);
+        currentDir = new JLabel(initialDir);
+        currentDir.setBounds(186, 15, 366, 22);
+        panel.add(currentDir);
 
-		ckBox = new JCheckBox("Log file");
-		ckBox.setBounds(558, 15, 76, 23);
-		panel.add(ckBox);
-		// Play
-		btnPlay = new JButton("");
-		btnPlay.setIcon(new ImageIcon(SwingRandomiseMusic.class.getResource("/javax/swing/plaf/metal/icons/ocean/maximize-pressed.gif")));
-		btnPlay.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnPlay.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				String selectedName = original_list.getSelectedValue();
-				File readyToPlay = new File(randEngine.exposeStartDirectory() + "//" + selectedName);
-				playFile(readyToPlay);
-			}
-		});
-		btnPlay.setBounds(135, 15, 24, 23);
-		panel.add(btnPlay);
-		// Stop
-		btnStop = new JButton("");
-		btnStop.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				stopPlay();
-				btnPlay.setEnabled(true);
-				btnStop.setEnabled(false);
-			}
-		});
-		btnStop.setIcon(new ImageIcon(SwingRandomiseMusic.class.getResource("/javax/swing/plaf/metal/icons/ocean/minimize-pressed.gif")));
-		btnStop.setBounds(158, 15, 24, 23);
-		panel.add(btnStop);
+        ckBox = new JCheckBox("Log file");
+        ckBox.setBounds(558, 15, 76, 23);
+        panel.add(ckBox);
+        // Play
+        btnPlay = new JButton("");
+        btnPlay.setIcon(new ImageIcon(SwingRandomiseMusic.class.getResource("/javax/swing/plaf/metal/icons/ocean/maximize-pressed.gif")));
+        btnPlay.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        btnPlay.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                String selectedName = original_list.getSelectedValue();
+                File readyToPlay = new File(randEngine.exposeStartDirectory() + "//" + selectedName);
+                playFile(readyToPlay);
+            }
+        });
+        btnPlay.setBounds(135, 15, 24, 23);
+        panel.add(btnPlay);
+        // Stop
+        btnStop = new JButton("");
+        btnStop.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                stopPlay();
+                btnPlay.setEnabled(true);
+                btnStop.setEnabled(false);
+            }
+        });
+        btnStop.setIcon(new ImageIcon(SwingRandomiseMusic.class.getResource("/javax/swing/plaf/metal/icons/ocean/minimize-pressed.gif")));
+        btnStop.setBounds(158, 15, 24, 23);
+        panel.add(btnStop);
 
-		progressBar = new JProgressBar();
-		progressBar.setOrientation(SwingConstants.VERTICAL);
-		progressBar.setBounds(727, 52, 17, 728);
-		panel.add(progressBar);
-	}
+        progressBar = new JProgressBar();
+        progressBar.setOrientation(SwingConstants.VERTICAL);
+        progressBar.setBounds(727, 52, 17, 728);
+        panel.add(progressBar);
+    }
 
-	// > ************* play music part //
-	private void playFile(File readyToPlay) {
-		if (readyToPlay.exists()) {
-			try {
-				fis = new FileInputStream(readyToPlay);
-				player = new AdvancedPlayer(fis);
-			} catch (JavaLayerException | FileNotFoundException e) {
-				System.out.println("Problem opening the playback file!");
-				e.printStackTrace();
-			}
-		}
-		playerThread = new Thread() {
-			@Override
-			public void run() {
-				try {
-					player.play();
-				} catch (JavaLayerException e) {
-					System.out.println("Java layer Exception!");
-					e.printStackTrace();
-				}
-			}
-		};
-		playerThread.start();
-		btnPlay.setEnabled(false);
-		btnStop.setEnabled(true);
-	}
+    // > ************* play music part //
+    private void playFile(File readyToPlay) {
+        if (readyToPlay.exists()) {
+            try {
+                fis = new FileInputStream(readyToPlay);
+                player = new AdvancedPlayer(fis);
+            } catch (JavaLayerException | FileNotFoundException e) {
+                System.out.println("Problem opening the playback file!");
+                e.printStackTrace();
+            }
+        }
+        playerThread = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    player.play();
+                } catch (JavaLayerException e) {
+                    System.out.println("Java layer Exception!");
+                    e.printStackTrace();
+                }
+            }
+        };
+        playerThread.start();
+        btnPlay.setEnabled(false);
+        btnStop.setEnabled(true);
+    }
 
-	@SuppressWarnings("all")
-	private void stopPlay() {
-		if (playerThread != null && fis != null) {
-			playerThread.stop();
-			try {
-				fis.close();
-			} catch (IOException e1) {
-				System.out.println("Problem while closing the playback stream!");
-				e1.printStackTrace();
-			}
-		}
-	}
+    @SuppressWarnings("all")
+    private void stopPlay() {
+        if (playerThread != null && fis != null) {
+            playerThread.stop();
+            try {
+                fis.close();
+            } catch (IOException e1) {
+                System.out.println("Problem while closing the playback stream!");
+                e1.printStackTrace();
+            }
+        }
+    }
 }
