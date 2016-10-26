@@ -150,7 +150,7 @@ public class Main {
 		btnMassopen.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent mouseClickedEvent) {
 				for (Component comp : panel.getComponents()) {
-					((JButton) comp).mouseDown(mouseClickedEvent.get, 10, 10);
+					((JButton) comp).mouseDown(mouseClickedEvent, 10, 10);
 					((JButton) comp).mouseUp(mouseClickedEvent, 10, 10);
 				}
 			}

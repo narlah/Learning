@@ -5,7 +5,8 @@ public class f7 {
 	public static void main(String[] args) {
         // ***************************f6**********************************
 
-		System.out.println("123");
+		long number = (long) Math.floor(Math.random() * 9000000000L) + 1000000000L;
+		System.out.println(number);
 		// ***************************************************************
     }
 }

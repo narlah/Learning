@@ -25,10 +25,10 @@ public class TestMain extends TestCase {
 
 			// check content of files
 		} finally {
-			// compressed.delete();
-			// decompressed.delete();
-			// compressedParallel.delete();
-			// decompressedParallel.delete();
+			 compressed.delete();
+			 decompressed.delete();
+			 compressedParallel.delete();
+			 decompressedParallel.delete();
 		}
 	}
 }
