@@ -1,5 +1,8 @@
-import java.io.File;
+package huffmanMulti;
+
 import junit.framework.TestCase;
+
+import java.io.File;
 
 public class TestMain extends TestCase {
 	public void testCompresDecompress() {
@@ -12,7 +15,7 @@ public class TestMain extends TestCase {
 		assertTrue(source.exists());
 		compressed.delete();
 		decompressed.delete();
-		compressedParallel.delete();
+    	compressedParallel.delete();            //TODO see why the assertion error on testCompressDecompress
 		decompressedParallel.delete();
 		try {
 			Main.compress(source, compressed);

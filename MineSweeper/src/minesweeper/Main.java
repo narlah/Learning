@@ -70,7 +70,7 @@ public class Main {
 
 		createMineFieldPanel();
 		fillZeMinefieldPanel();
-		addMassOpenButton();
+		//addMassOpenButton();
 	}
 
 	private void createMineFieldPanel() {
@@ -127,7 +127,7 @@ public class Main {
 					}
 
 				} else {
-					//System.err.println(matrix.isAlreadyOpened(i, j));
+					System.err.println(matrix.isAlreadyOpened(i, j));
 				}
 			}
 
@@ -142,18 +142,18 @@ public class Main {
 		});
 	}
 
-	private void addMassOpenButton() {
-		JButton btnMassopen = new JButton("MassOpen");
-		btnMassopen.setBounds(317, 0, 115, 23);
-		frame.getContentPane().add(btnMassopen);
-
-		btnMassopen.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent mouseClickedEvent) {
-				for (Component comp : panel.getComponents()) {
-					((JButton) comp).mouseDown(mouseClickedEvent, 10, 10);
-					((JButton) comp).mouseUp(mouseClickedEvent, 10, 10);
-				}
-			}
-		});
-	}
+//	private void addMassOpenButton() {
+//		JButton btnMassopen = new JButton("MassOpen");
+//		btnMassopen.setBounds(317, 0, 115, 23);
+//		frame.getContentPane().add(btnMassopen);
+//
+//		btnMassopen.addMouseListener(new MouseAdapter() {
+//			public void mouseClicked(MouseEvent mouseClickedEvent) {
+//				for (Component comp : panel.getComponents()) {
+//					((JButton) comp).mouseDown(mouseClickedEvent, 10, 10);
+//					((JButton) comp).mouseUp(mouseClickedEvent, 10, 10);
+//				}
+//			}
+//		});
+//	}
 }
