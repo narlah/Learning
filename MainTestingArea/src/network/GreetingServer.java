@@ -1,14 +1,12 @@
 package network;
 
-//File Name GreetingServer.java
-
 import java.net.*;
 import java.io.*;
 
 public class GreetingServer extends Thread {
 	private ServerSocket serverSocket;
 
-	public GreetingServer(int port) throws IOException {
+	private GreetingServer(int port) throws IOException {
 		serverSocket = new ServerSocket(port);
 		serverSocket.setSoTimeout(10000);
 	}
@@ -35,7 +33,7 @@ public class GreetingServer extends Thread {
 	}
 
 	public static void main(String[] args) {
-		int port = 60;
+		int port = 2016;
 		try {
 			Thread t = new GreetingServer(port);
 			t.start();

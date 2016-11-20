@@ -1,21 +1,13 @@
 package network;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class FileServer {
 
-	/**
-	 * @param args
-	 *            the command line arguments
-	 */
 	public static void main(String[] args) throws IOException {
-		ServerSocket serverSocket = null;
+		ServerSocket serverSocket;
 
 		serverSocket = new ServerSocket(4412);
 		serverSocket.setSoTimeout(3000);

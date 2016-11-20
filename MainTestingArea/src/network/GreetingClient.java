@@ -8,7 +8,7 @@ import java.io.*;
 public class GreetingClient {
 	public static void main(String[] args) {
 		String serverName = "localhost";
-		int port = 60;
+		int port = 2016;
 		try {
 			System.out.println("Connecting to " + serverName + " on port " + port);
 			Socket client = new Socket(serverName, port);
