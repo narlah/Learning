@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
  * Created by Nk on 11/20/2016.
  */
 public class KthElementOfSinglyLinkedList {
-    private final int K = 21;
+    private final int K = 61;
     private final int N = 100;
 
 
@@ -39,7 +39,7 @@ public class KthElementOfSinglyLinkedList {
                 headPointer = headPointer.next;
                 if (headPointer.next == null) {
                     if (i == K) return middle.data;
-                    for (int j = 1; j <= i; j++) {
+                    for (int j = 2; j <= i; j++) {
                         trailingPointer = trailingPointer.next;
                     }
                     return trailingPointer.data;
