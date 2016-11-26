@@ -17,13 +17,13 @@ public class WordSquareInterviewQuestion {
 
     private static boolean isSquareWord(String prosedString) {
         int length = prosedString.length();
-        int n = (int)Math.sqrt(prosedString.length());
-        if (length==0 || !isPerfectSquare(length))
+        int n = (int) Math.sqrt(prosedString.length());
+        if (length == 0 || !isPerfectSquare(length))
             return false;
 
-        for( int row=0; row < n; row++ ){
-            for( int col=0; col < row; col++ ){
-                if( prosedString.charAt(row* n + col) != prosedString.charAt(col * n + row) ){
+        for (int row = 0; row < n; row++) {
+            for (int col = 0; col < row; col++) {
+                if (prosedString.charAt(row * n + col) != prosedString.charAt(col * n + row)) {
                     return false;
                 }
             }

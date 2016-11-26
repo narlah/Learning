@@ -1,11 +1,9 @@
 package DataStructures.HashTable;
 
-import java.util.Map;
-
 /**
  * Created by Nk on 7/25/2016.
  */
-final class EntryNK<K, V>  {
+final class EntryNK<K, V> {
     final K key;
     V value;
     EntryNK<K, V> next;

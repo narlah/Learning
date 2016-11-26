@@ -2,11 +2,11 @@
  * Example of comparing Strings with and without intern()ing.
  */
 public class StringInternExample {
-    private static char[] chars = 
-        {'A', ' ', 'S', 't', 'r', 'i', 'n', 'g'};
+    private static char[] chars =
+            {'A', ' ', 'S', 't', 'r', 'i', 'n', 'g'};
 
     public static void main(String[] args) {
-    	
+
         // (0) For the base case, we just use a String literal
         String aString = "A String";
 
@@ -16,8 +16,8 @@ public class StringInternExample {
         String aConcatentatedString = "A" + " " + "String";
 
         printResults("(1)",
-            "aString", aString, 
-            "aConcatentatedString", aConcatentatedString);
+                "aString", aString,
+                "aConcatentatedString", aConcatentatedString);
 
         // (2) For the second case, construct the same String, but
         // in a way such that it's contents cannot be known
@@ -27,8 +27,8 @@ public class StringInternExample {
         // Verify that (0) and (2) are the same according 
         // to equals(...), but not ==
         printResults("(2)",
-            "aString", aString, 
-            "aRuntimeString", aRuntimeString);
+                "aString", aString,
+                "aRuntimeString", aRuntimeString);
 
         // (3) For the third case, create a String object by
         // invoking the intern() method on (3).
@@ -37,8 +37,8 @@ public class StringInternExample {
         // Verify that (0) and (3) now reference the same
         // object.
         printResults("(3)",
-            "aString", aString, 
-            "anInternedString", anInternedString);
+                "aString", aString,
+                "anInternedString", anInternedString);
 
         // (4) For the forth case, we explicitly construct
         // String object around a literal. 
@@ -49,8 +49,8 @@ public class StringInternExample {
         // better to simply avoid constructing a new object
         // around a literal.
         printResults("(4)",
-            "aString", aString, 
-            "anExplicitString", anExplicitString);
+                "aString", aString,
+                "anExplicitString", anExplicitString);
 
         // (5) For a more realistic test, compare (0) to
         // the first argument. This illustrates that unless
@@ -61,14 +61,14 @@ public class StringInternExample {
         if (arr.length > 0) {
             String firstArg = arr[0];
             printResults("(5)",
-                "aString", aString, 
-                "firstArg", firstArg);
+                    "aString", aString,
+                    "firstArg", firstArg);
 
             // (6) Verify that interning works in this case
             String firstArgInterned = firstArg.intern();
             printResults("(6)",
-                "aString", aString, 
-                "firstArgInterned", firstArgInterned);
+                    "aString", aString,
+                    "firstArgInterned", firstArgInterned);
         }
     }
 
@@ -76,12 +76,12 @@ public class StringInternExample {
      * Utility method to print the results of equals(...) and ==
      */
     private static void printResults(String tag,
-        String s1Name, String s1, String s2Name, String s2) {
+                                     String s1Name, String s1, String s2Name, String s2) {
         System.out.println(tag);
         System.out.println("  " +
-            s1Name + " == " + s2Name + " : " + (s1 == s2));
+                s1Name + " == " + s2Name + " : " + (s1 == s2));
         System.out.println("  " +
-            s1Name + ".equals(" + s2Name + ") : " + s1.equals(s2));
+                s1Name + ".equals(" + s2Name + ") : " + s1.equals(s2));
         System.out.println();
     }
 

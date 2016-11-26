@@ -1,7 +1,5 @@
 package java8TestingGround.lambda;
 
-import com.sun.org.apache.xpath.internal.SourceTree;
-
 public class FinalScopeExample {
 
     public static void main(String[] args) {

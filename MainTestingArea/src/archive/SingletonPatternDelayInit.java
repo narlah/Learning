@@ -1,27 +1,27 @@
 package archive;
 
 final class Singleton {
-	private static Singleton s = null;
-	private int i;
+    private static Singleton s = null;
+    private int i;
 
-	private Singleton(int x) {
-		i = x;
-	}
+    private Singleton(int x) {
+        i = x;
+    }
 
-	public static Singleton getReference() {
-		if (s == null) {
-			return new Singleton(47);
-		} else
-			return s;
-	}
+    public static Singleton getReference() {
+        if (s == null) {
+            return new Singleton(47);
+        } else
+            return s;
+    }
 
-	public int getValue() {
-		return i;
-	}
+    public int getValue() {
+        return i;
+    }
 
-	public void setValue(int x) {
-		i = x;
-	}
+    public void setValue(int x) {
+        i = x;
+    }
 }
 
 // : c01:SingletonPattern.java
@@ -32,17 +32,17 @@ final class Singleton {
 // making it final prevents cloneability from
 // being added through inheritance:
 public class SingletonPatternDelayInit {
-	public static void main(String[] args) {
-		Singleton s = Singleton.getReference();
-		System.out.println(s.getValue());
-		Singleton s2 = Singleton.getReference();
-		s2.setValue(9);
-		System.out.println(s.getValue());
-		try {
-			// Can't do this: compile-time error.
-			// Singleton s3 = (Singleton)s2.clone();
-		} catch (Exception e) {
-			e.printStackTrace(System.err);
-		}
-	}
+    public static void main(String[] args) {
+        Singleton s = Singleton.getReference();
+        System.out.println(s.getValue());
+        Singleton s2 = Singleton.getReference();
+        s2.setValue(9);
+        System.out.println(s.getValue());
+        try {
+            // Can't do this: compile-time error.
+            // Singleton s3 = (Singleton)s2.clone();
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+        }
+    }
 }

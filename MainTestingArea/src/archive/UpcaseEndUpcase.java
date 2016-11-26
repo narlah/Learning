@@ -1,36 +1,35 @@
 package archive;
-import java.lang.StringBuilder;
 
 public class UpcaseEndUpcase {
 
-	public static void main(String[] args) {
-		// ***************************f6**********************************
-		String str = new String(
-				"We are living in a <upcase>yellow submarine</upcase>. We don't have anything else. Inside the submarine is very tight. So we are <upcase>drinking</upcase> all the day. We <upcase>will</upcase> move out of it in 5 days.");
-		String searchForStart = "<upcase>";
-		String searchForEnd = "</upcase>";
-		StringBuilder strBuild = new StringBuilder(str.length());
-		boolean flag = false;
-		for (int i = 0; i < str.length(); i++) {
-			if (str.charAt(i) == '<') {
-				char c = str.charAt(i + 1);
-				if (c == 'u') {
-					i = i + searchForStart.length() - 1;
-					flag = true;
-					continue;
-				}
-				if (c == '/') {
-					i = i + searchForEnd.length() - 1;
-					flag = false;
-					continue;
-				}
-			}
-			strBuild.append(flag ? Character.toUpperCase(str.charAt(i)) : str.charAt(i));
+    public static void main(String[] args) {
+        // ***************************f6**********************************
+        String str = new String(
+                "We are living in a <upcase>yellow submarine</upcase>. We don't have anything else. Inside the submarine is very tight. So we are <upcase>drinking</upcase> all the day. We <upcase>will</upcase> move out of it in 5 days.");
+        String searchForStart = "<upcase>";
+        String searchForEnd = "</upcase>";
+        StringBuilder strBuild = new StringBuilder(str.length());
+        boolean flag = false;
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == '<') {
+                char c = str.charAt(i + 1);
+                if (c == 'u') {
+                    i = i + searchForStart.length() - 1;
+                    flag = true;
+                    continue;
+                }
+                if (c == '/') {
+                    i = i + searchForEnd.length() - 1;
+                    flag = false;
+                    continue;
+                }
+            }
+            strBuild.append(flag ? Character.toUpperCase(str.charAt(i)) : str.charAt(i));
 
-		}
-		System.out.println(strBuild.toString());
-	}
-	// ***************************************************************
+        }
+        System.out.println(strBuild.toString());
+    }
+    // ***************************************************************
 }
 
 // ***************************************************************

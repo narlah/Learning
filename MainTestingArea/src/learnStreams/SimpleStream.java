@@ -20,7 +20,7 @@ public class SimpleStream {
         System.out.println(getStream(persons).allMatch(s -> Character.isUpperCase(s.name.charAt(0))));
         System.out.println(getStream(persons).filter(s -> s.name.startsWith("P")).collect(Collectors.toList()));
         System.out.println(getStream(persons).limit(2).collect(Collectors.toList()));
-        System.out.println(getStream(persons).sorted().collect(Collectors.groupingBy( p -> p.age)));
+        System.out.println(getStream(persons).sorted().collect(Collectors.groupingBy(p -> p.age)));
 
     }
 

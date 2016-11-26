@@ -1,6 +1,10 @@
 package archive;
-import javax.script.*;
-import java.util.*;
+
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.SimpleBindings;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Parser {
     public static void main(String[] args) throws Exception {
@@ -10,6 +14,6 @@ public class Parser {
         vars.put("y", 1);
         vars.put("z", 3);
         vars.put("c", 8);
-        System.out.println("result = "+engine.eval("x + y + z*c", new SimpleBindings(vars)));
+        System.out.println("result = " + engine.eval("x + y + z*c", new SimpleBindings(vars)));
     }
 }

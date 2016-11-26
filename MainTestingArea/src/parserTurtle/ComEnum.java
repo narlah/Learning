@@ -1,27 +1,27 @@
 package parserTurtle;
 
 public enum ComEnum {
-	DOWN('D', "penDown"), UP('U', "penUp"), WEST('W', "drawWest"),
+    DOWN('D', "penDown"), UP('U', "penUp"), WEST('W', "drawWest"),
 
-	SOUTH('S', "drawSouth"), EAST('E', "drawEast"), NORTH('N', "drawNorth"), SELECTPEN('P', "selectPen"), 
-	
-	//Add new command
-	SELECTZPEN('Z', "selectZPen");
+    SOUTH('S', "drawSouth"), EAST('E', "drawEast"), NORTH('N', "drawNorth"), SELECTPEN('P', "selectPen"),
 
-	private char command;
-	private String procedure;
+    //Add new command
+    SELECTZPEN('Z', "selectZPen");
 
-	ComEnum(char command, String procedure) {
-		this.command = command;
-		this.procedure = procedure;
-	}
+    private char command;
+    private String procedure;
 
-	public char getCommand() {
-		return command;
-	}
+    ComEnum(char command, String procedure) {
+        this.command = command;
+        this.procedure = procedure;
+    }
 
-	public String getProcedure() {
-		return procedure;
-	}
+    public char getCommand() {
+        return command;
+    }
+
+    public String getProcedure() {
+        return procedure;
+    }
 
 }

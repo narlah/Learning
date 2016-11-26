@@ -1,16 +1,10 @@
 package archive;
+
+import javax.swing.*;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
 
 /**
- *
  * @author Ryan
  */
 public class JProgressBarExample {
@@ -36,7 +30,7 @@ public class JProgressBarExample {
         panel.add(jpb);
         frame.add(panel);
         frame.pack();
-        frame.setSize(200,90);
+        frame.setSize(200, 90);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -49,6 +43,7 @@ public class JProgressBarExample {
         JProgressBar jpb;
         int max;
         JLabel label;
+
         public Task_IntegerUpdate(JProgressBar jpb, int max, JLabel label) {
             this.jpb = jpb;
             this.max = max;
@@ -57,7 +52,7 @@ public class JProgressBarExample {
 
         @Override
         protected void process(List<Integer> chunks) {
-            int i = chunks.get(chunks.size()-1);
+            int i = chunks.get(chunks.size() - 1);
             jpb.setValue(i); // The last value in this array is all we care about.
             System.out.println(i);
             label.setText("Loading " + i + " of " + max);
@@ -65,7 +60,7 @@ public class JProgressBarExample {
 
         @Override
         protected Void doInBackground() throws Exception {
-            for(int i = 0; i <= max; i++) {
+            for (int i = 0; i <= max; i++) {
                 Thread.sleep(10); // Illustrating long-running code.
                 publish(i);
             }
@@ -81,5 +76,5 @@ public class JProgressBarExample {
                 e.printStackTrace();
             }
         }
-    }   
+    }
 }

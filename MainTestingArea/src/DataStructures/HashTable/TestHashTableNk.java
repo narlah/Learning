@@ -31,7 +31,7 @@ public class TestHashTableNk {
     }
 
     @Test
-    public void testGetKeys(){
+    public void testGetKeys() {
         HashTableNK<Integer, String> testHT = new HashTableNK<>();
         testHT.put(1, "nk1");
         testHT.put(2, "nk2");
@@ -48,14 +48,14 @@ public class TestHashTableNk {
     }
 
     @Test
-    public void testResize(){
+    public void testResize() {
         HashTableNK<Integer, String> testHT = new HashTableNK<>(2);
         testHT.put(1, "nk1");
         testHT.put(2, "nk2");
         testHT.put(3, "nk3");
         testHT.put(1800, "nk1800");
-        assertTrue(testHT.lenght()>3);
-        assertFalse(testHT.lenght()<=2);
+        assertTrue(testHT.lenght() > 3);
+        assertFalse(testHT.lenght() <= 2);
         System.out.println(testHT.getKeys().toString());
         assertTrue(testHT.containsKey(1));
         assertTrue(testHT.containsKey(1800));
@@ -63,7 +63,7 @@ public class TestHashTableNk {
     }
 
     @Test
-    public void testRemove(){
+    public void testRemove() {
         HashTableNK<Integer, String> testHT = new HashTableNK<>(2);
         testHT.put(1, "nk1");
         testHT.put(2, "nk2");

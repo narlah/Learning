@@ -1,15 +1,15 @@
 package learnConcurency;
 
 public class WaitNotifyExample {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         ThreadB b = new ThreadB();
         b.start();
 
-        synchronized(b){
-            try{
+        synchronized (b) {
+            try {
                 System.out.println("Waiting for b to complete...");
                 b.wait();
-            }catch(InterruptedException e){
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
@@ -18,12 +18,13 @@ public class WaitNotifyExample {
     }
 }
 
-class ThreadB extends Thread{
+class ThreadB extends Thread {
     int total;
+
     @Override
-    public void run(){
-        synchronized(this){
-            for(int i=0; i<=50100 ; i++){
+    public void run() {
+        synchronized (this) {
+            for (int i = 0; i <= 50100; i++) {
                 total += i;
             }
             notify();
