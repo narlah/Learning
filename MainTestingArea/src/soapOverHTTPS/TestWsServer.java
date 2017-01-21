@@ -9,12 +9,12 @@ import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManagerFactory;
 import javax.xml.ws.Endpoint;
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.security.*;
-import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
-import java.security.cert.CertificateFactory;
 
 public class TestWsServer {
     public static void main(final String[] args) {
@@ -54,6 +54,7 @@ public class TestWsServer {
         ssl.init(keyFactory.getKeyManagers(),
                 trustFactory.getTrustManagers(), new SecureRandom());
 
+
         return new HttpsConfigurator(ssl);
     }
 
@@ -66,29 +67,29 @@ public class TestWsServer {
         return keyStore;
     }
 
-    private static void setGivenCertificate(char[] keyPass, File keyStoreFile, KeyStore keyStore) throws IOException, CertificateException, KeyStoreException, NoSuchAlgorithmException {
-        //set certificate
-        String alias = "selfsigned";
-        String certfile = "/tmp/ssl/X509_certificate.cer";
-        InputStream certstream = fullStream(certfile);
-        CertificateFactory cf = CertificateFactory.getInstance("X.509");
-        Certificate certs = cf.generateCertificate(certstream);
-
-        //keyFactory.init(store, keypas);
-        keyStore.setCertificateEntry(alias, certs);
-        FileOutputStream out = new FileOutputStream(keyStoreFile);
-        keyStore.store(out, keyPass);
-        out.close();
-    }
-
-    private static InputStream fullStream(String fname) throws IOException {
-        FileInputStream fis = new FileInputStream(fname);
-        DataInputStream dis = new DataInputStream(fis);
-        byte[] bytes = new byte[dis.available()];
-        dis.readFully(bytes);
-        ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
-        return bais;
-    }
+//    private static void setGivenCertificate(char[] keyPass, File keyStoreFile, KeyStore keyStore) throws IOException, CertificateException, KeyStoreException, NoSuchAlgorithmException {
+//        //set certificate
+//        String alias = "selfsigned";
+//        String certfile = "/tmp/ssl/X509_certificate.cer";
+//        InputStream certstream = fullStream(certfile);
+//        CertificateFactory cf = CertificateFactory.getInstance("X.509");
+//        Certificate certs = cf.generateCertificate(certstream);
+//
+//        //keyFactory.init(store, keypas);
+//        keyStore.setCertificateEntry(alias, certs);
+//        FileOutputStream out = new FileOutputStream(keyStoreFile);
+//        keyStore.store(out, keyPass);
+//        out.close();
+//    }
+//
+//    private static InputStream fullStream(String fname) throws IOException {
+//        FileInputStream fis = new FileInputStream(fname);
+//        DataInputStream dis = new DataInputStream(fis);
+//        byte[] bytes = new byte[dis.available()];
+//        dis.readFully(bytes);
+//        ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
+//        return bais;
+//    }
 }
 
 
