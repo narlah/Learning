@@ -1,7 +1,9 @@
 package soapOverHTTPS;
 
-/**
- * Created by narlah on 21.01.17.
- */
-public class HelloInterface {
+import javax.jws.*;
+
+@WebService
+public interface HelloInterface {
+
+    public String hello(@WebParam( name = "who" ) String who );
 }
