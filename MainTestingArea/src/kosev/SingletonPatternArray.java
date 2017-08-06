@@ -9,7 +9,7 @@ final class SingletonArray {
         i = x;
     }
 
-    public static SingletonArray getReference() {
+    static SingletonArray getReference() {
         if (s == null) {
             return new SingletonArray(47);
         } else

@@ -8,7 +8,7 @@ public class FindNumberSumElementsInARowBrute {
         private int[] massive = null;
         private int startIndex = 0, endIndex = 0;
         private int currentSum = 0;
-        ; // maybe the first element is our hero ?
+        // maybe the first element is our hero ?
 
         private int findThisSum = 0;
         String currentName = null;

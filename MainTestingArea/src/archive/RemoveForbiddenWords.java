@@ -10,13 +10,11 @@ public class RemoveForbiddenWords {
 
     public static void main(String[] args) {
         // ***************************f6**********************************
-        String str = new String(
-                "Microsoft announced its next generation Java compiler today.It uses advanced parser and special optimizer for the Microsoft JVM.");
+        String str = "Microsoft announced its next generation Java compiler today.It uses advanced parser and special optimizer for the Microsoft JVM.";
         String forbiddenWords = "Java,JVM,Microsoft";
         String[] forbiddenWordsArray = forbiddenWords.split(",");
 
-        String s1 = new String(str);
-        String s2 = new String(str);
+        String s1 = str;
         for (String word : forbiddenWordsArray) {
             String filled = create_Word(word.length(), '*');
             s1 = s1.replaceAll(word, filled);
@@ -24,7 +22,7 @@ public class RemoveForbiddenWords {
 
         }
         System.out.println(s1);
-        System.out.println(s2);
+        System.out.println(str);
     }
 
     // ***************************************************************

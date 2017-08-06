@@ -15,7 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Vector;
 
-public class SwingRandomiseMusic extends JFrame {
+class SwingRandomiseMusic extends JFrame {
     public static final long serialVersionUID = 1;
 
     private RandomizerEngine randEngine;

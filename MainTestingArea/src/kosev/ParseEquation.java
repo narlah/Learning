@@ -14,7 +14,7 @@ public class ParseEquation {
                     return false;
             }
         }
-        return counter == 0 ? true : false;
+        return counter == 0;
     }
 
     public static void main(String[] args) {

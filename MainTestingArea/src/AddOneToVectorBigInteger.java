@@ -6,10 +6,10 @@ public class AddOneToVectorBigInteger {
 
     public static void main(String[] args) {
         AddOneToVectorBigInteger a = new AddOneToVectorBigInteger();
-        System.out.println(a.plusOne(new ArrayList(Arrays.asList(0, 8, 9, 9, 1))));
+        System.out.println(a.plusOne(new ArrayList<>(Arrays.asList(0, 8, 9, 9, 1))));
     }
 
-    public ArrayList<Integer> plusOne(ArrayList<Integer> in) {
+    private ArrayList<Integer> plusOne(ArrayList<Integer> in) {
         int carry = 1;
         int[] result = new int[in.size() + 1];
         for (int i = in.size() - 1; i >= -1; i--) {
@@ -31,10 +31,10 @@ public class AddOneToVectorBigInteger {
             zeroIndex++;
 
         }
-        ArrayList<Integer> resulttArray = new ArrayList<Integer>();
+        ArrayList<Integer> resultArray = new ArrayList<>();
         for (int i = zeroIndex; i < result.length; i++) {
-            resulttArray.add(result[i]);
+            resultArray.add(result[i]);
         }
-        return resulttArray;
+        return resultArray;
     }
 }

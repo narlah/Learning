@@ -1,4 +1,4 @@
-package com.nkosev;
+package learnORM.HibernateExample.src.main.java.com.nkosev;
 
 import javax.persistence.*;
 import java.util.ArrayList;

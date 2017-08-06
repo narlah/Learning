@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class InitializeStudents {
     public static void main(String[] args) {
         Student[] data = new Student[10];
-        ;
+
         data[1] = (new Student("Ivan1", "Draganov", 2));
         data[2] = (new Student("Ivan2", "Draganov2", 3));
         data[3] = (new Student("Ivan3", "Draganov", 6));
@@ -18,9 +18,9 @@ public class InitializeStudents {
         data[9] = (new Student("Ivan9", "Draganov", 9));
         data[0] = (new Student("Ivan10", "Draganov", 10));
         Arrays.sort(data);
-        for (int i = 0; i < data.length; i++) {
-            System.out.printf("Student %s %s have ocenka %d\n", data[i].getFirstName(), data[i].getLastName(),
-                    data[i].getOcenka());
+        for (Student aData : data) {
+            System.out.printf("Student %s %s have ocenka %d\n", aData.getFirstName(), aData.getLastName(),
+                    aData.getOcenka());
         }
 
     }

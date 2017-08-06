@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AreAnagrams {
-    public static boolean areAnagrams(String first, String second) {
+    private static boolean areAnagrams(String first, String second) {
         if (first.length() != second.length())
             return false;
         char[] charArrFirst = first.toCharArray();
@@ -26,11 +26,11 @@ public class AreAnagrams {
         return true;
     }
 
-    public static boolean areAnagrams2(String first, String second) {
+    private static boolean areAnagrams2(String first, String second) {
         char[] word1 = first.toCharArray();
         char[] word2 = second.toCharArray();
 
-        Map<Character, Integer> lettersInWord1 = new HashMap<Character, Integer>();
+        Map<Character, Integer> lettersInWord1 = new HashMap<>();
 
         for (char c : word1) {
             if (lettersInWord1.get(c) != null) {
@@ -57,15 +57,15 @@ public class AreAnagrams {
         long long1 = System.nanoTime();
         System.out.println(areAnagrams(inanagram, outanagram));
         long long2 = System.nanoTime();
-        long firstTime = long2 - long1;
-        System.out.println(firstTime);
+        double firstTime = long2 - long1;
+        System.out.println("areAnagrams : "+ firstTime);
 
         long long3 = System.nanoTime();
         System.out.println(areAnagrams2(inanagram, outanagram));
         long long4 = System.nanoTime();
-        long secondTime = long4 - long3;
-        System.out.println(secondTime);
-        System.out.println("Times faster : " + secondTime / firstTime);
+        double secondTime = long4 - long3;
+        System.out.println("areAnagrams2 (hash) : " + secondTime);
+        System.out.println("Times slower : " + (secondTime / firstTime)*100 + "%");
 
     }
 }

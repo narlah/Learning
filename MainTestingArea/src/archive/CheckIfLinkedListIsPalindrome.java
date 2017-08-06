@@ -7,9 +7,8 @@ public class CheckIfLinkedListIsPalindrome {
         CheckIfLinkedListIsPalindrome maine = new CheckIfLinkedListIsPalindrome();
         int[] arr = {1, 2, 3, 4, 5, 6};
         simpleNode root = new simpleNode(arr[0]);
-        simpleNode tail = root;
         for (int i = 1; i <= arr.length - 1; i++) {
-            tail.extedTail(new simpleNode(arr[i]));
+            root.extedTail(new simpleNode(arr[i]));
         }
         // printLL(root);
 

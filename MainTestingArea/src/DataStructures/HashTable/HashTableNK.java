@@ -3,10 +3,10 @@ package DataStructures.HashTable;
 import java.util.HashSet;
 import java.util.Set;
 
-class HashTableNK<K, V> {
+public class HashTableNK<K, V> {
     private final static int INITIAL_DEFAULT_SIZE = 16;
     private final static float LOAD_FACTOR = 0.75f;
-    private EntryNK<K, V>[] storage;
+    private EntryNK[] storage;
     private int currentEntries;
 
 
@@ -27,56 +27,60 @@ class HashTableNK<K, V> {
         currentEntries = 0;
     }
 
-    public EntryNK<K, V> put(K key, V value) {
-        EntryNK<K, V> newEntry = insertInGivenStorage(key, value, storage, storage.length);
-        currentEntries++;
-        if (currentEntries / storage.length > LOAD_FACTOR)
-            resizeHashMap();
-        return newEntry;
+    public EntryNK put(K key, V value) {
+        if (containsKey(key)) {
+            EntryNK updateEntry = getElementForKey(key);
+            assert updateEntry != null;
+            updateEntry.setValue(value);
+            return updateEntry;
+        } else {
+            EntryNK<K, V> newEntry = insertInGivenStorage(key, value, storage);
+            currentEntries++;
+            if (currentEntries / storage.length > LOAD_FACTOR)
+                resizeHashMap();
+            return newEntry;
+        }
     }
 
-    private EntryNK<K, V> insertInGivenStorage(K key, V value, EntryNK<K, V>[] paramStorage, int paramSize) {
+    private EntryNK<K, V> insertInGivenStorage(K key, V value, EntryNK<K, V>[] paramStorage) {
         int hashNumber = hash(key);
-        int index = indexFor(hashNumber, paramSize);
-        EntryNK<K, V> newEntry = new EntryNK<K, V>(key, value);
+        int index = indexFor(hashNumber, paramStorage.length);
+        EntryNK<K, V> newEntry = new EntryNK<>(key, value);
         newEntry.hash = hashNumber;
         if (paramStorage[index] == null) { //put on empty space
             paramStorage[index] = newEntry;
         } else { //find last and put there
-            findLast(paramStorage[index]).next = newEntry;
+            EntryNK lastInList=findLast(paramStorage[index]);
+            lastInList.next = newEntry;
+            newEntry.prev = lastInList;
         }
         return newEntry;
     }
 
     private void resizeHashMap() {
         int newSize = storage.length * 2;
-        EntryNK<K, V>[] newStorage = new EntryNK[newSize];
+        EntryNK[] newStorage = new EntryNK[newSize];
         for (K key : this.getKeys()) {
-            insertInGivenStorage(key, this.get(key), newStorage, newSize);
+            insertInGivenStorage(key, this.get(key), newStorage);
         }
         storage = newStorage;
     }
 
     public V get(K key) {
-        EntryNK current = getElementForKey(key);
-        return current == null ? null : (V) current.getValue();
+        EntryNK<K, V> current = getElementForKey(key);
+        return current == null ? null : current.getValue();
     }
 
-    public V remove(K key) {
+    V remove(K key) {
         int index = indexFor(hash(key), storage.length);
         EntryNK<K, V> current = storage[index];
-        if (current == null) return null; //nothing to remove
-        EntryNK<K, V> prev = null;
-        if (current.getKey().equals(key)) {
-            if (current.next != null) {
-                storage[index] = current.next;
-            }
-        }
-        return null;
+        current = removeKey(current, key, index);
+        return current!=null?current.getValue():null;
     }
 
-    public boolean containsKey(K key) {
-        EntryNK current = getElementForKey(key);
+
+    boolean containsKey(K key) {
+        EntryNK<? extends K, ? extends V> current = getElementForKey(key);
         return current != null;
     }
 
@@ -95,8 +99,8 @@ class HashTableNK<K, V> {
         }
     }
 
-    public Set<K> getKeys() {
-        Set<K> resultSet = new HashSet();
+    Set<K> getKeys() {
+        Set<K> resultSet = new HashSet<>();
         for (EntryNK entry : storage) {
             while (entry != null) {
                 resultSet.add((K) entry.getKey());
@@ -119,13 +123,27 @@ class HashTableNK<K, V> {
     }
 
     private EntryNK<K, V> findLast(EntryNK<K, V> current) {
-        if (current.next != null) {
-            while (current.next != null) {
-                current = current.next;
-            }
+        while (current.next != null) {
+          current = current.next;
         }
         return current;
     }
 
+    private EntryNK<K, V> removeKey(EntryNK<K, V> current, K key, int index) {
+        while (current!= null && !current.getKey().equals(key)){
+            current = current.next;
+        }
+        if (current!=null) {
+            if (current.prev != null)
+                current.prev.next = current.next;
+            else if (current.next != null)
+                storage[index] = current.next;
+            else
+                storage[index] = null;
+            currentEntries--;
+        }
+
+        return current;
+    }
 
 }

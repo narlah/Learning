@@ -3,14 +3,14 @@ package codeGeneratorParserDiffLang;
 import java.io.*;
 
 public class BatchProcessorTest {
-    private static String dir = "c:\\Programing\\";
 
-    public static void main(String[] args) throws FileNotFoundException, IOException {
+    public static void main(String[] args) throws IOException {
         parseLanguage("Java", new JavaParser());
         parseLanguage("C", new CParser());
     }
 
     private static void parseLanguage(String Language, LanguageParser parser) throws IOException {
+        String dir = "c:\\Programing\\";
         BufferedReader br = new BufferedReader(new FileReader(new File(dir + "generateThis.txt")));
         BufferedWriter wr = new BufferedWriter(new FileWriter(new File(dir + Language + ".txt")));
 

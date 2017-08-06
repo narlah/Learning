@@ -22,23 +22,21 @@ public class ReflectExample {
                 inheritedMethod = classType.getDeclaredMethod(theMethodName, methodParamTypes);
                 break;
             } catch (NoSuchMethodException ex) {
-
                 classType = classType.getSuperclass();
-
             }
             return inheritedMethod;
         }
         return inheritedMethod;
     }
 
-    public static String dump(Object o, int callCount) {
+    private static String dump(Object o, int callCount) {
         callCount++;
-        StringBuffer tabs = new StringBuffer();
+        StringBuilder tabs = new StringBuilder();
         for (int k = 0; k < callCount; k++) {
             tabs.append("\t");
         }
-        StringBuffer buffer = new StringBuffer();
-        Class<? extends Object> oClass = o.getClass();
+        StringBuilder buffer = new StringBuilder();
+        Class<?> oClass = o.getClass();
         if (oClass.isArray()) {
             buffer.append("\n");
             buffer.append(tabs.toString());

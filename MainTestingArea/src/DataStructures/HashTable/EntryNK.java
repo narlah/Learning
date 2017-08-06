@@ -1,12 +1,10 @@
 package DataStructures.HashTable;
 
-/**
- * Created by Nk on 7/25/2016.
- */
-final class EntryNK<K, V> {
-    final K key;
-    V value;
+ final class EntryNK<K, V> {
+    private final K key;
+    private V value;
     EntryNK<K, V> next;
+    EntryNK<K, V> prev;
     int hash;
 
     EntryNK(K key, V value) {
@@ -14,15 +12,15 @@ final class EntryNK<K, V> {
         this.setValue(value);
     }
 
-    public K getKey() {
+    K getKey() {
         return this.key;
     }
 
-    public V getValue() {
+    V getValue() {
         return this.value;
     }
 
-    public V setValue(V value) {
+    V setValue(V value) {
         this.value = value;
         return value;
     }

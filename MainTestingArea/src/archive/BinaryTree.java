@@ -24,7 +24,7 @@ public class BinaryTree {
         System.out.println(checkSuperBalancedIte(rootUnbalanced));
     }
 
-    public static TreeNode recBalance(int[] inList, int binaryBalanceFactor) {
+    private static TreeNode recBalance(int[] inList, int binaryBalanceFactor) {
         if (inList.length == 0)
             return null; // empty leaf , do nothing
         if (inList.length == 1)
@@ -45,7 +45,7 @@ public class BinaryTree {
         return tempRoot;
     }
 
-    public static String checkSuperBalancedRec(TreeNode root) {
+    private static String checkSuperBalancedRec(TreeNode root) {
         max_depth = 0;
         return checkSuperBalancedInner(root, 0) ? "REC Not Balanced" : "REC Balanced";
 
@@ -56,20 +56,17 @@ public class BinaryTree {
             if (max_depth == 0) {
                 max_depth = current_depth;
             }
-            if (Math.abs(current_depth - max_depth) > 1) {
-                return true;
-            } else
-                return false;
+            return Math.abs(current_depth - max_depth) > 1;
         }
         boolean left = checkSuperBalancedInner(root.left, current_depth + 1);
         boolean right = checkSuperBalancedInner(root.right, current_depth + 1);
         return (left || right);
     }
 
-    public static String checkSuperBalancedIte(TreeNode root) {
+    private static String checkSuperBalancedIte(TreeNode root) {
 
         int maxDepth = 0;
-        Stack<StackNode> stack = new Stack<StackNode>();
+        Stack<StackNode> stack = new Stack<>();
         stack.add(new StackNode(root, 0));
         while (!stack.isEmpty()) {
             StackNode temp = stack.pop();
@@ -90,7 +87,7 @@ public class BinaryTree {
 }
 
 class StackNode {
-    public StackNode(TreeNode node, int depth) {
+    StackNode(TreeNode node, int depth) {
         super();
         this.node = node;
         this.depth = depth;
@@ -101,7 +98,7 @@ class StackNode {
 }
 
 class TreeNode {
-    Integer value;
+    private Integer value;
     TreeNode left;
     TreeNode right;
 
@@ -111,7 +108,7 @@ class TreeNode {
         this.right = right;
     }
 
-    public void printTree(PrintStream out) throws IOException {
+    void printTree(PrintStream out) throws IOException {
         if (right != null) {
             right.printTree(out, true, "");
         }

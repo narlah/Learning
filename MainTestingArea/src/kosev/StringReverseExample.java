@@ -8,7 +8,7 @@ import java.io.IOException;
  */
 public class StringReverseExample {
 
-    public static void main(String args[]) throws FileNotFoundException, IOException {
+    public static void main(String args[]) throws IOException {
 
         // original string
         String str = "Sony is going to introduce Internet TV soon";

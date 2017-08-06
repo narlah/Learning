@@ -9,7 +9,7 @@ public class heap_Sort {
         }
     }
 
-    public static void fnSortHeap(int array[], int arr_ubound) {
+    private static void fnSortHeap(int array[], int arr_ubound) {
         int i, o;
         int lChild, rChild, mChild, root, temp;
         root = (arr_ubound - 1) / 2;
@@ -41,6 +41,5 @@ public class heap_Sort {
         temp = array[0];
         array[0] = array[arr_ubound];
         array[arr_ubound] = temp;
-        return;
     }
 }

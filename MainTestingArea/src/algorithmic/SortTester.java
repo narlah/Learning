@@ -14,11 +14,11 @@ public class SortTester {
         // System.out.println(Arrays.toString(insertionSort.sort()));
 
         MergeSortComponent mergeSort = new MergeSortComponent();
-        int[] res = mergeSort.sort(massive);
+        int[] res = MergeSortComponent.sort(massive);
         System.out.println(Arrays.toString(res));
         System.out.println(res.length + " =?= " + massive.length);
-        // QuickSortComponent quickSort = new QuickSortComponent();
-        // System.out.println(Arrays.toString(quickSort.sort(massive)));
+         QuickSortComponent quickSort = new QuickSortComponent();
+         System.out.println(Arrays.toString(quickSort.sort(massive)));
 
         // ***************************************************************
     }

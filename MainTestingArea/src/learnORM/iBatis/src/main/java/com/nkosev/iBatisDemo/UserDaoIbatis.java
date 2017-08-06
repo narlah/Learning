@@ -2,7 +2,7 @@ package learnORM.iBatis.src.main.java.com.nkosev.iBatisDemo;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 
-public class UserDaoIbatis implements UserDao {
+class UserDaoIbatis implements UserDao {
     @Override
     public UserModel addUser(UserModel user, SqlMapClient sqlmapClient) {
         try {
@@ -22,8 +22,7 @@ public class UserDaoIbatis implements UserDao {
     @Override
     public UserModel getUserById(Integer id, SqlMapClient sqlmapClient) {
         try {
-            UserModel user = (UserModel) sqlmapClient.queryForObject("user.getUserById", id);
-            return user;
+            return (UserModel) sqlmapClient.queryForObject("user.getUserById", id);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -38,7 +38,7 @@ public class CheckPrimesSolution {
                 throw new Exception("Overloading not allowed");
             }
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 

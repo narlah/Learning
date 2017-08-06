@@ -53,7 +53,7 @@ class Calculate {
 }
 
 //
-//public class Solution {
+//public class PrettyPrintMatrix {
 //
 //    public static void main(String[] args) {
 //        DoNotTerminate.forbidExit();
@@ -95,7 +95,7 @@ class Calculate {
 //
 //
 //    } //end of main
-//} //end of Solution
+//} //end of PrettyPrintMatrix
 //
 ///**
 // *This class prevents the user form using System.exit(0)

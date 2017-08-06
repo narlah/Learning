@@ -1,7 +1,7 @@
 package hackerRank;
 
 class Add {
-    public void add(int... list) {
+    private void add(int... list) {
         int sum = 0;
         String text = "";
         for (int i =0;i<list.length;i++) {

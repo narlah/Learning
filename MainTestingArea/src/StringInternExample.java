@@ -42,7 +42,7 @@ public class StringInternExample {
 
         // (4) For the forth case, we explicitly construct
         // String object around a literal. 
-        String anExplicitString = new String("A String");
+        String anExplicitString = "A String";
 
         // Verify that (0) and (4) are different objects.
         // Interning would solve this, but it would be
@@ -79,7 +79,7 @@ public class StringInternExample {
                                      String s1Name, String s1, String s2Name, String s2) {
         System.out.println(tag);
         System.out.println("  " +
-                s1Name + " == " + s2Name + " : " + (s1 == s2));
+                s1Name + " == " + s2Name + " : " + (s1.equals(s2)));
         System.out.println("  " +
                 s1Name + ".equals(" + s2Name + ") : " + s1.equals(s2));
         System.out.println();

@@ -8,7 +8,7 @@ public class ExtractProtocol {
 
     public static void main(String[] args) {
         // ***************************f6**********************************
-        String str = new String("http://www.devbg.org/forum/index.php");
+        String str = "http://www.devbg.org/forum/index.php";
         //String[] resultArray = str.split("//");
         int endProtocol = str.indexOf("://");
         int endServer = str.substring(endProtocol + 3).indexOf('/');

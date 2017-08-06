@@ -2,9 +2,6 @@ package algorithmic;
 
 import java.util.Stack;
 
-/**
- * Created by Nk on 1/7/2017.
- */
 public class MaxStack {
     Stack<Element> stack = new Stack<>();
 

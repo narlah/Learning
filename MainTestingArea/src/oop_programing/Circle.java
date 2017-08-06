@@ -1,8 +1,8 @@
 package oop_programing;
 
 
-public class Circle extends Shape {
-    public Circle(float inWidth, float inHeight) {
+class Circle extends Shape {
+    Circle(float inWidth, float inHeight) {
         super(inWidth, inHeight);
         if (inHeight != inWidth) {
             System.out.println("Not a circle!");
@@ -17,6 +17,5 @@ public class Circle extends Shape {
         return "Circle";
     }
 
-    ;
 
 }

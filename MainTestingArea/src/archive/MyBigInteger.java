@@ -33,11 +33,11 @@ public class MyBigInteger {
         return array.size();
     }
 
-    public int getIndex(int i) {
+    private int getIndex(int i) {
         return array.get(i);
     }
 
-    public int setIndex(int i, int value) {
+    private int setIndex(int i, int value) {
         return array.set(i, value);
     }
 
@@ -59,7 +59,7 @@ public class MyBigInteger {
 
     //-----------------------------------------------------------------------------
     private void carryNumber(int index, int carry, MyBigInteger result) {
-        int multPlus = 0, singlePlus = 0;
+        int multPlus, singlePlus;
         do {
             multPlus = carry + result.getIndex(index);
             if (multPlus > 9 && index >= 0) {
@@ -69,7 +69,6 @@ public class MyBigInteger {
                 index--;
             } else {
                 result.setIndex(index, multPlus);
-                carry = 0;
                 break;
             }
         } while (true);

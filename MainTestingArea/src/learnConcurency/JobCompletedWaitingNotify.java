@@ -25,9 +25,7 @@ public class JobCompletedWaitingNotify extends Thread {
         job.start();
         Thread.sleep(1000);
         System.out.println("Waiting to get End ...");
-        synchronized (job) {
-            job.wait();
-        }
+        job.wait();
         System.out.println(job.counter);
     }
 

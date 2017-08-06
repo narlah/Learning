@@ -3,7 +3,7 @@ package soapOverHTTPS;
 import javax.jws.*;
 
 @WebService
-public interface HelloInterface {
+interface HelloInterface {
 
-    public String hello(@WebParam( name = "who" ) String who );
+    String hello(@WebParam(name = "who") String who);
 }

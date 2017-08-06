@@ -21,14 +21,14 @@ public class CountAndSay {
         int currentIndex = 0;
         while (currentIndex <= string.length() - 1) {
             if (currentIndex == string.length() - 1) {
-                outString.append(currentCount + "" + currentChar);
+                outString.append(currentCount).append("").append(currentChar);
                 break;
             }
             char c = string.charAt(currentIndex + 1);
             if (c == currentChar) {
                 currentCount++;
             } else {
-                outString.append(currentCount + "" + currentChar);
+                outString.append(currentCount).append("").append(currentChar);
                 currentCount = 1;
                 currentChar = c;
             }

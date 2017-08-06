@@ -12,7 +12,7 @@ enum testSingleton {
         this.counter = counter + 1;
     }
 
-    private testSingleton() {
+    testSingleton() {
         System.out.println("Here");
     }
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.function.Function;
 
 public class FindPairsInIntArray {
-    public static int searchForSum = 8;
+    private static int searchForSum = 8;
 
     private static boolean checkForPairs(int[] arr) {
         for (int i = 0; i < arr.length; i++) {
@@ -18,7 +18,7 @@ public class FindPairsInIntArray {
 
     private static boolean checkForPairsAdvanced(int[] arr) {
         if (arr.length == 1) return false; //we need pairs
-        int i = 0, j = arr.length - 1, sum = 0;
+        int i = 0, j = arr.length - 1, sum;
 
         while (i < j) {
             sum = arr[i] + arr[j];
@@ -33,9 +33,9 @@ public class FindPairsInIntArray {
         return false;
     }
 
-    public static boolean checkForPairsHash(int[] arr) {
+    private static boolean checkForPairsHash(int[] arr) {
         HashSet<Integer> set = new HashSet<>();
-        int current;
+        //int current;
         for (int anArr : arr) {
             if (set.contains(anArr)) return true;
             set.add(searchForSum - anArr);
@@ -44,7 +44,7 @@ public class FindPairsInIntArray {
     }
 
     public static void main(String[] args) {
-        FindPairsInIntArray f = new FindPairsInIntArray();
+        //FindPairsInIntArray f = new FindPairsInIntArray();
         List<int[]> initialData = new ArrayList<>();
 
         initialData.add(new int[]{-1, -1, 2, 3, 9});
@@ -59,7 +59,7 @@ public class FindPairsInIntArray {
         check(FindPairsInIntArray::checkForPairsHash, initialData);
     }
 
-    private static void check(Function<int[],Boolean> f, List<int[]> initialData){
+    private static void check(Function<int[], Boolean> f, List<int[]> initialData) {
         System.out.println(f); //still wondering how to get the name of the Function , but its freaking 2am , good night
         for (int[] data : initialData) {
             System.out.println(Arrays.toString(data) + " " + f.apply(data));

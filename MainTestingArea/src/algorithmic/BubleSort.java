@@ -31,7 +31,7 @@ public class BubleSort {
      * iteration larget number is sorted and subsequently numbers smaller than
      * that.
      */
-    public static void bubbleSort(int[] unsorted) {
+    private static void bubbleSort(int[] unsorted) {
         System.out.println("unsorted array before sorting : " + Arrays.toString(unsorted));
         boolean cycleWithoutSwap = false;
         // Outer loop - need n-1 iteration to sort n elements
@@ -50,7 +50,7 @@ public class BubleSort {
                     cycleWithoutSwap = true;
                 }
             }
-            if (cycleWithoutSwap == false) {
+            if (!cycleWithoutSwap) {
                 System.out.println("Meh its finished");
                 break;
             }

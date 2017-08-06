@@ -3,7 +3,7 @@ package oop_programing;
 public class TestShape {
     public static void main(String[] args) {
         Shape[] data = new Shape[10];
-        ;
+
         try {
             data[0] = (new Rectangle(3, 2));
             data[1] = (new Triangle(2, 1));
@@ -19,8 +19,8 @@ public class TestShape {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        for (int i = 0; i < data.length; i++) {
-            System.out.printf("Surface for %s Shape is %f\n", data[i].getShapeName(), data[i]
+        for (Shape aData : data) {
+            System.out.printf("Surface for %s Shape is %f\n", aData.getShapeName(), aData
                     .calculateSurface());
         }
 

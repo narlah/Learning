@@ -56,7 +56,6 @@ public class TestHashTableNk {
         testHT.put(1800, "nk1800");
         assertTrue(testHT.lenght() > 3);
         assertFalse(testHT.lenght() <= 2);
-        System.out.println(testHT.getKeys().toString());
         assertTrue(testHT.containsKey(1));
         assertTrue(testHT.containsKey(1800));
         assertFalse(testHT.containsKey(112));
@@ -67,11 +66,23 @@ public class TestHashTableNk {
         HashTableNK<Integer, String> testHT = new HashTableNK<>(2);
         testHT.put(1, "nk1");
         testHT.put(2, "nk2");
+        testHT.put(33, "nk3");
+        assertTrue(testHT.remove(33).equals("nk3"));
         assertTrue(testHT.containsKey(1));
+        assertFalse(testHT.containsKey(22));
+        testHT.remove(2);
         assertTrue(testHT.remove(1).equals("nk1"));
-        assertTrue(!testHT.containsKey(1));
-        assertFalse(testHT.containsKey(1));
-        System.out.println(testHT.getKeys().toString());
+        assertTrue(testHT.lenght()==0);
+
+        testHT.put(1,"z");
+        assertTrue(testHT.lenght()==1);
+        testHT.put(2,"k");
+        assertTrue(testHT.lenght()==2);
+        testHT.put(1,"l");
+        assertTrue(testHT.lenght()==2);
+        assertTrue(testHT.remove(1).equals("l"));
+        assertTrue(testHT.lenght()==1);
+        System.out.println(testHT.getKeys());
     }
 
 }

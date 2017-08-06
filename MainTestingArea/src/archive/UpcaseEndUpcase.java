@@ -4,8 +4,7 @@ public class UpcaseEndUpcase {
 
     public static void main(String[] args) {
         // ***************************f6**********************************
-        String str = new String(
-                "We are living in a <upcase>yellow submarine</upcase>. We don't have anything else. Inside the submarine is very tight. So we are <upcase>drinking</upcase> all the day. We <upcase>will</upcase> move out of it in 5 days.");
+        String str = "We are living in a <upcase>yellow submarine</upcase>. We don't have anything else. Inside the submarine is very tight. So we are <upcase>drinking</upcase> all the day. We <upcase>will</upcase> move out of it in 5 days.";
         String searchForStart = "<upcase>";
         String searchForEnd = "</upcase>";
         StringBuilder strBuild = new StringBuilder(str.length());

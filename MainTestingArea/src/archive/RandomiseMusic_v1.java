@@ -8,7 +8,7 @@ import java.util.Vector;
 
 public class RandomiseMusic_v1 {
 
-    public static void randomizeDir(String startDirectory) throws IOException {
+    private static void randomizeDir(String startDirectory) throws IOException {
         Vector<File> AllMusicFiles = get_music_files(startDirectory);
         Collections.shuffle(AllMusicFiles);
         int vectorLenght = AllMusicFiles.size();
@@ -17,13 +17,13 @@ public class RandomiseMusic_v1 {
         Long time = new Date().getTime();
         String logFileName = "logFile_" + time + ".txt";
         logFileCreator logFile = new logFileCreator(startDirectory, logFileName);
-        String absolutePath = null;
-        String filePath = null;
-        String newName = null;
+        String absolutePath;
+        String filePath;
+        String newName;
 
         // Main cycle , we shuffle , change the names, and rename the file
         for (int i = 0; i < vectorLenght; i++) {
-            File currentFile = (File) AllMusicFiles.elementAt(i);
+            File currentFile = AllMusicFiles.elementAt(i);
             String originalName = currentFile.getName();
 
             absolutePath = currentFile.getAbsolutePath();
@@ -61,11 +61,12 @@ public class RandomiseMusic_v1 {
 
     // Ensures we pick only the mp3 files
     private static Vector<File> get_music_files(String startDirectory) {
-        File startdir = new File(startDirectory);
-        File[] AllFiles = startdir.listFiles();
+        File startDir = new File(startDirectory);
+        File[] AllFiles = startDir.listFiles();
+        assert(AllFiles!=null);
         int length = AllFiles.length;
         System.out.printf("Array size : %d%n ", length);
-        Vector<File> TempArray = new Vector<File>(length);
+        Vector<File> TempArray = new Vector<>(length);
 
         for (File file : AllFiles) {
             String path = file.getAbsolutePath();
@@ -84,7 +85,7 @@ public class RandomiseMusic_v1 {
         int c = 0;
 
         while (!Character.isLetter(oldName.charAt(c))) {
-            if (oldName.charAt(c) == new Character('.')) {
+            if (oldName.charAt(c) == '.') {
                 c++;
                 break;
             }
@@ -92,7 +93,7 @@ public class RandomiseMusic_v1 {
         }
 
         String strippedName = oldName.substring(c);
-        String newName = "";
+        String newName;
         if (strippedName.isEmpty() || strippedName.equals("mp3")) {
             newName = (songNextNumber + 1) + "." + oldName;
         } else {
@@ -103,12 +104,12 @@ public class RandomiseMusic_v1 {
     }
 
     // -> A new class for handling the log file creation and operation.
-    public static class logFileCreator {
+    private static class logFileCreator {
         private File logFile = null;
         private PrintStream fileWriter = null;
-        private LinkedList<String[]> logBuffer = new LinkedList<String[]>();
+        private LinkedList<String[]> logBuffer = new LinkedList<>();
 
-        public logFileCreator(String path, String logFileName)
+        logFileCreator(String path, String logFileName)
                 throws IOException {
             initialiseFields(path, logFileName);
         }
@@ -133,22 +134,22 @@ public class RandomiseMusic_v1 {
             }
         }
 
-        public Boolean logSingleLine(String[] logLine) throws IOException {
+        Boolean logSingleLine(String[] logLine) throws IOException {
             return logBuffer.add(logLine);
 
         }
 
         // Print the entire buffered log, after that the log file is closed
-        public void printTheLog() throws IOException {
+        void printTheLog() throws IOException {
             int longestSong = 0;
-            int len = 0;
+            int len;
             for (String[] strArray : logBuffer) {
                 len = strArray[0].length();
                 if (longestSong < len) {
                     longestSong = len;
                 }
             }
-            String temp = null;
+            String temp;
             for (String[] strPrint : logBuffer) {
                 int spacesAdded = longestSong - Integer.getInteger(strPrint[1]);
                 temp = String.format("%-" + spacesAdded + "s", strPrint[0]);

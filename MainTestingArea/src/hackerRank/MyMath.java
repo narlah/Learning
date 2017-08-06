@@ -70,15 +70,15 @@ class Solution {
             int num = Integer.parseInt(st.nextToken());
             if (ch == 1) {
                 op = ob.is_odd();
-                ret = ob.checker(op, num);
+                ret = MyMath.checker(op, num);
                 ans = (ret) ? "ODD" : "EVEN";
             } else if (ch == 2) {
                 op = ob.is_prime();
-                ret = ob.checker(op, num);
+                ret = MyMath.checker(op, num);
                 ans = (ret) ? "PRIME" : "COMPOSITE";
             } else if (ch == 3) {
                 op = ob.is_palindrome();
-                ret = ob.checker(op, num);
+                ret = MyMath.checker(op, num);
                 ans = (ret) ? "PALINDROME" : "NOT PALINDROME";
 
             }

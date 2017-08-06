@@ -21,7 +21,7 @@ public class FindLetterIndexInAWord {
         }
     }
 
-    public static void fillAlphabetInArray() {
+    private static void fillAlphabetInArray() {
         int startCaps = 65;
         int startSubCaps = 97;
         for (int i = 0; i < TOTAL_LETTERS; i++) {
@@ -32,13 +32,13 @@ public class FindLetterIndexInAWord {
         }
     }
 
-    public static void printArray() {
+    private static void printArray() {
         for (int i = 0; i < TOTAL_LETTERS_D; i++) {
             System.out.print(" " + matrix[i]);
         }
     }
 
-    public static void printCodesEasy(String word) {
+    private static void printCodesEasy(String word) {
         int wordLength = word.length();
         System.out.println("\n ---------Easy----------\n ");
         for (int i = 0; i < wordLength; i++) {
@@ -52,13 +52,13 @@ public class FindLetterIndexInAWord {
         System.out.println("\n --------------\n ");
     }
 
-    public static void printCodesSmart(String word) {
+    private static void printCodesSmart(String word) {
         final int DISPLACEMENT = 6;
         int wordLength = word.length();
         System.out.println("\n -------Smart-------\n ");
         for (int i = 0; i < wordLength; i++) {
             char ch = word.charAt(i);
-            int code = 0;
+            int code;
             if (ch == ' ') {
                 code = (int) ch;
             } else {

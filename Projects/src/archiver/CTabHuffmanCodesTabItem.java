@@ -29,7 +29,7 @@ public class CTabHuffmanCodesTabItem {
     public void initUI() {
 
         // tab Show Codes
-        tbtmNewCodes = new CTabItem(tabFolder, SWT.NONE);
+        tbtmNewCodes = new CTabItem(tabFolder, SWT.None);
         tbtmNewCodes.setText("Show Codes");
 
         ScrolledComposite scrolledCodesComposite = new ScrolledComposite(tabFolder, SWT.BORDER | SWT.H_SCROLL
@@ -96,31 +96,18 @@ public class CTabHuffmanCodesTabItem {
         }
     }
 
-    public final Comparator<String[]> BY_CHAR = new Comparator<String[]>() {
-        @Override
-        public int compare(String[] o1, String[] o2) {
-            return o1[0].compareTo(o2[0]);
-        }
-    };
+    private final Comparator<String[]> BY_CHAR = (o1, o2) -> o1[0].compareTo(o2[0]);
 
-    public final Comparator<String[]> BY_ASCII = new Comparator<String[]>() {
-        @Override
-        public int compare(String[] o1, String[] o2) {
-            return new Integer(o1[1]).compareTo(new Integer(o2[1]));
-        }
-    };
+    private final Comparator<String[]> BY_ASCII = (o1, o2) -> new Integer(o1[1]).compareTo(new Integer(o2[1]));
 
-    public final Comparator<String[]> BY_CODE = new Comparator<String[]>() {
-        @Override
-        public int compare(String[] o1, String[] o2) {
-            int len1 = o1[2].length();
-            int len2 = o2[2].length();
-            if (len1 > len2)
-                return 1;
-            else if (len1 < len2)
-                return -1;
-            else
-                return 0;
-        }
+    private final Comparator<String[]> BY_CODE = (o1, o2) -> {
+        int len1 = o1[2].length();
+        int len2 = o2[2].length();
+        if (len1 > len2)
+            return 1;
+        else if (len1 < len2)
+            return -1;
+        else
+            return 0;
     };
 }

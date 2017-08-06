@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class InitializeWorkers {
     public static void main(String[] args) {
         Worker[] data = new Worker[10];
-        ;
+
         data[1] = (new Worker("Ivan1", "Draganov", 121, 8));
         data[2] = (new Worker("Ivan2", "Draganov2", 123123, 12));
         data[3] = (new Worker("Ivan3", "Draganov", 13123, 1));
@@ -18,9 +18,9 @@ public class InitializeWorkers {
         data[9] = (new Worker("Ivan9", "Draganov", 12, 9));
         data[0] = (new Worker("Ivan10", "Draganov", 10, 9));
         Arrays.sort(data);
-        for (int i = 0; i < data.length; i++) {
-            System.out.printf("Worker %s %s have daily salary %f\n", data[i].getFirstName(), data[i].getLastName(),
-                    data[i].getSalaryPerDay());
+        for (Worker aData : data) {
+            System.out.printf("Worker %s %s have daily salary %f\n", aData.getFirstName(), aData.getLastName(),
+                    aData.getSalaryPerDay());
         }
 
     }

@@ -1,4 +1,4 @@
-package com.nkosev;
+package learnORM.HibernateExample.src.main.java.com.nkosev;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

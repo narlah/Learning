@@ -27,17 +27,16 @@ public class CoupleTasksWithConsoleMenu {
             System.out.println("Number must be positive Number (>0)! Try again...");
             return;
         }
-        String str = forward.toString();
-        StringBuilder build = new StringBuilder(str.length());
-        for (int i = str.length() - 1; i >= 0; i--) {
-            build.append(str.charAt(i));
+        StringBuilder build = new StringBuilder(forward.length());
+        for (int i = forward.length() - 1; i >= 0; i--) {
+            build.append(forward.charAt(i));
         }
         System.out.println(build.toString());
     }
 
     //average arithmetic
     private static void averageArithmetic() {
-        ArrayList<Integer> massiveArray = new ArrayList<Integer>();
+        ArrayList<Integer> massiveArray = new ArrayList<>();
         int counter = 1;
         System.out.println("End the sequence with \"finish\"!");
         do {
@@ -58,7 +57,7 @@ public class CoupleTasksWithConsoleMenu {
             result += i;
         }
         System.out.print("Average for massive :");
-        System.out.println(massiveArray.toString() + " is " + new Double(result) / new Double(massiveArray.size()));
+        System.out.println(massiveArray.toString() + " is " + (double) result / (double) massiveArray.size());
     }
 
     //a*x+b=0
@@ -67,7 +66,7 @@ public class CoupleTasksWithConsoleMenu {
             System.out.println("\'a\' must not be equal to ZERO. Try again ...");
             return;
         }
-        System.out.printf("Equation %d*x+%d=0 , x=%f", a, b, new Float(-b) / new Float(a));
+        System.out.printf("Equation %d*x+%d=0 , x=%f", a, b, (float) -b / (float) a);
     }
 
     private static void printMenu() {

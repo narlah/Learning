@@ -13,7 +13,7 @@ public class GzipInputStreamTEst {
             GZIPOutputStream gzip = new GZIPOutputStream(new FileOutputStream(new File("c:\\test.zip")));
 
             byte[] b = new byte[BUFFER_SIZE];
-            int count = 0;
+            int count;
             while ((count = fis.read(b)) > 0) {
                 gzip.write(b, 0, count);
             }

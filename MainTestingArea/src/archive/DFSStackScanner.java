@@ -20,12 +20,7 @@ public class DFSStackScanner {
         int c = 0;
         while (!queue.isEmpty()) {
             File currentFolder = queue.pop();
-            String[] directories = currentFolder.list(new FilenameFilter() {
-                @Override
-                public boolean accept(File current, String name) {
-                    return new File(current, name).isDirectory();
-                }
-            });
+            String[] directories = currentFolder.list((current, name) -> new File(current, name).isDirectory());
             c++;
             if (directories != null) {
                 for (int i = 0; i < directories.length; i++) {

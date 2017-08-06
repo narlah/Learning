@@ -4,10 +4,9 @@ public class CheckIfPerfectSquare {
         System.out.println(isPerfectSquare(25));
         System.out.println(isPerfectSquare(5));
         System.out.println(isPerfectSquare(4));
-
     }
 
-    public final static boolean isPerfectSquare(long n) {
+    private static boolean isPerfectSquare(long n) {
         if (n < 0)
             return false;
         long tst = (long) (Math.sqrt(n) + 0.5);

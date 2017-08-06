@@ -47,10 +47,9 @@ public class FindSubMatrix3x3 {
 
     private static int sum3x3(int x, int y) {
 
-        int sum = matrix[x][y] + matrix[x][y + 1] + matrix[x][y + 2] + matrix[x + 1][y]
+        return matrix[x][y] + matrix[x][y + 1] + matrix[x][y + 2] + matrix[x + 1][y]
                 + matrix[x + 1][y + 1] + matrix[x + 1][y + 2] + matrix[x + 2][y] + matrix[x + 2][y + 1]
                 + matrix[x + 2][y + 2];
-        return sum;
     }
 
     private static int[] findAndPrintMax3x3() {
@@ -66,8 +65,7 @@ public class FindSubMatrix3x3 {
                 }
             }
         }
-        int[] a = {sum, x, y};
-        return a;
+        return new int[]{sum, x, y};
     }
 
     public static void main(String[] args) {

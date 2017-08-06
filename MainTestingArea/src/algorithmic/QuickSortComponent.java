@@ -6,7 +6,6 @@ public class QuickSortComponent {
     //{ 20, 19, 18, 17, 15, 16, 14, 13, 12, 56, 124, 76, 78, 6, 11, 10, 7, 8, 9, 4, 5, 6,3, 2, 1, 0 };
 
     private int[] numbers;
-    private int number;
 
     public int[] sort(int[] values) {
         // check for empty or null array
@@ -14,8 +13,7 @@ public class QuickSortComponent {
             return values;
         }
         this.numbers = values;
-        number = values.length;
-        quicksort(0, number - 1);
+        quicksort(0, numbers.length - 1);
         return numbers;
     }
 

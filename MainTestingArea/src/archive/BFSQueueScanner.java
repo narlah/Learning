@@ -1,7 +1,6 @@
 package archive;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.util.LinkedList;
 
 public class BFSQueueScanner {
@@ -21,17 +20,12 @@ public class BFSQueueScanner {
         while (!queue.isEmpty()) {
             File currentFolder = queue.getFirst();
             queue.removeFirst();
-            String[] directories = currentFolder.list(new FilenameFilter() {
-                @Override
-                public boolean accept(File current, String name) {
-                    return new File(current, name).isDirectory();
-                }
-            });
+            String[] directories = currentFolder.list((current, name) -> new File(current, name).isDirectory());
             if (directories != null) {
-                for (int i = 0; i < directories.length; i++) {
+                for (String directory : directories) {
                     printDelimiters(c);
-                    System.out.println(directories[i]);
-                    queue.addLast(new File(currentFolder.getAbsolutePath() + "\\" + directories[i]));
+                    System.out.println(directory);
+                    queue.addLast(new File(currentFolder.getAbsolutePath() + "\\" + directory));
                 }
             }
         }

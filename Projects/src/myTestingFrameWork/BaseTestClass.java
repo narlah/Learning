@@ -63,10 +63,8 @@ abstract class BaseTestClass {
                     responceString.append("\n \n" + HTML_LI_RED_TAG + " ASSERTION ERROR : ").append(methodNameOutput).append(stackTraceToString(invocationException)).append(HTML_LI_END_TAG);
                 else {
                     Exception e = (Exception) invocationException.getTargetException();
-                    if (e instanceof Exception) //just replacing CorbaClientException for readability in git
+                    if (e != null) //just replacing CorbaClientException for readability in git
                         responceString.append("\n \n" + HTML_LI_RED_TAG + " CORBA ERROR     : ").append(methodNameOutput).append(stackTraceToString(invocationException)).append(HTML_LI_END_TAG);
-                    else if (e instanceof Exception) //just replacing CoreAPIException for readability in git
-                        responceString.append("\n \n" + HTML_LI_RED_TAG + " CORE API ERROR  : ").append(methodNameOutput).append(stackTraceToString(invocationException)).append(HTML_LI_END_TAG);
                     else {
                         responceString.append("\n \n" + HTML_LI_RED_TAG + " GENERAL ERROR  : ").append(methodNameOutput).append(stackTraceToString(invocationException)).append(HTML_LI_END_TAG);
                     }

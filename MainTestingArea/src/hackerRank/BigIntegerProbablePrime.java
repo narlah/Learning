@@ -1,9 +1,5 @@
 package hackerRank;
 
-/**
- * Created by narlah on 27.11.16.
- */
-
 import java.math.BigInteger;
 import java.util.Scanner;
 

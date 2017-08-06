@@ -8,7 +8,7 @@ final class Singleton {
         i = x;
     }
 
-    public static Singleton getReference() {
+    static Singleton getReference() {
         if (s == null) {
             return new Singleton(47);
         } else

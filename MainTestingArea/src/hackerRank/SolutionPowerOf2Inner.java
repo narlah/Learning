@@ -12,7 +12,7 @@ public class SolutionPowerOf2Inner {
 
         try {
             int num = 5;
-            Object o;// Must be used to hold the reference of the instance of the class Solution.Inner.Private
+            Object o;// Must be used to hold the reference of the instance of the class PrettyPrintMatrix.Inner.Private
 
             SolutionPowerOf2Inner solution = new SolutionPowerOf2Inner();
             Class[] c = Inner.class.getDeclaredClasses();
@@ -42,7 +42,7 @@ public class SolutionPowerOf2Inner {
         }
     }//end of Inner
 
-}//end of Solution
+}//end of PrettyPrintMatrix
 
 class DoNotTerminate { //This class prevents exit(0)
 

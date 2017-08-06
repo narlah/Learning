@@ -1,26 +1,26 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Solution {
+public class PrettyPrintMatrix {
     public static void main(String[] args) {
-        Solution sol = new Solution();
+        PrettyPrintMatrix sol = new PrettyPrintMatrix();
         sol.printMatrix(sol.prettyPrint(4));
     }
 
-    public ArrayList<ArrayList<Integer>> prettyPrint(int n) {
-        int N = n + n - 1;
-        ArrayList<ArrayList<Integer>> matrix = new ArrayList<ArrayList<Integer>>();
+    private ArrayList<ArrayList<Integer>> prettyPrint(int n) {
+        int N = 2*n - 1;
+        ArrayList<ArrayList<Integer>> matrix = new ArrayList<>();
         for (int i = 0; i < N; i++) {
-            matrix.add(new ArrayList<Integer>(0));
+            matrix.add(new ArrayList<>(0));
         }
         int k = n;
 
         Integer[] row = new Integer[N];
         for (int i = 0; i <= N / 2; i++) {
-            for (int j = 0 + i; j < N - i; j++) {
+            for (int j = i; j < N - i; j++) {
                 row[j] = k;
             }
-            ArrayList<Integer> temp = new ArrayList<Integer>(Arrays.asList(row));
+            ArrayList<Integer> temp = new ArrayList<>(Arrays.asList(row));
             matrix.set(i, temp);
             matrix.set(N - i - 1, temp);
             k--;
@@ -28,11 +28,9 @@ public class Solution {
         return matrix;
     }
 
-    public void printMatrix(ArrayList<ArrayList<Integer>> arrayList) {
+    private void printMatrix(ArrayList<ArrayList<Integer>> arrayList) {
         for (ArrayList<Integer> element : arrayList) {
-            for (Integer t : element) {
-                System.out.print(t);
-            }
+            element.forEach(System.out::print);
             System.out.println();
         }
     }

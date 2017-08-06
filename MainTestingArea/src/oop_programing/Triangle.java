@@ -1,8 +1,8 @@
 package oop_programing;
 
-public class Triangle extends Shape {
+class Triangle extends Shape {
 
-    public Triangle(float inWidth, float inHeight) {
+    Triangle(float inWidth, float inHeight) {
         super(inWidth, inHeight);
     }
 
@@ -13,7 +13,5 @@ public class Triangle extends Shape {
     public String getShapeName() {
         return "Triangle";
     }
-
-    ;
 
 }

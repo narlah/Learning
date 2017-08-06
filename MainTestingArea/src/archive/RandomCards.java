@@ -9,11 +9,11 @@ import java.util.List;
  * and shuffle them equally to 4 players
  */
 class Card {
-    public enum Rank {
+    private enum Rank {
         DEUCE, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING, ACE
     }
 
-    public enum Suit {
+    private enum Suit {
         CLUBS, DIAMONDS, HEARTS, SPADES
     }
 
@@ -46,7 +46,7 @@ class Card {
                 protoDeck.add(new Card(rank, suit));
     }
 
-    public static ArrayList<Card> newDeck() {
+    static ArrayList<Card> newDeck() {
         return new ArrayList<Card>(protoDeck); // Return copy of prototype deck
     }
 }
@@ -68,20 +68,16 @@ public class RandomCards {
             if (j == 1) {
                 player1.add(deck.get(i));
                 j++;
-                continue;
             } else if (j == 2) {
                 player2.add(deck.get(i));
                 j++;
-                continue;
             } else if (j == 3) {
                 player3.add(deck.get(i));
 
                 j++;
-                continue;
             } else if (j == 4) {
                 player4.add(deck.get(i));
                 j = 1;
-                continue;
             }
         }
         System.out.println(" Player 1 " + player1);

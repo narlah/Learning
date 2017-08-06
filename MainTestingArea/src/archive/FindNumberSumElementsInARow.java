@@ -8,7 +8,7 @@ public class FindNumberSumElementsInARow {
         private int[] massive = null;
         private int startIndex = 0, endIndex = 0;
         private int currentSum = 0;
-        ; // maybe the first element is our hero ?
+        // maybe the first element is our hero ?
 
         private int findThisSum = 0;
         String currentName = null;
@@ -27,7 +27,7 @@ public class FindNumberSumElementsInARow {
             }
         }
 
-        public void findCurrent() {
+        void findCurrent() {
             if (massive == null || massive.length == 0) {
                 System.out.println("No valid current in a invalid massive.");
                 return;
@@ -64,7 +64,7 @@ public class FindNumberSumElementsInARow {
             } while (currentSum != findThisSum);
         }
 
-        public void printCurrent() {
+        void printCurrent() {
             if (massive == null || massive.length == 0) {
                 System.out.println("Fill the massive first, before printing!");
             } else if ((startIndex == endIndex && endIndex == massive.length && findThisSum != massive[endIndex]) || currentSum != findThisSum) {
@@ -83,7 +83,7 @@ public class FindNumberSumElementsInARow {
         }
     }
 
-    public static void printStartInfo(int[] mas, String Find_element) {
+    private static void printStartInfo(int[] mas, String Find_element) {
         System.out.println("We are searching for : " + Find_element);
         System.out.println(Arrays.toString(mas));
     }

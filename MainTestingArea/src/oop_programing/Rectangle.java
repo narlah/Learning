@@ -1,8 +1,8 @@
 package oop_programing;
 
-public class Rectangle extends Shape {
+class Rectangle extends Shape {
 
-    public Rectangle(float inWidth, float inHeight) {
+    Rectangle(float inWidth, float inHeight) {
         super(inWidth, inHeight);
         // TODO Auto-generated constructor stub
     }
@@ -15,6 +15,5 @@ public class Rectangle extends Shape {
         return "Rectangle";
     }
 
-    ;
 
 }

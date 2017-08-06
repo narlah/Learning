@@ -1,14 +1,14 @@
 package game2048;
 
 public class Game2048 {
-    public static final int SIZE_MIN = 3;
-    public static final int MOVE_LEFT = 1;
-    public static final int MOVE_RIGHT = 2;
-    public static final int MOVE_UP = 4;
-    public static final int MOVE_DOWN = 8;
+    private static final int SIZE_MIN = 3;
+    private static final int MOVE_LEFT = 1;
+    private static final int MOVE_RIGHT = 2;
+    private static final int MOVE_UP = 4;
+    private static final int MOVE_DOWN = 8;
 
     public final int size;
-    public final int goal;
+    private final int goal;
     final int[] board;
     private boolean gameOver;
     private boolean won;
@@ -32,19 +32,15 @@ public class Game2048 {
 
     void setBoard(int[] newBoard) {
         int s = Math.min(newBoard.length, board.length);
-        for (int i = 0; i < s; i++) {
-            board[i] = newBoard[i];
-        }
+        System.arraycopy(newBoard, 0, board, 0, s);
     }
 
     public void getBoard(int[] newBoard) {
         int s = Math.min(newBoard.length, board.length);
-        for (int i = 0; i < s; i++) {
-            newBoard[i] = board[i];
-        }
+        System.arraycopy(board, 0, newBoard, 0, s);
     }
 
-    public void newGame() {
+    private void newGame() {
         // clear Board
         for (int i = 0, l = board.length; i < l; i++) {
             board[i] = 0;
@@ -62,8 +58,8 @@ public class Game2048 {
     private void addRandomTile() {
         // count free tiles
         int freeTiles = 0;
-        for (int i = 0, l = board.length; i < l; i++) {
-            if (board[i] == 0) {
+        for (int aBoard : board) {
+            if (aBoard == 0) {
                 freeTiles++;
             }
         }
@@ -102,7 +98,7 @@ public class Game2048 {
         return won;
     }
 
-    public boolean cellsAvailable() {
+    private boolean cellsAvailable() {
         for (int i = 0, l = board.length; i < l; i++) {
             if (board[i] == 0) {
                 return true;
@@ -111,7 +107,7 @@ public class Game2048 {
         return false;
     }
 
-    public boolean tileMatchesAvailable() {
+    private boolean tileMatchesAvailable() {
         for (int y = 0, ym = board.length - size; y < ym; y += size) {
             for (int x = 0, xm = size - 1; x < xm; x++) {
                 int cell = y + x;
@@ -179,7 +175,7 @@ public class Game2048 {
         }
     }
 
-    boolean doRowLeft(int offset) {
+    private boolean doRowLeft(int offset) {
         boolean changed = false;
         clearStack();
         for (int x = offset, l = offset + size; x < l; x++) {
@@ -194,7 +190,7 @@ public class Game2048 {
         return changed;
     }
 
-    boolean moveLeft() {
+    private boolean moveLeft() {
 
         // try left shift
         boolean changed = false;
@@ -208,7 +204,7 @@ public class Game2048 {
         return changed;
     }
 
-    boolean doRowRight(int offset) {
+    private boolean doRowRight(int offset) {
         boolean changed = false;
         clearStack();
         for (int x = offset + size - 1; x >= offset; x--) {
@@ -236,7 +232,7 @@ public class Game2048 {
         return changed;
     }
 
-    boolean doColumnUp(int column) {
+    private boolean doColumnUp(int column) {
         boolean changed = false;
         clearStack();
         for (int x = column, i = 0; i < size; i++, x += size) {
@@ -251,7 +247,7 @@ public class Game2048 {
         return changed;
     }
 
-    boolean moveUp() {
+    private boolean moveUp() {
         // try left shift
         boolean changed = false;
 
@@ -264,7 +260,7 @@ public class Game2048 {
         return changed;
     }
 
-    boolean doColumnDown(int column) {
+    private boolean doColumnDown(int column) {
         boolean changed = false;
         clearStack();
         for (int x = column + size * (size - 1); x >= 0; x -= size) {
@@ -279,7 +275,7 @@ public class Game2048 {
         return changed;
     }
 
-    boolean moveDown() {
+    private boolean moveDown() {
         // try left shift
         boolean changed = false;
 

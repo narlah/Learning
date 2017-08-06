@@ -4,21 +4,13 @@ import javax.swing.*;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-/**
- * @author Ryan
- */
 public class JProgressBarExample {
 
     public static void main(String args[]) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                go();
-            }
-        });
+        SwingUtilities.invokeLater(JProgressBarExample::go);
     }
 
-    public static void go() {
+    private static void go() {
         JFrame frame = new JFrame();
         JPanel panel = new JPanel();
         JLabel label = new JLabel("Loading...");
@@ -38,7 +30,7 @@ public class JProgressBarExample {
 
     }
 
-    static class Task_IntegerUpdate extends SwingWorker<Void, Integer> {
+    private static class Task_IntegerUpdate extends SwingWorker<Void, Integer> {
 
         JProgressBar jpb;
         int max;

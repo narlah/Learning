@@ -4,7 +4,7 @@ class ElementStack {
     ElementStack prev;
     int data = 0;
 
-    public ElementStack(ElementStack prevConstr, int dataConstr) {
+    ElementStack(ElementStack prevConstr, int dataConstr) {
         this.prev = prevConstr;
         this.data = dataConstr;
     }
@@ -24,8 +24,7 @@ public class DynamicStack {
             this.Last = new ElementStack(null, values[0]);
             this.counter++;
             for (int i = 1; i < values.length; i++) {
-                ElementStack e = new ElementStack(Last, values[i]);
-                this.Last = e;
+                this.Last = new ElementStack(Last, values[i]);
                 this.counter++;
             }
         }
@@ -51,8 +50,7 @@ public class DynamicStack {
     }
 
     public int getElement() { //������ ��� ������
-        int result = Last.data;
-        return result;
+        return Last.data;
 
     }
 

@@ -56,8 +56,7 @@ public class DoubleLinkedList {
 
     private void addElementFirst(int inData) { //�������� ������
         if (this.First != null) {
-            Element e = new Element(null, First, inData);
-            First = e;
+            First = new Element(null, First, inData);
             counter++;
         } else {
             addElement(inData);

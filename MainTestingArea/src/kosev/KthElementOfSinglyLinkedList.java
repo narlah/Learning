@@ -2,9 +2,6 @@ package kosev;
 
 import java.util.stream.IntStream;
 
-/**
- * Created by Nk on 11/20/2016.
- */
 public class KthElementOfSinglyLinkedList {
     private final int K = 61;
     private final int N = 100;
@@ -74,7 +71,7 @@ public class KthElementOfSinglyLinkedList {
             count++;
         }
         curr = root;
-        for (int i : IntStream.range(1, count - K).toArray()) {
+        for (int ignored : IntStream.range(1, count - K).toArray()) {
             curr = curr.next;
         }
         return curr.data;

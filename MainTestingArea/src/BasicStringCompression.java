@@ -18,7 +18,7 @@ public class BasicStringCompression {
 
             if (currChar != ch[i] || i == ch.length - 1) {
                 if (currentCount >= 2)
-                    builder.append(currentCount + "" + currChar);
+                    builder.append(currentCount).append("").append(currChar);
                 else
                     builder.append(currChar);
 

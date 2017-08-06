@@ -2,9 +2,9 @@ package parserTurtle;
 
 import java.util.StringTokenizer;
 
-public class ParseCommands {
+class ParseCommands {
 
-    public static Command parseCommand(String line) {
+    static Command parseCommand(String line) {
         StringTokenizer st = new StringTokenizer(line);
         Character command = st.nextToken().charAt(0);
 
@@ -21,6 +21,6 @@ public class ParseCommands {
     }
 
     private static boolean checkLenght(String str) {
-        return str.length() >= 1 ? true : false;
+        return str.length() >= 1;
     }
 }

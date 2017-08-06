@@ -6,17 +6,17 @@ import java.util.Map.Entry;
 
 public class MaxDuplicatedWordCount {
 
-    public Map<String, Integer> getWordCount(String fileName) {
+    private Map<String, Integer> getWordCount(String fileName) {
 
-        FileInputStream fis = null;
-        DataInputStream dis = null;
+        FileInputStream fis;
+        DataInputStream dis;
         BufferedReader br = null;
-        Map<String, Integer> wordMap = new HashMap<String, Integer>();
+        Map<String, Integer> wordMap = new HashMap<>();
         try {
             fis = new FileInputStream(fileName);
             dis = new DataInputStream(fis);
             br = new BufferedReader(new InputStreamReader(dis));
-            String line = null;
+            String line;
             while ((line = br.readLine()) != null) {
                 StringTokenizer st = new StringTokenizer(line, " ");
                 while (st.hasMoreTokens()) {
@@ -28,29 +28,23 @@ public class MaxDuplicatedWordCount {
                     }
                 }
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             try {
                 if (br != null)
                     br.close();
-            } catch (Exception ex) {
+            } catch (Exception ignored) {
             }
         }
         return wordMap;
     }
 
-    public List<Entry<String, Integer>> sortByValue(Map<String, Integer> wordMap) {
+    private List<Entry<String, Integer>> sortByValue(Map<String, Integer> wordMap) {
 
         Set<Entry<String, Integer>> set = wordMap.entrySet();
-        List<Entry<String, Integer>> list = new ArrayList<Entry<String, Integer>>(set);
-        Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
-            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
-                return (o2.getValue()).compareTo(o1.getValue());
-            }
-        });
+        List<Entry<String, Integer>> list = new ArrayList<>(set);
+        list.sort((o1, o2) -> (o2.getValue()).compareTo(o1.getValue()));
         return list;
     }
 
