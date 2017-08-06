@@ -1,4 +1,4 @@
-package exercise.junitTests;
+package BookRepositoryJPM.junit.exercise.junitTests;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

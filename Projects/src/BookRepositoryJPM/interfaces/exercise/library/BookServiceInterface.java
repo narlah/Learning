@@ -1,4 +1,4 @@
-package exercise.library;
+package BookRepositoryJPM.interfaces.exercise.library;
 
 public interface BookServiceInterface
 {

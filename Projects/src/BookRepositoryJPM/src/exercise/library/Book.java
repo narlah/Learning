@@ -1,4 +1,4 @@
-package exercise.library;
+package BookRepositoryJPM.src.exercise.library;
 
 public class Book {
 	private String isbn;

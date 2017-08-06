@@ -1,4 +1,4 @@
-package exercise.library;
+package BookRepositoryJPM.src.exercise.library;
 
 import java.util.StringTokenizer;
 

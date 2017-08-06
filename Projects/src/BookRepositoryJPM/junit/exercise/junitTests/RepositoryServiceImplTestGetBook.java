@@ -1,13 +1,13 @@
-package exercise.junitTests;
+package BookRepositoryJPM.junit.exercise.junitTests;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import exercise.library.Book;
-import exercise.library.BookNotFoundException;
-import exercise.library.BookServiceImpl;
-import exercise.library.BookWrongISBNInputException;
+import BookRepositoryJPM.src.exercise.library.Book;
+import BookRepositoryJPM.src.exercise.library.BookNotFoundException;
+import BookRepositoryJPM.src.exercise.library.BookServiceImpl;
+import BookRepositoryJPM.src.exercise.library.BookWrongISBNInputException;
 
 public class RepositoryServiceImplTestGetBook {
 
