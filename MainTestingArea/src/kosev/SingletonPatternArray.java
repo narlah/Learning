@@ -39,11 +39,5 @@ public class SingletonPatternArray {
         SingletonArray s2 = SingletonArray.getReference();
         s2.setValue(9);
         System.out.println(s.getValue());
-        try {
-            // Can't do this: compile-time error.
-            // Singleton s3 = (Singleton)s2.clone();
-        } catch (Exception e) {
-            e.printStackTrace(System.err);
-        }
     }
 }
