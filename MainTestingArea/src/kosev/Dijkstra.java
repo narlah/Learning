@@ -7,11 +7,11 @@ import java.util.PriorityQueue;
 
 class Vertex implements Comparable<Vertex> {
     public final String name;
-    public Edge[] adjacencies;
-    public double minDistance = Double.POSITIVE_INFINITY;
-    public Vertex previous;
+    Edge[] adjacencies;
+    double minDistance = Double.POSITIVE_INFINITY;
+    Vertex previous;
 
-    public Vertex(String argName) {
+    Vertex(String argName) {
         name = argName;
     }
 
@@ -25,19 +25,19 @@ class Vertex implements Comparable<Vertex> {
 }
 
 class Edge {
-    public final Vertex target;
-    public final double weight;
+    final Vertex target;
+    final double weight;
 
-    public Edge(Vertex argTarget, double argWeight) {
+    Edge(Vertex argTarget, double argWeight) {
         target = argTarget;
         weight = argWeight;
     }
 }
 
 public class Dijkstra {
-    public static void computePaths(Vertex source) {
+    private static void computePaths(Vertex source) {
         source.minDistance = 0.;
-        PriorityQueue<Vertex> vertexQueue = new PriorityQueue<Vertex>();
+        PriorityQueue<Vertex> vertexQueue = new PriorityQueue<>();
         vertexQueue.add(source);
 
         while (!vertexQueue.isEmpty()) {
@@ -58,8 +58,8 @@ public class Dijkstra {
         }
     }
 
-    public static List<Vertex> getShortestPathTo(Vertex target) {
-        List<Vertex> path = new ArrayList<Vertex>();
+    private static List<Vertex> getShortestPathTo(Vertex target) {
+        List<Vertex> path = new ArrayList<>();
         for (Vertex vertex = target; vertex != null; vertex = vertex.previous)
             path.add(vertex);
         Collections.reverse(path);

@@ -1,15 +1,11 @@
 package archiver;
 
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 import java.util.PriorityQueue;
+import java.util.stream.Collectors;
 
 final class HuffmanCompresor extends Compressor {
     private HashMap<Character, String> codes = new HashMap<>();
@@ -82,10 +78,7 @@ final class HuffmanCompresor extends Compressor {
     }
 
     private Node buildTree() {
-        PriorityQueue<Node> queue = new PriorityQueue<>();
-        for (Entry<Character, Integer> entry : treeToFile.entrySet()) {
-            queue.add(new Node(entry.getValue(), entry.getKey(), null, null));
-        }
+        PriorityQueue<Node> queue = treeToFile.entrySet().stream().map(entry -> new Node(entry.getValue(), entry.getKey(), null, null)).collect(Collectors.toCollection(PriorityQueue::new));
         while (queue.size() > 1) {
             Node min1 = queue.remove();
             Node min2 = queue.remove();
