@@ -20,8 +20,8 @@ public final class GZipStreamCompresor extends Compressor {
 	public void encode() throws IOException {
 
 		try {
-			InputStream fis = new FileInputStream(new File(inFile));
-			GZIPOutputStream gzip = new GZIPOutputStream(new FileOutputStream(new File(outFile)));
+			InputStream fis = new FileInputStream(new File(getInFileName()));
+			GZIPOutputStream gzip = new GZIPOutputStream(new FileOutputStream(new File(getOutFileName())));
 
 			byte[] b = new byte[BUFFER_SIZE];
 			int count;
@@ -38,7 +38,7 @@ public final class GZipStreamCompresor extends Compressor {
 
 	@Override
 	public String toString() {
-		return inFile + " -> " + "GZIP Stream Compressor" + " -> " + outFile;
+		return getInFileName() + " -> " + "GZIP Stream Compressor" + " -> " + getOutFileName();
 	}
 
 	@Override

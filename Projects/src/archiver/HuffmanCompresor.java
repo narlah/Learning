@@ -21,10 +21,10 @@ final class HuffmanCompresor extends Compressor {
         Node treeRoot = buildTree();
         buildCode(treeRoot, "");
 
-        BufferedReader reader = new BufferedReader(new FileReader(inFile));
+        BufferedReader reader = new BufferedReader(new FileReader(getInFileName()));
         String line = reader.readLine();
 
-        BinaryStdOut writer = new BinaryStdOut(new BufferedOutputStream(new FileOutputStream(new File(outFile))));
+        BinaryStdOut writer = new BinaryStdOut(new BufferedOutputStream(new FileOutputStream(new File(getOutFileName()))));
         writeTreeToFile(writer);
         while (line != null) {
             line += "\r";
@@ -48,7 +48,7 @@ final class HuffmanCompresor extends Compressor {
 
     @Override
     public String toString() {
-        return inFile + " -> " + "Huffman Compressor" + " -> " + outFile;
+        return getInFileName() + " -> " + "Huffman Compressor" + " -> " + getOutFileName();
     }
 
     @SuppressWarnings("unchecked")
@@ -57,7 +57,7 @@ final class HuffmanCompresor extends Compressor {
     }
 
     private void getFrequencesFromFile() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(inFile));
+        BufferedReader reader = new BufferedReader(new FileReader(getInFileName()));
         String line = reader.readLine();
         try {
             char hashCodeForNewLine = (char) 13;

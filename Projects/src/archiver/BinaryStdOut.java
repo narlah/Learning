@@ -153,6 +153,7 @@ public final class BinaryStdOut {
 		writeByte((x >>> 24) & 0xff);
 		writeByte((x >>> 16) & 0xff);
 		writeByte((x >>> 8) & 0xff);
+		//noinspection PointlessBitwiseExpression
 		writeByte((x >>> 0) & 0xff);
 	}
 
@@ -207,6 +208,7 @@ public final class BinaryStdOut {
 		writeByte((int) ((x >>> 24) & 0xff));
 		writeByte((int) ((x >>> 16) & 0xff));
 		writeByte((int) ((x >>> 8) & 0xff));
+		//noinspection PointlessBitwiseExpression
 		writeByte((int) ((x >>> 0) & 0xff));
 	}
 
@@ -228,6 +230,7 @@ public final class BinaryStdOut {
 	 */
 	public void write(short x) {
 		writeByte((x >>> 8) & 0xff);
+		//noinspection PointlessBitwiseExpression
 		writeByte((x >>> 0) & 0xff);
 	}
 
