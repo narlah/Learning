@@ -1,4 +1,4 @@
-package huffmanMulti;
+package archiver.huffmanMulti;
 
 public class Counter extends Thread {
 	final public long[] frequenceTable = new long[256];

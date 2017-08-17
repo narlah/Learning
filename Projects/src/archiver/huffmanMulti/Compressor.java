@@ -1,4 +1,4 @@
-package huffmanMulti;
+package archiver.huffmanMulti;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

@@ -1,4 +1,4 @@
-package huffmanMulti;
+package archiver.huffmanMulti;
 
 public class Merger extends Thread {
 	public long[] frequenceTable;

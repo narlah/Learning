@@ -1,4 +1,4 @@
-package huffman;
+package archiver.huffmanAdaptive;
 
 import java.util.ArrayList;
 import java.util.List;

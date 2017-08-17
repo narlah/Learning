@@ -1,4 +1,4 @@
-package huffman;
+package archiver.huffmanAdaptive;
 
 /**
  * A node in a code tree. This class has two and only two subclasses:

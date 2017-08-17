@@ -1,6 +1,6 @@
 package RandomizeMusic;
 
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 public class MainRandomize {
 	public static void main(String[] args) {

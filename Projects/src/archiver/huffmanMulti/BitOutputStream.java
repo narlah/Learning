@@ -1,4 +1,4 @@
-package huffmanMulti;
+package archiver.huffmanMulti;
 
 import java.io.IOException;
 import java.io.OutputStream;

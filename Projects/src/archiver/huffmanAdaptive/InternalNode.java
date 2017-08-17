@@ -1,4 +1,4 @@
-package huffman;
+package archiver.huffmanAdaptive;
 
 /**
  * An internal node in a code tree. It has two nodes as children. Immutable.

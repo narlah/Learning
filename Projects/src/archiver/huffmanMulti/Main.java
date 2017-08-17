@@ -1,4 +1,4 @@
-package huffmanMulti;
+package archiver.huffmanMulti;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -82,7 +82,7 @@ public class Main {
 		}
 	}
 
-	static void decompress(File inputFile, File outputFile) {
+	public static void decompress(File inputFile, File outputFile) {
 		long time = System.currentTimeMillis();
 		InputStream inStream = null;
 		OutputStream outStream = null;
@@ -115,7 +115,7 @@ public class Main {
 		System.out.println("decompress: " + (System.currentTimeMillis() - time));
 	}
 
-	static void compress(File inputFile, File outputFile) {
+	public static void compress(File inputFile, File outputFile) {
 		long time = System.currentTimeMillis();
 		long timeCompress = 0;
 		long timeCompressE = 0;
@@ -155,7 +155,7 @@ public class Main {
 				+ (timeCompressE - timeCompress));
 	}
 
-	static void compressParallel(int threads, File inputFile, File outputFile) {
+	public static void compressParallel(int threads, File inputFile, File outputFile) {
 		long time = System.currentTimeMillis();
 		long timeCompress = 0;
 		long timeCompressE = 0;

@@ -1,4 +1,4 @@
-package huffman;
+package archiver.huffmanAdaptive;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

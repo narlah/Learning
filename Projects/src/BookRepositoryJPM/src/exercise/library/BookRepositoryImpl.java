@@ -1,5 +1,7 @@
 package BookRepositoryJPM.src.exercise.library;
 
+import BookRepositoryJPM.interfaces.exercise.library.BookRepositoryInterface;
+
 import java.util.HashMap;
 import java.util.Map;
 

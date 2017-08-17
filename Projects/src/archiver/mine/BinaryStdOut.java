@@ -1,4 +1,4 @@
-package archiver;
+package archiver.mine;
 
 /*************************************************************************
  *  Compilation:  javac BinaryStdOut.java

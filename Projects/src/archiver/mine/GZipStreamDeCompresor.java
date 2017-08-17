@@ -1,4 +1,6 @@
-package archiver;
+package archiver.mine;
+
+import archiver.mine.DeCompressor;
 
 import java.io.*;
 import java.util.zip.GZIPInputStream;

@@ -8,11 +8,11 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Vector;
 
-class RandomizerEngine {
+class RandomizeEngine {
     private String startDirectory;
     private Vector<String> AllMusicFiles = new Vector<>();
 
-    RandomizerEngine(String dir) {
+    RandomizeEngine(String dir) {
         this.startDirectory = dir;
         getMusicFiles();
     }
@@ -21,9 +21,8 @@ class RandomizerEngine {
      * Ensures we pick only the mp3 files
      */
     private void getMusicFiles() {
-
-        File startdir = new File(startDirectory);
-        File[] AllFiles = startdir.listFiles();
+        File startDir = new File(startDirectory);
+        File[] AllFiles = startDir.listFiles();
         if (AllFiles != null && AllFiles.length != 0) {
             Arrays.sort(AllFiles, (f1, f2) -> {
                 Integer a = Integer.valueOf("0" + f1.getName().replaceAll("(\\d*).*", "$1"));
@@ -39,7 +38,6 @@ class RandomizerEngine {
                 }
             }
         }
-
     }
 
     Vector<String> exposeMusicFileList() {
@@ -65,7 +63,7 @@ class RandomizerEngine {
     }
 
     /**
-     * Does the main work, shuffles the collected musical files and change names accordinly.
+     * Does the main work, shuffles the collected musical files and change names accordingly.
      *
      * @param logFileFlag Flag for the log file
      * @throws IOException

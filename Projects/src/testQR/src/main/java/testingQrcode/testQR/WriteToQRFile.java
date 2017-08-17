@@ -1,4 +1,4 @@
-package testingQrcode.testQR;
+package testQR.src.main.java.testingQrcode.testQR;
 
 import net.glxn.qrgen.QRCode;
 import net.glxn.qrgen.image.ImageType;

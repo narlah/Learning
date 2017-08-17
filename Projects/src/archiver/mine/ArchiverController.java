@@ -1,4 +1,8 @@
-package archiver;
+package archiver.mine;
+
+import archiver.mine.Compressor;
+import archiver.mine.GZipStreamCompresor;
+import archiver.mine.HuffmanCompresor;
 
 import java.io.IOException;
 import java.nio.file.Paths;

@@ -1,4 +1,4 @@
-package archiver;
+package archiver.mine;
 
 import java.util.ArrayList;
 import java.util.Collections;

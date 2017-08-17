@@ -1,4 +1,4 @@
-package huffmanMulti;
+package archiver.huffmanMulti;
 // // Copyright (c) 2010 Kevin Coulombe
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy

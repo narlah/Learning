@@ -1,25 +1,20 @@
 package RandomizeMusic;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.List;
 import java.util.Vector;
 import java.util.concurrent.ExecutionException;
-
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JProgressBar;
-import javax.swing.SwingWorker;
 
 class ProgressBarWorker extends SwingWorker<Void, Integer> {
 
 	private JProgressBar progressBar;
 	private int max;
 	private JLabel label;
-	private RandomizerEngine randEngine;
+	private RandomizeEngine randEngine;
 	private boolean isSelected=false;
 	private JList<String> original_list;
-	ProgressBarWorker(JProgressBar jpb, int max, JLabel label, RandomizerEngine randEngine, boolean isSelected, JList<String> original_list) throws IOException{
+	ProgressBarWorker(JProgressBar jpb, int max, JLabel label, RandomizeEngine randEngine, boolean isSelected, JList<String> original_list) throws IOException{
 		this.progressBar = jpb;
 		this.max = max;
 		this.label = label;

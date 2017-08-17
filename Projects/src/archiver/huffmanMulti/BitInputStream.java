@@ -1,4 +1,4 @@
-package huffmanMulti;
+package archiver.huffmanMulti;
 
 import java.io.EOFException;
 import java.io.IOException;

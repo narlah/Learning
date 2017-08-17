@@ -1,4 +1,4 @@
-package archiver;
+package archiver.mine;
 
 public class Node implements Comparable<Node> {
 

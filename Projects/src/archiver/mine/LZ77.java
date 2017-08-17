@@ -1,4 +1,4 @@
-package archiver;
+package archiver.mine;
 
 class LZ77 {
 

@@ -1,7 +1,6 @@
 package BookRepositoryJPM.junit.exercise.junitTests;
 
 import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 import BookRepositoryJPM.src.exercise.library.Book;

@@ -1,4 +1,4 @@
-package archiver;
+package archiver.mine;
 
 import java.io.IOException;
 

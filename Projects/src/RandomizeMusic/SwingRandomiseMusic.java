@@ -18,7 +18,7 @@ import java.util.Vector;
 class SwingRandomiseMusic extends JFrame {
     public static final long serialVersionUID = 1;
 
-    private RandomizerEngine randEngine;
+    private RandomizeEngine randEngine;
 
     private JList<String> original_list;
     private JFileChooser fileChooser;
@@ -50,7 +50,7 @@ class SwingRandomiseMusic extends JFrame {
      */
     private void initUI() {
         String initialDir = "C:\\";
-        randEngine = new RandomizerEngine(initialDir);
+        randEngine = new RandomizeEngine(initialDir);
         JPanel panel = new JPanel();
         getContentPane().add(panel, BorderLayout.CENTER);
         // File chooser

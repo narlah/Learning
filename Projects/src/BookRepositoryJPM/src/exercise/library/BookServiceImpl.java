@@ -1,5 +1,7 @@
 package BookRepositoryJPM.src.exercise.library;
 
+import BookRepositoryJPM.interfaces.exercise.library.BookServiceInterface;
+
 import java.util.StringTokenizer;
 
 public class BookServiceImpl implements BookServiceInterface {
