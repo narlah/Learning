@@ -1,7 +1,6 @@
 package DataStructures.HashTable;
 
 import org.junit.Test;
-
 import java.util.Set;
 
 import static junit.framework.TestCase.assertFalse;
@@ -84,7 +83,6 @@ public class TestHashTableNk {
         assertTrue(testHT.lenght()==1);
         System.out.println(testHT.getKeys());
     }
-
 }
 
 

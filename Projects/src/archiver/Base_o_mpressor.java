@@ -1,8 +1,8 @@
 package archiver;
 
 public abstract class Base_o_mpressor {
-	protected String inFile;
-	protected String outFile;
+	private String inFile;
+	private String outFile;
 
 	public String getInFileName() {
 		return String.valueOf(inFile); // defensive copy

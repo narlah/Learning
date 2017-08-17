@@ -16,7 +16,7 @@ public class Department {
     private String name;
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.PERSIST)
-    private List<Employee> employees = new ArrayList<Employee>();
+    private List<learnORM.HibernateExample.src.main.java.com.nkosev.Employee> employees = new ArrayList<learnORM.HibernateExample.src.main.java.com.nkosev.Employee>();
 
     public Department() {
         super();
@@ -42,7 +42,7 @@ public class Department {
         this.name = name;
     }
 
-    public List<Employee> getEmployees() {
+    public List<learnORM.HibernateExample.src.main.java.com.nkosev.Employee> getEmployees() {
         return employees;
     }
 

@@ -4,7 +4,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 
-public class HibernateUtil {
+class HibernateUtil {
 
     private static final SessionFactory sessionFactory = buildSessionFactory();
 
@@ -19,7 +19,7 @@ public class HibernateUtil {
         }
     }
 
-    public static SessionFactory getSessionFactory() {
+    static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
 
