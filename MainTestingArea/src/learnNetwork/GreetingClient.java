@@ -1,4 +1,4 @@
-package network;
+package learnNetwork;
 
 //File Name GreetingClient.java
 

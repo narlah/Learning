@@ -1,4 +1,4 @@
-package java8TestingGround.lambda;
+package learnLambdaEx;
 
 public class FinalScopeExample {
 

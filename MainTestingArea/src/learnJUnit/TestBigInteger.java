@@ -1,4 +1,4 @@
-package junitLearning;
+package learnJUnit;
 
 import archive.MyBigInteger;
 import org.junit.Test;

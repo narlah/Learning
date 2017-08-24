@@ -1,4 +1,4 @@
-package network;
+package learnNetwork;
 
 import java.io.*;
 import java.net.ServerSocket;

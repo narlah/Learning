@@ -1,0 +1,25 @@
+1. Complexity (Big-O) - http://bigocheatsheet.com/
+2. Sorting Quick Sort & Merge Sort, SortLists
+3. Hashtables, HT w/ only arrays
+4. Trees - Construction , traversal , manipulation, Binary
+	N-ary, trie
+5. Balanced trees - RB, AVL , Splay, Implementation
+6. (trees) BFS, DFS[O(|V|+|E| time, C(|V|) space worst )], 	inorder, preorder
+7. Graphs, Representation - objects&pointers, matrix, 	adjacency list - pros&cons for each
+8. Graphs - BFS[O(|N|+|E|) time, O(|V|) space worst depth], 	DFS [O(|N|+|E|) time, space O(|V|), O(b^d)], complexity ,tradeoffs
+9. Dijkstra
+10. A*
+11. Data Structures, Longest Path
+12. NP - Complete - traveling salesman, knapsack, NP complete in disguise
+13. Discrete MAth - probability , n-choose-k, counting
+14. Operating Systems - locks , mitexes, semaphors, monitors
+15. Operating Systems - thread, processes
+16. Deadlocks , livelock (special case of resource starvation). Livelock - can happen on deadlock detection - by exclusive lock
+17. Operating Systems - context switching , process info , thread info
+18. Operating Systems - scheduling
+19. Coding - C++, Java (generics too)
+	semaphores : V(S) - increments S, P(S) - decrements S, also sleeps until S>=0, producer consumer
+Unix : V(S, I):S=S+I
+	   P(S,I):for(;;) if (S>=I){S=S-I;break;}
+20. Bonus - Graph Coloring
+21. SQL

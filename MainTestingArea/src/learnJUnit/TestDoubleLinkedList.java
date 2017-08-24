@@ -1,4 +1,4 @@
-package junitLearning;
+package learnJUnit;
 
 import archive.DoubleLinkedList;
 import org.junit.Test;

@@ -6,7 +6,7 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 
 @WebService( endpointInterface="soapOverHTTPS.HelloInterface" )
-public class HelloInterfaceImpl implements HelloInterface {
+class HelloInterfaceImpl implements HelloInterface {
 
     @Override
     public String hello(@WebParam(name = "who") String who) {

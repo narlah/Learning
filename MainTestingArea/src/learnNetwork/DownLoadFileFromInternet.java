@@ -1,4 +1,4 @@
-package network;
+package learnNetwork;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

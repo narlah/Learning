@@ -1,4 +1,4 @@
-package junitLearning;
+package learnJUnit;
 
 import archive.DynamicStack;
 import org.junit.Test;
