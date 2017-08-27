@@ -1,7 +1,7 @@
 package learnORM.HibernateExample.src.main.java.com.nkosev;
 
 import org.hibernate.Session;
-import org.hibernate.query.Query;
+import org.hibernate.Query;
 
 import java.util.List;
 

@@ -13,7 +13,6 @@ public class SortTester {
         // InsertionSortComponent insertionSort = new InsertionSortComponent(massive);
         // System.out.println(Arrays.toString(insertionSort.sort()));
 
-        MergeSortComponent mergeSort = new MergeSortComponent();
         int[] res = MergeSortComponent.sort(massive);
         System.out.println(Arrays.toString(res));
         System.out.println(res.length + " =?= " + massive.length);
