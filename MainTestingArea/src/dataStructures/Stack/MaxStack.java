@@ -1,22 +1,25 @@
 package dataStructures.Stack;
 
+import org.hibernate.annotations.SourceType;
+
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 public class MaxStack {
-    Stack<Element> stack = new Stack<>();
+    private Stack<Element> stack = new Stack<>();
 
-    void push(int newElementValue) {
-        Element n = new Element(newElementValue);
-        if (stack.size() > 0){
-
-            Element old = stack.peek();
-            if (old.value < n.value) {
-                n.currentMax = n.value;
+    public void push(int newElementValue) {
+        Element newElement = new Element(newElementValue);
+        if (stack.size() > 0) {
+            Element oldElement = stack.peek();
+            if (oldElement.currentMax < newElement.value) {
+                newElement.currentMax = newElement.value;
             } else {
-                n.currentMax = old.value;
+                newElement.currentMax = oldElement.currentMax;
             }
         }
-        stack.push(n);
+        stack.push(newElement);
+        System.out.println(newElement);
     }
 
     public Element pop() {
@@ -27,31 +30,52 @@ public class MaxStack {
         return stack.peek().currentMax;
     }
 
+
     public static void main(String[] args) {
         MaxStack maxStack = new MaxStack();
         maxStack.push(1);
         maxStack.push(2);
+        maxStack.push(12);
         maxStack.push(3);
         maxStack.push(4);
+        maxStack.push(55);
         maxStack.push(5);
-        System.out.println(maxStack.getMax());
-        maxStack.pop();
-        System.out.println(maxStack.getMax());
-        maxStack.pop();
-        System.out.println(maxStack.getMax());
-        maxStack.pop();
-        System.out.println(maxStack.getMax());
-        maxStack.pop();
+        try {
+            for (int i = 0; i < 10; i++) {
+                System.out.println(maxStack.getMax());
+                maxStack.pop();
 
-
+            }
+        }catch (EmptyStackException e){
+            System.out.println("Stack is empty , do not try this at home!");
+        }
     }
 }
 
 class Element {
-    public Element(int value) {
+    Element(int value) {
         this.value = value;
     }
 
     int value;
+
+    @Override
+    public String toString() {
+        return "Element{" +
+                "value=" + value +
+                ", currentMax=" + currentMax +
+                '}';
+    }
+
     int currentMax;
+
+    public int getCurrentMax() {
+        return currentMax;
+    }
+
+    public void setCurrentMax(int currentMax) {
+        this.currentMax = currentMax;
+    }
+
+
 }
