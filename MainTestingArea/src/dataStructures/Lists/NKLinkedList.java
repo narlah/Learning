@@ -1,7 +1,5 @@
 package dataStructures.Lists;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.util.*;
 
 public class NKLinkedList<T> implements List<T> {
@@ -150,7 +148,7 @@ public class NKLinkedList<T> implements List<T> {
         if (index == 0) {
             root = new ListNode((T)element, root);
         } else {
-            throw new NotImplementedException();
+            throw new UnsupportedOperationException();
         }
     }
 

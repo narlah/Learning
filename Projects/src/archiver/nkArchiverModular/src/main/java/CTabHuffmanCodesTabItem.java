@@ -1,5 +1,3 @@
-package archiver.mine;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
@@ -9,6 +7,18 @@ import org.eclipse.swt.widgets.*;
 import java.util.*;
 
 public class CTabHuffmanCodesTabItem {
+    private final Comparator<String[]> BY_CHAR = (o1, o2) -> o1[0].compareTo(o2[0]);
+    private final Comparator<String[]> BY_ASCII = (o1, o2) -> new Integer(o1[1]).compareTo(new Integer(o2[1]));
+    private final Comparator<String[]> BY_CODE = (o1, o2) -> {
+        int len1 = o1[2].length();
+        int len2 = o2[2].length();
+        if (len1 > len2)
+            return 1;
+        else if (len1 < len2)
+            return -1;
+        else
+            return 0;
+    };
     private CTabItem tbtmNewCodes;
     private Table table;
     private TableColumn tblclmnChar;
@@ -95,19 +105,4 @@ public class CTabHuffmanCodesTabItem {
             item.setText(row);
         }
     }
-
-    private final Comparator<String[]> BY_CHAR = (o1, o2) -> o1[0].compareTo(o2[0]);
-
-    private final Comparator<String[]> BY_ASCII = (o1, o2) -> new Integer(o1[1]).compareTo(new Integer(o2[1]));
-
-    private final Comparator<String[]> BY_CODE = (o1, o2) -> {
-        int len1 = o1[2].length();
-        int len2 = o2[2].length();
-        if (len1 > len2)
-            return 1;
-        else if (len1 < len2)
-            return -1;
-        else
-            return 0;
-    };
 }

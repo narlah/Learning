@@ -1,4 +1,4 @@
-package learnORM.iBatis.src.main.java.com.nkosev.iBatisDemo;
+package com.nkosev.iBatisDemo;
 
 public class UserModel {
     private Integer id;

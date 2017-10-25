@@ -1,5 +1,3 @@
-package archiver.mine;
-
 class LZ77 {
 
     private char referencePrefix;

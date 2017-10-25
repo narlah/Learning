@@ -1,4 +1,4 @@
-package learnORM.HibernateExample.src.main.java.com.nkosev;
+package com.nkosev.HibernateDemo;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ public class Department {
     private String name;
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.PERSIST)
-    private List<learnORM.HibernateExample.src.main.java.com.nkosev.Employee> employees = new ArrayList<learnORM.HibernateExample.src.main.java.com.nkosev.Employee>();
+    private List<Employee> employees = new ArrayList<Employee>();
 
     public Department() {
         super();
@@ -42,7 +42,7 @@ public class Department {
         this.name = name;
     }
 
-    public List<learnORM.HibernateExample.src.main.java.com.nkosev.Employee> getEmployees() {
+    public List<Employee> getEmployees() {
         return employees;
     }
 

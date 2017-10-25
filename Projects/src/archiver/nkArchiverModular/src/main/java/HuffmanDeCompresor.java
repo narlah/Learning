@@ -1,16 +1,14 @@
-package archiver.mine;
-
 import java.io.*;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 import java.util.PriorityQueue;
 
 public final class HuffmanDeCompresor extends DeCompressor {
+    private LinkedHashMap<Character, Integer> treeFromFile;
+
     public HuffmanDeCompresor(String inFile, String outFile) {
         super(inFile, outFile);
     }
-
-    private LinkedHashMap<Character, Integer> treeFromFile;
 
     /**
      * Reads frequencies from the beginning of a file, the first integer is the

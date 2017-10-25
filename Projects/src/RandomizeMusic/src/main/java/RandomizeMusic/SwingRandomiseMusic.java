@@ -87,7 +87,7 @@ class SwingRandomiseMusic extends JFrame {
                 if (evt.getClickCount() == 2) {
                     stopPlay();
                     String selectedName = original_list.getSelectedValue();
-                    File readyToPlay = new File(randEngine.exposeStartDirectory() + "//" + selectedName);
+                    File readyToPlay = new File(randEngine.exposeStartDirectory() + File.separator + selectedName);
                     playFile(readyToPlay);
                 }
             }
@@ -127,7 +127,7 @@ class SwingRandomiseMusic extends JFrame {
         btnPlay.setFont(new Font("Tahoma", Font.PLAIN, 12));
         btnPlay.addActionListener(arg0 -> {
             String selectedName = original_list.getSelectedValue();
-            File readyToPlay = new File(randEngine.exposeStartDirectory() + "//" + selectedName);
+            File readyToPlay = new File(randEngine.exposeStartDirectory() + File.separator + selectedName);
             playFile(readyToPlay);
         });
         btnPlay.setBounds(135, 15, 24, 23);

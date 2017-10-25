@@ -1,4 +1,4 @@
-package learnORM.iBatis.src.main.java.com.nkosev.iBatisDemo;
+package com.nkosev.iBatisDemo;
 
 import com.ibatis.common.resources.Resources;
 import com.ibatis.sqlmap.client.SqlMapClient;
