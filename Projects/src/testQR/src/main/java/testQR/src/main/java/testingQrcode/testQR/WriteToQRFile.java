@@ -17,8 +17,8 @@ public class WriteToQRFile {
         frame.setPreferredSize(new Dimension(400, 400));
         // ImageIcon icon = new ImageIcon("androidBook.jpg");
 
-        final JPanel panel = new JPanel(){
-            public void paintComponent(Graphics g){
+        final JPanel panel = new JPanel() {
+            public void paintComponent(Graphics g) {
                 BufferedImage image = null;
                 super.paintComponent(g);
                 try {
@@ -26,7 +26,7 @@ public class WriteToQRFile {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                if(image != null){
+                if (image != null) {
                     g.drawImage(image, 0, 0, this);
                 }
             }

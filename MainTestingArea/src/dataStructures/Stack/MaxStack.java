@@ -1,7 +1,5 @@
 package dataStructures.Stack;
 
-import org.hibernate.annotations.SourceType;
-
 import java.util.EmptyStackException;
 import java.util.Stack;
 
@@ -46,7 +44,7 @@ public class MaxStack {
                 maxStack.pop();
 
             }
-        }catch (EmptyStackException e){
+        } catch (EmptyStackException e) {
             System.out.println("Stack is empty , do not try this at home!");
         }
     }

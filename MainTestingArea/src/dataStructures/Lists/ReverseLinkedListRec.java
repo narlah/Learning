@@ -46,7 +46,7 @@ public class ReverseLinkedListRec {
         }
         System.out.print(String.format("%1$20s", msg) + " : ");
         while (root != null) {
-            System.out.print(root.a + " ");
+            System.out.print(root.getData() + " ");
             root = root.next;
         }
         System.out.println();

@@ -1,11 +1,15 @@
 package dataStructures.Lists;
 
-class ListNode {
-    int a;
+class ListNode<T> {
+    private T value;
     ListNode next;
 
-    ListNode(int a, ListNode next) {
-        this.a = a;
+    ListNode(T value, ListNode next) {
+        this.value = value;
         this.next = next;
+    }
+
+    public T getData() {
+        return value;
     }
 }
