@@ -1,9 +1,9 @@
-package learnORM.iBatis.src.main.java.com.nkosev.iBatisDemo;
+package com.nkosev.iBatisDemo;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 
 class UserDaoIbatis implements UserDao {
-    @Override
+
     public UserModel addUser(UserModel user, SqlMapClient sqlmapClient) {
         try {
             Integer id = (Integer) sqlmapClient.queryForObject("user.getMaxId");
@@ -19,7 +19,6 @@ class UserDaoIbatis implements UserDao {
         return null;
     }
 
-    @Override
     public UserModel getUserById(Integer id, SqlMapClient sqlmapClient) {
         try {
             return (UserModel) sqlmapClient.queryForObject("user.getUserById", id);
@@ -29,7 +28,6 @@ class UserDaoIbatis implements UserDao {
         return null;
     }
 
-    @Override
     public void deleteUserById(Integer id, SqlMapClient sqlmapClient) {
         try {
             sqlmapClient.delete("user.deleteUserById", id);
