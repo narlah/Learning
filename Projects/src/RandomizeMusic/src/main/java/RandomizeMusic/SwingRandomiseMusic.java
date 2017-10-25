@@ -5,8 +5,6 @@ import javazoom.jl.player.advanced.AdvancedPlayer;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -37,8 +35,7 @@ class SwingRandomiseMusic extends JFrame {
         setResizable(false);
 
         setTitle("Randomize music");
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(
-                SwingRandomiseMusic.class.getResource("/com/sun/java/swing/plaf/windows/icons/ListView.gif")));
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(SwingRandomiseMusic.class.getResource("/ListView.gif")));
         setSize(760, 850);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -49,31 +46,28 @@ class SwingRandomiseMusic extends JFrame {
      * Initialises UI only
      */
     private void initUI() {
-        String initialDir = "C:\\";
+        String initialDir = File.separator;
         randEngine = new RandomizeEngine(initialDir);
         JPanel panel = new JPanel();
         getContentPane().add(panel, BorderLayout.CENTER);
         // File chooser
         final JButton openButton = new JButton("Choose dir");
         openButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
-        openButton.setIcon(new ImageIcon(SwingRandomiseMusic.class.getResource("/com/sun/java/swing/plaf/windows/icons/Directory.gif")));
+        openButton.setIcon(new ImageIcon(SwingRandomiseMusic.class.getResource("/Directory.gif")));
         openButton.setBounds(20, 11, 105, 30);
-        openButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                fileChooser = new JFileChooser();
-                fileChooser.setCurrentDirectory(new File(randEngine.exposeStartDirectoryParent()));
-                fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                fileChooser.setAcceptAllFileFilterUsed(false);
-                int returnVal = fileChooser.showOpenDialog(SwingRandomiseMusic.this);
+        openButton.addActionListener(event -> {
+            fileChooser = new JFileChooser();
+            fileChooser.setCurrentDirectory(new File(randEngine.exposeStartDirectoryParent()));
+            fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            fileChooser.setAcceptAllFileFilterUsed(false);
+            int returnVal = fileChooser.showOpenDialog(SwingRandomiseMusic.this);
 
-                if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    File newSelectedDir = fileChooser.getSelectedFile();
-                    randEngine.changeDirectory(newSelectedDir.getAbsolutePath());
-                    Vector<String> newVector = randEngine.exposeMusicFileList();
-                    original_list.setListData(newVector);
-                    currentDir.setText(newSelectedDir.getAbsolutePath());
-                }
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                File newSelectedDir = fileChooser.getSelectedFile();
+                randEngine.changeDirectory(newSelectedDir.getAbsolutePath());
+                Vector<String> newVector = randEngine.exposeMusicFileList();
+                original_list.setListData(newVector);
+                currentDir.setText(newSelectedDir.getAbsolutePath());
             }
         });
         Vector<String> fileList = randEngine.exposeMusicFileList();
@@ -84,7 +78,7 @@ class SwingRandomiseMusic extends JFrame {
         scrollPane.setBounds(20, 52, 700, 728);
         panel.add(scrollPane);
 
-        original_list = new JList<String>(fileList);
+        original_list = new JList<>(fileList);
         scrollPane.setViewportView(original_list);
         scrollPane.setViewportView(original_list);
         // Double click
@@ -100,23 +94,20 @@ class SwingRandomiseMusic extends JFrame {
         });
         // Shuffle
         JButton shuffleButton = new JButton("Shuffle");
-        shuffleButton.setBounds(640, 11, 80, 30);
+        shuffleButton.setBounds(640, 11, 100, 30);
         panel.add(shuffleButton);
-        shuffleButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                try {
-                    new ProgressBarWorker(progressBar, randEngine.exposeMusicFileList().size(), new JLabel("Label"), randEngine, ckBox.isSelected(),
-                            original_list).execute();
-                    // randEngine.randomizeDir(ckBox.isSelected(), progressBar);
-                    // randEngine.changeDirectory(randEngine.exposeStartDirectory());
-                    // Vector<String> newVector = randEngine.exposeMusicFileList();
-                    // original_list.setListData(newVector);
-                } catch (IOException ioException) {
-                    statusBar.setText("!!! IO Error during shuffle!!!");
-                }
-
+        shuffleButton.addActionListener(event -> {
+            try {
+                new ProgressBarWorker(progressBar, randEngine.exposeMusicFileList().size(), new JLabel("Label"), randEngine, ckBox.isSelected(),
+                        original_list).execute();
+                // randEngine.randomizeDir(ckBox.isSelected(), progressBar);
+                // randEngine.changeDirectory(randEngine.exposeStartDirectory());
+                // Vector<String> newVector = randEngine.exposeMusicFileList();
+                // original_list.setListData(newVector);
+            } catch (IOException ioException) {
+                statusBar.setText("!!! IO Error during shuffle!!!");
             }
+
         });
 
         statusBar = new JLabel("Change the directory or shuffle the selected files.");
@@ -132,27 +123,23 @@ class SwingRandomiseMusic extends JFrame {
         panel.add(ckBox);
         // Play
         btnPlay = new JButton("");
-        btnPlay.setIcon(new ImageIcon(SwingRandomiseMusic.class.getResource("/javax/swing/plaf/metal/icons/ocean/maximize-pressed.gif")));
+        btnPlay.setIcon(new ImageIcon(SwingRandomiseMusic.class.getResource("/maximize-pressed.gif")));
         btnPlay.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        btnPlay.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                String selectedName = original_list.getSelectedValue();
-                File readyToPlay = new File(randEngine.exposeStartDirectory() + "//" + selectedName);
-                playFile(readyToPlay);
-            }
+        btnPlay.addActionListener(arg0 -> {
+            String selectedName = original_list.getSelectedValue();
+            File readyToPlay = new File(randEngine.exposeStartDirectory() + "//" + selectedName);
+            playFile(readyToPlay);
         });
         btnPlay.setBounds(135, 15, 24, 23);
         panel.add(btnPlay);
         // Stop
         btnStop = new JButton("");
-        btnStop.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                stopPlay();
-                btnPlay.setEnabled(true);
-                btnStop.setEnabled(false);
-            }
+        btnStop.addActionListener(e -> {
+            stopPlay();
+            btnPlay.setEnabled(true);
+            btnStop.setEnabled(false);
         });
-        btnStop.setIcon(new ImageIcon(SwingRandomiseMusic.class.getResource("/javax/swing/plaf/metal/icons/ocean/minimize-pressed.gif")));
+        btnStop.setIcon(new ImageIcon(SwingRandomiseMusic.class.getResource("/minimize-pressed.gif")));
         btnStop.setBounds(158, 15, 24, 23);
         panel.add(btnStop);
 

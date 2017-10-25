@@ -66,7 +66,7 @@ class RandomizeEngine {
      * Does the main work, shuffles the collected musical files and change names accordingly.
      *
      * @param logFileFlag Flag for the log file
-     * @throws IOException
+     * @throws IOException in case we can't read things ...
      */
     void randomizeDir(boolean logFileFlag, final JProgressBar progressBar) throws IOException {
         Collections.shuffle(AllMusicFiles);
