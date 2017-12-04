@@ -1,12 +1,14 @@
 package algorithmic;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class FindDuplicateSpaceEdition {
-    private static int findRepeat(int[] theArray) {
+    private static int findRepeat(final List<Integer> a) {
 
         int floor = 1;
-        int ceiling = theArray.length - 1;
+        int ceiling = a.size() - 1;
 
         while (floor < ceiling) {
 
@@ -22,7 +24,7 @@ public class FindDuplicateSpaceEdition {
 
             // count number of items in lower range
             int itemsInLowerRange = 0;
-            for (int item : theArray) {
+            for (int item : a) {
 
                 // is it in the lower range?
                 if (item >= lowerRangeFloor && item <= lowerRangeCeiling) {
@@ -56,6 +58,6 @@ public class FindDuplicateSpaceEdition {
     public static void main(String[] args) {
         int[] arr = {2, 3, 4, 5, 6, 100, 200, 7, 1, 2, 2};
         System.out.println(Arrays.toString(arr));
-        System.out.println(findRepeat(arr));
+        System.out.println(findRepeat(new ArrayList(Arrays.asList(arr))));
     }
 }
