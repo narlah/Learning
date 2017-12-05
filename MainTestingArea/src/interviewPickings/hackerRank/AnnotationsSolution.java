@@ -1,4 +1,4 @@
-package hackerRank;
+package interviewPickings.hackerRank;
 
 import java.lang.annotation.*;
 import java.lang.reflect.*;

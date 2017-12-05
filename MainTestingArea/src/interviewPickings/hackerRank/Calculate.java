@@ -1,4 +1,4 @@
-package hackerRank;
+package interviewPickings.hackerRank;
 //i label this exercise as TOXIC WASTE ... what an utter crap
 import java.io.IOException;
 import java.util.Scanner;

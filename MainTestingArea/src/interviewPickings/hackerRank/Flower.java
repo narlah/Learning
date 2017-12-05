@@ -1,4 +1,4 @@
-package hackerRank;
+package interviewPickings.hackerRank;
 
 class Flower {
     String whatsYourName() {

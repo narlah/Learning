@@ -1,4 +1,4 @@
-package hackerRank;
+package interviewPickings.hackerRank;
 
 import java.util.ArrayList;
 import java.util.Scanner;

@@ -1,4 +1,4 @@
-package hackerRank;
+package interviewPickings.hackerRank;
 
 import java.math.BigInteger;
 import java.util.Scanner;

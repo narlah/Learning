@@ -1,4 +1,4 @@
-package hackerRank;
+package interviewPickings.hackerRank;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;

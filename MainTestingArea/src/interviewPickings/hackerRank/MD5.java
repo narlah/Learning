@@ -1,4 +1,4 @@
-package hackerRank;
+package interviewPickings.hackerRank;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

@@ -1,4 +1,4 @@
-package hackerRank;
+package interviewPickings.hackerRank;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

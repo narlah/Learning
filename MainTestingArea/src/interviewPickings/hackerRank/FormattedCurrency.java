@@ -1,4 +1,4 @@
-package hackerRank;
+package interviewPickings.hackerRank;
 
 import java.text.NumberFormat;
 import java.util.Locale;

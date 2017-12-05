@@ -2,4 +2,5 @@
 *.idea/
 out/
 testQR/.idea/
-
+*.class
+/bin/*
