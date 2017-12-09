@@ -8,15 +8,6 @@ public class MedianOfTwoArrays {
         System.out.println(m.findMedianSortedArrays(nums1, nums2));
     }
 
-    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        int[] arr = merge(nums1, nums2);
-        if (arr.length % 2 == 0) { // even
-            int sumOfMiddleAndMiddlePlusOne = arr[arr.length / 2 - 1] + arr[arr.length / 2];
-            return (Double.valueOf(sumOfMiddleAndMiddlePlusOne) / 2);
-        } else
-            return arr[arr.length / 2];
-    }
-
     private static int[] merge(int[] first, int[] second) {
         int iFirst = 0;
         int iSecond = 0;
@@ -35,5 +26,14 @@ public class MedianOfTwoArrays {
         System.arraycopy(first, iFirst, arr, j, first.length - iFirst);
         System.arraycopy(second, iSecond, arr, j, second.length - iSecond);
         return arr;
+    }
+
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int[] arr = merge(nums1, nums2);
+        if (arr.length % 2 == 0) { // even
+            int sumOfMiddleAndMiddlePlusOne = arr[arr.length / 2 - 1] + arr[arr.length / 2];
+            return (Double.valueOf(sumOfMiddleAndMiddlePlusOne) / 2);
+        } else
+            return arr[arr.length / 2];
     }
 }

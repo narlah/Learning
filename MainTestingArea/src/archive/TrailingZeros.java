@@ -17,8 +17,8 @@ public class TrailingZeros {
 		 * number/j is no longer greater than 1
 		 */
         for (int j = 5; number / j >= 1; j *= 5) {
-			/*
-			 * assuming that number/j will just give you the integer result of
+            /*
+             * assuming that number/j will just give you the integer result of
 			 * the division of number/j and also truncate:
 			 */
             count += number / j;

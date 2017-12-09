@@ -3,6 +3,15 @@ package learnConcurency;
 public class JobCompletedWaitingNotify extends Thread {
     private int counter;
 
+    public static void main(String[] args) throws InterruptedException {
+        JobCompletedWaitingNotify job = new JobCompletedWaitingNotify();
+        job.start();
+        Thread.sleep(1000);
+        System.out.println("Waiting to get End ...");
+        job.wait();
+        System.out.println(job.counter);
+    }
+
     @Override
     public void run() {
         synchronized (this) {
@@ -17,16 +26,6 @@ public class JobCompletedWaitingNotify extends Thread {
             this.notifyAll();
             System.out.println("Completed Counting ...");
         }
-    }
-
-
-    public static void main(String[] args) throws InterruptedException {
-        JobCompletedWaitingNotify job = new JobCompletedWaitingNotify();
-        job.start();
-        Thread.sleep(1000);
-        System.out.println("Waiting to get End ...");
-        job.wait();
-        System.out.println(job.counter);
     }
 
 }

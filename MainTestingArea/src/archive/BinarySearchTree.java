@@ -25,10 +25,43 @@ package archive;
 @SuppressWarnings("all")
 public class BinarySearchTree {
     /**
+     * The tree root.
+     */
+    protected BinaryNode root;
+
+    /**
      * Construct the tree.
      */
     public BinarySearchTree() {
         root = null;
+    }
+
+    // Test program
+    public static void main(String[] args) {
+        BinarySearchTree t = new BinarySearchTree();
+        final int NUMS = 4000;
+        final int GAP = 37;
+
+        System.out.println("Checking... (no more output means success)");
+
+        for (int i = GAP; i != 0; i = (i + GAP) % NUMS)
+            t.insert(new Integer(i));
+
+        for (int i = 1; i < NUMS; i += 2)
+            t.remove(new Integer(i));
+
+        if (((Integer) (t.findMin())).intValue() != 2 ||
+                ((Integer) (t.findMax())).intValue() != NUMS - 2)
+            System.out.println("FindMin or FindMax error!");
+
+        for (int i = 2; i < NUMS; i += 2)
+            if (((Integer) (t.find(new Integer(i)))).intValue() != i)
+                System.out.println("Find error1!");
+
+        for (int i = 1; i < NUMS; i += 2) {
+            if (t.find(new Integer(i)) != null)
+                System.out.println("Find error2!");
+        }
     }
 
     /**
@@ -222,40 +255,6 @@ public class BinarySearchTree {
 
         return null;         // Not found
     }
-
-    /**
-     * The tree root.
-     */
-    protected BinaryNode root;
-
-
-    // Test program
-    public static void main(String[] args) {
-        BinarySearchTree t = new BinarySearchTree();
-        final int NUMS = 4000;
-        final int GAP = 37;
-
-        System.out.println("Checking... (no more output means success)");
-
-        for (int i = GAP; i != 0; i = (i + GAP) % NUMS)
-            t.insert(new Integer(i));
-
-        for (int i = 1; i < NUMS; i += 2)
-            t.remove(new Integer(i));
-
-        if (((Integer) (t.findMin())).intValue() != 2 ||
-                ((Integer) (t.findMax())).intValue() != NUMS - 2)
-            System.out.println("FindMin or FindMax error!");
-
-        for (int i = 2; i < NUMS; i += 2)
-            if (((Integer) (t.find(new Integer(i)))).intValue() != i)
-                System.out.println("Find error1!");
-
-        for (int i = 1; i < NUMS; i += 2) {
-            if (t.find(new Integer(i)) != null)
-                System.out.println("Find error2!");
-        }
-    }
 }
 
 
@@ -264,16 +263,16 @@ public class BinarySearchTree {
 //of this package.
 @SuppressWarnings("all")
 class BinaryNode {
+    // Friendly data; accessible by other package routines
+    Comparable element;      // The data in the node
+    BinaryNode left;         // Left child
+    BinaryNode right;        // Right child
+
     // Constructors
     BinaryNode(Comparable theElement) {
         element = theElement;
         left = right = null;
     }
-
-    // Friendly data; accessible by other package routines
-    Comparable element;      // The data in the node
-    BinaryNode left;         // Left child
-    BinaryNode right;        // Right child
 }
 
 

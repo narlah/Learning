@@ -12,7 +12,7 @@ public class I100doors100monkeys {
         boolean[] doors = new boolean[101];
         for (int i = 1; i <= 100; i++) {
             for (int j = i; j <= 100; j++) {
-                if(j % i == 0) doors[j] = !doors[j];
+                if (j % i == 0) doors[j] = !doors[j];
             }
         }
         ArrayList open = new ArrayList();

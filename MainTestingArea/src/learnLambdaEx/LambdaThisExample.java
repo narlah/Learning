@@ -8,13 +8,13 @@ public class LambdaThisExample {
 
     };
 
-    public String toString() {
-        return "hello's custom toString()";
-    }
-
     public static void main(String[] args) {
         LambdaThisExample l = new LambdaThisExample();
         l.r.run();
+    }
+
+    public String toString() {
+        return "hello's custom toString()";
     }
 
 }

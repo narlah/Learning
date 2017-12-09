@@ -50,6 +50,12 @@ class Consumer extends Thread {
         producer = p;
     }
 
+    public static void main(String args[]) {
+        Producer producer = new Producer();
+        producer.start();
+        new Consumer(producer).start();
+    }
+
     @Override
     public void run() {
         try {
@@ -61,11 +67,5 @@ class Consumer extends Thread {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String args[]) {
-        Producer producer = new Producer();
-        producer.start();
-        new Consumer(producer).start();
     }
 }

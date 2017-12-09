@@ -3,6 +3,15 @@ package interviewPickings;
 public class WillItCompile extends Thread {
     private int counter;
 
+    public static void main(String[] args) throws InterruptedException {
+        WillItCompile job = new WillItCompile();
+        job.start();
+        Thread.sleep(1000);
+        System.out.println("Waiting to get End ...");
+        job.wait();
+        System.out.println(job.counter);
+    }
+
     @Override
     public void run() {
         synchronized (this) {
@@ -13,16 +22,6 @@ public class WillItCompile extends Thread {
             this.notifyAll();
             System.out.println("Completed Counting ...");
         }
-    }
-
-
-    public static void main(String[] args) throws InterruptedException {
-        WillItCompile job = new WillItCompile();
-        job.start();
-        Thread.sleep(1000);
-        System.out.println("Waiting to get End ...");
-        job.wait();
-        System.out.println(job.counter);
     }
 
 }

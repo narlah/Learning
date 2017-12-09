@@ -5,7 +5,8 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ RepositoryServiceImplTestGetBook.class , RepositoryServiceImplTestGetSummary.class}) //ResourcePoolTests.class, ActiveGroupTests.class , SystemTests.class
-public class RunAllTestsSuite{
+@SuiteClasses({RepositoryServiceImplTestGetBook.class, RepositoryServiceImplTestGetSummary.class})
+//ResourcePoolTests.class, ActiveGroupTests.class , SystemTests.class
+public class RunAllTestsSuite {
 }
 

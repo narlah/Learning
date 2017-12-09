@@ -6,6 +6,18 @@ public class NamesCountQuestionTest1 {
     private int count = 0;
     private HashMap<String, Integer> counts = new HashMap<String, Integer>();
 
+    public static void main(String[] args) {
+        NamesCountQuestionTest1 namesCount = new NamesCountQuestionTest1();
+
+        namesCount.addName("James");
+        namesCount.addName("John");
+        namesCount.addName("Mary");
+        namesCount.addName("Mary");
+
+        System.out.println("Fraction of Johns: " + namesCount.nameProportion("John"));
+        System.out.println("Fraction of Marys: " + namesCount.nameProportion("Mary"));
+    }
+
     /**
      * Adds the name.
      *
@@ -35,17 +47,5 @@ public class NamesCountQuestionTest1 {
             return 0;
         }
         return numberOfOccurences.doubleValue() / (double) count;
-    }
-
-    public static void main(String[] args) {
-        NamesCountQuestionTest1 namesCount = new NamesCountQuestionTest1();
-
-        namesCount.addName("James");
-        namesCount.addName("John");
-        namesCount.addName("Mary");
-        namesCount.addName("Mary");
-
-        System.out.println("Fraction of Johns: " + namesCount.nameProportion("John"));
-        System.out.println("Fraction of Marys: " + namesCount.nameProportion("Mary"));
     }
 }

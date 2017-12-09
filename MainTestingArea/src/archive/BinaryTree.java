@@ -87,20 +87,19 @@ public class BinaryTree {
 }
 
 class StackNode {
+    TreeNode node;
+    int depth;
     StackNode(TreeNode node, int depth) {
         super();
         this.node = node;
         this.depth = depth;
     }
-
-    TreeNode node;
-    int depth;
 }
 
 class TreeNode {
-    private Integer value;
     TreeNode left;
     TreeNode right;
+    private Integer value;
 
     TreeNode(Integer i, TreeNode left, TreeNode right) {
         this.value = i;

@@ -9,12 +9,13 @@ import java.util.List;
  * and shuffle them equally to 4 players
  */
 class Card {
-    private enum Rank {
-        DEUCE, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING, ACE
-    }
+    private static final List<Card> protoDeck = new ArrayList<Card>();
 
-    private enum Suit {
-        CLUBS, DIAMONDS, HEARTS, SPADES
+    // Initialize prototype deck
+    static {
+        for (Suit suit : Suit.values())
+            for (Rank rank : Rank.values())
+                protoDeck.add(new Card(rank, suit));
     }
 
     private final Rank rank;
@@ -23,6 +24,10 @@ class Card {
     private Card(Rank rank, Suit suit) {
         this.rank = rank;
         this.suit = suit;
+    }
+
+    static ArrayList<Card> newDeck() {
+        return new ArrayList<Card>(protoDeck); // Return copy of prototype deck
     }
 
     public Rank rank() {
@@ -37,17 +42,12 @@ class Card {
         return rank + " of " + suit;
     }
 
-    private static final List<Card> protoDeck = new ArrayList<Card>();
-
-    // Initialize prototype deck
-    static {
-        for (Suit suit : Suit.values())
-            for (Rank rank : Rank.values())
-                protoDeck.add(new Card(rank, suit));
+    private enum Rank {
+        DEUCE, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING, ACE
     }
 
-    static ArrayList<Card> newDeck() {
-        return new ArrayList<Card>(protoDeck); // Return copy of prototype deck
+    private enum Suit {
+        CLUBS, DIAMONDS, HEARTS, SPADES
     }
 }
 

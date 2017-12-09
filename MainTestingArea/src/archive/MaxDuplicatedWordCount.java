@@ -6,6 +6,15 @@ import java.util.Map.Entry;
 
 public class MaxDuplicatedWordCount {
 
+    public static void main(String a[]) {
+        MaxDuplicatedWordCount mdc = new MaxDuplicatedWordCount();
+        Map<String, Integer> wordMap = mdc.getWordCount("C:/MyTestFile.txt");
+        List<Entry<String, Integer>> list = mdc.sortByValue(wordMap);
+        for (Map.Entry<String, Integer> entry : list) {
+            System.out.println(entry.getKey() + " ==== " + entry.getValue());
+        }
+    }
+
     private Map<String, Integer> getWordCount(String fileName) {
 
         FileInputStream fis;
@@ -46,14 +55,5 @@ public class MaxDuplicatedWordCount {
         List<Entry<String, Integer>> list = new ArrayList<>(set);
         list.sort((o1, o2) -> (o2.getValue()).compareTo(o1.getValue()));
         return list;
-    }
-
-    public static void main(String a[]) {
-        MaxDuplicatedWordCount mdc = new MaxDuplicatedWordCount();
-        Map<String, Integer> wordMap = mdc.getWordCount("C:/MyTestFile.txt");
-        List<Entry<String, Integer>> list = mdc.sortByValue(wordMap);
-        for (Map.Entry<String, Integer> entry : list) {
-            System.out.println(entry.getKey() + " ==== " + entry.getValue());
-        }
     }
 }

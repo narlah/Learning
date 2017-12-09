@@ -7,6 +7,12 @@ public class Path {
         this.path = path;
     }
 
+    public static void main(String[] args) {
+        // interviewPickings.Path path = new interviewPickings.Path("/a/b/c/d");
+        Path path = new Path("/");
+        System.out.println(path.cd("x").getPath());
+    }
+
     public String getPath() {
         return path;
     }
@@ -43,11 +49,5 @@ public class Path {
             recursiveGo(newPath.substring(3, firstDash));
         }
 
-    }
-
-    public static void main(String[] args) {
-        // interviewPickings.Path path = new interviewPickings.Path("/a/b/c/d");
-        Path path = new Path("/");
-        System.out.println(path.cd("x").getPath());
     }
 }

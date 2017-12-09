@@ -1,6 +1,7 @@
 package dataStructures.HashTable;
 
 import org.junit.Test;
+
 import java.util.Set;
 
 import static junit.framework.TestCase.assertFalse;
@@ -71,16 +72,16 @@ public class TestHashTableNk {
         assertFalse(testHT.containsKey(22));
         testHT.remove(2);
         assertTrue(testHT.remove(1).equals("nk1"));
-        assertTrue(testHT.lenght()==0);
+        assertTrue(testHT.lenght() == 0);
 
-        testHT.put(1,"z");
-        assertTrue(testHT.lenght()==1);
-        testHT.put(2,"k");
-        assertTrue(testHT.lenght()==2);
-        testHT.put(1,"l");
-        assertTrue(testHT.lenght()==2);
+        testHT.put(1, "z");
+        assertTrue(testHT.lenght() == 1);
+        testHT.put(2, "k");
+        assertTrue(testHT.lenght() == 2);
+        testHT.put(1, "l");
+        assertTrue(testHT.lenght() == 2);
         assertTrue(testHT.remove(1).equals("l"));
-        assertTrue(testHT.lenght()==1);
+        assertTrue(testHT.lenght() == 1);
         System.out.println(testHT.getKeys());
     }
 }

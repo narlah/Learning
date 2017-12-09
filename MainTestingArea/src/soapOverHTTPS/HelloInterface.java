@@ -1,6 +1,7 @@
 package soapOverHTTPS;
 
-import javax.jws.*;
+import javax.jws.WebParam;
+import javax.jws.WebService;
 
 @WebService
 interface HelloInterface {

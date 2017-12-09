@@ -63,7 +63,7 @@ public class RandomiseMusic_v1 {
     private static Vector<File> get_music_files(String startDirectory) {
         File startDir = new File(startDirectory);
         File[] AllFiles = startDir.listFiles();
-        assert(AllFiles!=null);
+        assert (AllFiles != null);
         int length = AllFiles.length;
         System.out.printf("Array size : %d%n ", length);
         Vector<File> TempArray = new Vector<>(length);
@@ -102,6 +102,25 @@ public class RandomiseMusic_v1 {
         return newName;
 
     }
+
+    // Main method
+    public static void main(String[] args) {
+        try {
+
+            if (args.length != 0 && args[0] != null && !args[0].isEmpty()
+                    && args[0].contains("\\") && args[0].contains(":")) {
+                randomizeDir(args[0]);
+            } else {
+                randomizeDir("C:\\MUSIC\\piratesMp3");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (java.lang.ArrayIndexOutOfBoundsException arr) {
+            System.out.println("No paramters provided, exiting.");
+        }
+    }
+
+    // <- End of log file creator
 
     // -> A new class for handling the log file creation and operation.
     private static class logFileCreator {
@@ -164,25 +183,6 @@ public class RandomiseMusic_v1 {
             } catch (Exception e) {
                 throw new IOException("Problem closing log file : " + logFile);
             }
-        }
-    }
-
-    // <- End of log file creator
-
-    // Main method
-    public static void main(String[] args) {
-        try {
-
-            if (args.length != 0 && args[0] != null && !args[0].isEmpty()
-                    && args[0].contains("\\") && args[0].contains(":")) {
-                randomizeDir(args[0]);
-            } else {
-                randomizeDir("C:\\MUSIC\\piratesMp3");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (java.lang.ArrayIndexOutOfBoundsException arr) {
-            System.out.println("No paramters provided, exiting.");
         }
     }
 }

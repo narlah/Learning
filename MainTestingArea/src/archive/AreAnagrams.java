@@ -58,14 +58,14 @@ public class AreAnagrams {
         System.out.println(areAnagrams(inanagram, outanagram));
         long long2 = System.nanoTime();
         double firstTime = long2 - long1;
-        System.out.println("areAnagrams : "+ firstTime);
+        System.out.println("areAnagrams : " + firstTime);
 
         long long3 = System.nanoTime();
         System.out.println(areAnagrams2(inanagram, outanagram));
         long long4 = System.nanoTime();
         double secondTime = long4 - long3;
         System.out.println("areAnagrams2 (hash) : " + secondTime);
-        System.out.println("Times slower : " + (secondTime / firstTime)*100 + "%");
+        System.out.println("Times slower : " + (secondTime / firstTime) * 100 + "%");
 
     }
 }

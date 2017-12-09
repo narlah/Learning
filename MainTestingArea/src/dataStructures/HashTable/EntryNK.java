@@ -1,11 +1,11 @@
 package dataStructures.HashTable;
 
- final class EntryNK<K, V> {
+final class EntryNK<K, V> {
     private final K key;
-    private V value;
     EntryNK<K, V> next;
     EntryNK<K, V> prev;
     int hash;
+    private V value;
 
     EntryNK(K key, V value) {
         this.key = key;

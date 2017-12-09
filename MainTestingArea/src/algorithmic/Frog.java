@@ -1,30 +1,7 @@
 package algorithmic;
 
 public class Frog {
-    public class froggiRec {
-        private int ways = 0;
-        private int max = 0;
-
-        public froggiRec(int n) {
-            max = n;
-        }
-
-        public int recNumberOfWays(int current) {
-            if (current > max)
-                return 0;
-            if (current == max) {
-                ways++;
-                return 0;
-            }
-            if (current < max) {
-                recNumberOfWays(current + 1);
-                recNumberOfWays(current + 2);
-            }
-            return 0;
-        }
-    }
-
-    public static int numberOfWays(int n) {
+    private static int numberOfWays(int n) {
         int prepre = 0, pre = 1, sum = 0;
         for (int i = 0; i < n; i++) {
             sum = pre + prepre;
@@ -51,5 +28,28 @@ public class Frog {
         long elapsedTime2 = System.nanoTime() - start2;
         System.out.println(" elapsed " + elapsedTime2);
 
+    }
+
+    public class froggiRec {
+        private int ways = 0;
+        private int max = 0;
+
+        froggiRec(int n) {
+            max = n;
+        }
+
+        int recNumberOfWays(int current) {
+            if (current > max)
+                return 0;
+            if (current == max) {
+                ways++;
+                return 0;
+            }
+            if (current < max) {
+                recNumberOfWays(current + 1);
+                recNumberOfWays(current + 2);
+            }
+            return 0;
+        }
     }
 }

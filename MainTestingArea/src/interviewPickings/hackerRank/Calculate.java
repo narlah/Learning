@@ -1,10 +1,16 @@
 package interviewPickings.hackerRank;
 //i label this exercise as TOXIC WASTE ... what an utter crap
+
 import java.io.IOException;
 import java.util.Scanner;
 
 class Calculate {
     Scanner scanner = new Scanner(System.in);
+    Output output = new Output();
+
+    public static Calculate do_calc() {
+        return new Calculate();
+    }
 
     public int get_int_val() throws IOException {
         int input = scanner.nextInt();
@@ -18,10 +24,6 @@ class Calculate {
         if (input <= 0)
             throw new NumberFormatException("All the values must be positive");
         return input;
-    }
-
-    public static Calculate do_calc() {
-        return new Calculate();
     }
 
     public double get_volume(int a) {
@@ -42,8 +44,6 @@ class Calculate {
     public double get_volume(double r, double h) {
         return Math.PI * (r * r) * h;
     }
-
-    Output output = new Output();
 
     public class Output {
         void display(double num) {

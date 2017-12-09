@@ -43,15 +43,14 @@ public class TradeAppleStock {
 }
 
 class MinMaxSum {
+    int min;
+    int max;
+    int sum;
     public MinMaxSum(int min, int max, int sum) {
         this.min = min;
         this.max = max;
         this.sum = sum;
     }
-
-    int min;
-    int max;
-    int sum;
 
     public String toString() {
         return "minIndex=" + min + " maxIndex=" + max + " sum=" + sum;

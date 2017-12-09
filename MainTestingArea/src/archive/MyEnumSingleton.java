@@ -4,16 +4,16 @@ enum testSingleton {
     INSTANCE;
     private int counter = 0;
 
+    testSingleton() {
+        System.out.println("Here");
+    }
+
     public int getCounter() {
         return counter;
     }
 
     public void incrementCounter() {
         this.counter = counter + 1;
-    }
-
-    testSingleton() {
-        System.out.println("Here");
     }
 }
 

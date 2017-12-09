@@ -9,6 +9,21 @@ import java.util.StringTokenizer;
 public class WordCloud {
     private HashMap<String, Integer> storageMap = new HashMap<>();
 
+    public static void main(String[] args) {
+        WordCloud wc = new WordCloud();
+        String[] texts = {
+                "We came, we saw, we conquered...then we ate Bill's (Mille-Feuille) cake.",
+                "The bill came to five dollars.",
+                "After beating the eggs, Dana read the next step:",
+                "Add milk and eggs, then add flour and sugar."
+        };
+        for (String t : texts) {
+            wc.addTextToCloud(t);
+            System.out.println(wc.toString());
+            wc.clearCloud();
+        }
+    }
+
     public void clearCloud() {
         storageMap.clear();
     }
@@ -34,21 +49,6 @@ public class WordCloud {
             } else {
                 storageMap.put(word, storageMap.get(word) + 1);
             }
-        }
-    }
-
-    public static void main(String[] args) {
-        WordCloud wc = new WordCloud();
-        String[] texts = {
-                "We came, we saw, we conquered...then we ate Bill's (Mille-Feuille) cake.",
-                "The bill came to five dollars.",
-                "After beating the eggs, Dana read the next step:",
-                "Add milk and eggs, then add flour and sugar."
-        };
-        for (String t : texts) {
-            wc.addTextToCloud(t);
-            System.out.println(wc.toString());
-            wc.clearCloud();
         }
     }
 }

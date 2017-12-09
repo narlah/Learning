@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class SolutionMaxPositiveLine {
+    public static void main(String[] args) {
+        SolutionMaxPositiveLine sol = new SolutionMaxPositiveLine();
+        ArrayList<Integer> a = sol.maxset(new ArrayList<Integer>(Arrays.asList(336465782, -278722862, -2145174067, 1101513929, 1315634022, -1369133069, 1059961393, 628175011, -1131176229, -859484421)));
+        System.out.println("=>" + Arrays.toString(a.toArray()));
+    }
+
     public ArrayList<Integer> maxset(ArrayList<Integer> a) {
         long x1 = 0, y1 = 0, x2 = 0, y2 = 0, sum1 = 0, sum2 = 0;
         for (int i : a) {
@@ -48,11 +54,5 @@ public class SolutionMaxPositiveLine {
             }
         }
         return ret;
-    }
-
-    public static void main(String[] args) {
-        SolutionMaxPositiveLine sol = new SolutionMaxPositiveLine();
-        ArrayList<Integer> a = sol.maxset(new ArrayList<Integer>(Arrays.asList(336465782, -278722862, -2145174067, 1101513929, 1315634022, -1369133069, 1059961393, 628175011, -1131176229, -859484421)));
-        System.out.println("=>" + Arrays.toString(a.toArray()));
     }
 }

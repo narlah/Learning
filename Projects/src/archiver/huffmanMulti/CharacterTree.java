@@ -23,303 +23,298 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class CharacterTree {
 
-	private class Node implements Comparable<Node> {
-		private final Integer letter;
-		private final long frequence;
-		private final Node lowerNode;
-		private final Node higherNode;
+    private Node rootNode;
+    private Map<Integer, Boolean[]> pathMap;
+    private long[] frequenceTable;
 
-		public Node(Integer letter, long frequenceTable) {
-			this.lowerNode = null;
-			this.higherNode = null;
-			this.letter = letter;
-			this.frequence = frequenceTable;
-		}
+    public CharacterTree(long[] frequenceTable) {
+        long time = System.currentTimeMillis();
+        initFromFrequenceTable(frequenceTable);
+        System.out.println("tree build: " + (System.currentTimeMillis() - time));
+    }
 
-		public Node(Node lowerNode, Node higherNode) {
-			this.lowerNode = lowerNode;
-			this.higherNode = higherNode;
-			this.letter = null;
-			this.frequence = lowerNode.frequence + higherNode.frequence;
-		}
+    public CharacterTree(BitInputStream inputStream) throws IOException {
+        int letterCount = inputStream.read() + 1;
 
-		public Node(LinkedList<Integer> letterQueue, BitInputStream inputStream) throws IOException {
-			if (inputStream.readBit()) {
-				letter = letterQueue.pop();
-				frequence = 0; // unknown
-				lowerNode = null;
-				higherNode = null;
-			} else {
-				letter = null;
-				frequence = 0; // unknown
-				lowerNode = new Node(letterQueue, inputStream);
-				higherNode = new Node(letterQueue, inputStream);
-			}
-		}
+        ArrayList<Integer> lettersMap = getLetterMap();
+        LinkedList<Integer> letterQueue = new LinkedList<Integer>();
 
-		/**
-		 * @return the letter
-		 */
-		public int getLetter() {
-			return letter;
-		}
+        for (int i = 0; i < letterCount; i++) {
+            int letterIndex = inputStream.readBinary(getLastSetBitIndex(lettersMap.size() - 1));
 
-		/**
-		 * @return the frequence
-		 */
-		public long getFrequence() {
-			return frequence;
-		}
+            letterQueue.add(lettersMap.get(letterIndex));
+            lettersMap.remove(letterIndex);
+        }
 
-		/**
-		 * @return the lowerNode
-		 */
-		public Node getLowerNode() {
-			return lowerNode;
-		}
+        rootNode = new Node(letterQueue, inputStream);
+    }
 
-		/**
-		 * @return the higherNode
-		 */
-		public Node getHigherNode() {
-			return higherNode;
-		}
+    private int frequenceElements() {
+        int elements = 0;
+        for (int i = 0, l = frequenceTable.length; i < l; i++) {
+            if (frequenceTable[i] > 0) elements++;
+        }
+        return elements;
+    }
 
-		@Override
-		public int compareTo(Node comparee) {
-			return (int) (this.frequence - comparee.frequence);
-		}
+    private void initFromFrequenceTable(long[] frequenceTable) {
+        this.frequenceTable = frequenceTable;
 
-		public boolean isLeaf() {
-			return (letter != null);
-		}
+        if (frequenceElements() < 2) {
+            throw new IllegalArgumentException("The frequence table must have at least two element.");
+        }
 
-		public void read(BitInputStream compressedInputStream, OutputStream decompressedOutputStream)
-				throws IOException {
-			if (this.isLeaf()) {
-				decompressedOutputStream.write(this.letter);
-			} else {
-				try {
-					if (compressedInputStream.readBit()) {
-						lowerNode.read(compressedInputStream, decompressedOutputStream);
-					} else {
-						higherNode.read(compressedInputStream, decompressedOutputStream);
-					}
-				} catch (EOFException ex) {
-					throw ex;
-				}
-			}
-		}
+        ArrayList<Node> nodeList = getNodeList(frequenceTable);
+        Collections.sort(nodeList);
 
-		public void fillPathMap(Map<Integer, Boolean[]> pathMap) {
-			fillPathMap(pathMap, new Boolean[0]);
-		}
+        while (nodeList.size() > 1) {
+            nodeList.add(new Node(nodeList.remove(0), nodeList.remove(0)));
+            Collections.sort(nodeList);
+        }
 
-		private void fillPathMap(Map<Integer, Boolean[]> pathMap, Boolean[] prefix) {
-			if (this.isLeaf()) {
-				pathMap.put(this.letter, prefix);
-			} else {
-				Boolean[] lowerAddress = Arrays.copyOf(prefix, prefix.length + 1);
-				lowerAddress[lowerAddress.length - 1] = true;
-				lowerNode.fillPathMap(pathMap, lowerAddress);
+        assert (nodeList.size() > 0);
 
-				Boolean[] higherAddress = Arrays.copyOf(prefix, prefix.length + 1);
-				higherAddress[higherAddress.length - 1] = false;
-				higherNode.fillPathMap(pathMap, higherAddress);
-			}
-		}
+        this.rootNode = nodeList.get(0);
 
-		public void writeLetters(BitOutputStream outputStream, ArrayList<Integer> letterMap) throws IOException {
-			if (this.isLeaf()) {
-				outputStream.writeBinary(letterMap.indexOf(this.letter), getLastSetBitIndex(letterMap.size() - 1));
-				letterMap.remove(this.letter);
-			} else {
-				lowerNode.writeLetters(outputStream, letterMap);
-				higherNode.writeLetters(outputStream, letterMap);
-			}
-		}
+        if (Main.dumpTable) {
+            System.out.println(this.rootNode.toString());
+        }
 
-		public void writePaths(BitOutputStream outputStream) throws IOException {
-			if (!this.isLeaf()) {
-				outputStream.writeBit(false);
-				lowerNode.writePaths(outputStream);
-				outputStream.writeBit(true);
-				higherNode.writePaths(outputStream);
-			}
-		}
+        pathMap = new TreeMap<Integer, Boolean[]>();
+        this.rootNode.fillPathMap(pathMap);
+    }
 
-		public int countLeaves() {
-			if (this.isLeaf()) {
-				return 1;
-			} else {
-				return lowerNode.countLeaves() + higherNode.countLeaves();
-			}
-		}
+    private ArrayList<Node> getNodeList(long[] frequenceTable) {
+        ArrayList<Node> nodeList = new ArrayList<Node>(frequenceTable.length);
 
-		@Override
-		public String toString() {
-			return toString(0);
-		}
+        for (int i = 0, l = frequenceTable.length; i < l; i++) {
+            if (frequenceTable[i] > 0) {
+                nodeList.add(new Node(i, frequenceTable[i]));
+            }
+        }
 
-		private String toString(int level) {
-			if (this.isLeaf()) {
-				return level + " - " + this.letter + " - " + this.frequence;
-			} else {
-				String lowerToString = lowerNode.toString(level + 1);
-				String higherToString = higherNode.toString(level + 1);
+        Collections.sort(nodeList);
+        return nodeList;
+    }
 
-				return lowerToString + "\n" + higherToString;
-			}
-		}
+    public void read(BitInputStream compressedInputStream, OutputStream decompressedOutputStream) throws IOException {
+        try {
+            while (true) {
+                rootNode.read(compressedInputStream, decompressedOutputStream);
+            }
+        } catch (EOFException ex) {
+            // finished
+        }
+    }
 
-		public int countDepth() {
-			if (this.isLeaf()) {
-				return 1;
-			} else {
-				int lowerDepth = lowerNode.countDepth();
-				int higherDepth = higherNode.countDepth();
+    public void write(InputStream uncompressedInputStream, BitOutputStream compressedOutputStream) throws IOException {
+        int readByte;
+        long time = System.currentTimeMillis();
+        while ((readByte = uncompressedInputStream.read()) >= 0) {
+            for (boolean value : pathMap.get(readByte)) {
+                compressedOutputStream.writeBit(value);
+            }
+        }
+        System.out.println("comressor: " + (System.currentTimeMillis() - time));
+    }
 
-				if (lowerDepth > higherDepth) {
-					return lowerDepth + 1;
-				} else {
-					return higherDepth + 1;
-				}
-			}
-		}
-	}
+    public void serializeTo(BitOutputStream outputStream) throws IOException {
+        int letterCount = rootNode.countLeaves();
+        outputStream.write(letterCount - 1);
 
-	private Node rootNode;
-	private Map<Integer, Boolean[]> pathMap;
-	private long[] frequenceTable;
+        ArrayList<Integer> lettersMap = getLetterMap();
 
-	public CharacterTree(long[] frequenceTable) {
-		long time = System.currentTimeMillis();
-		initFromFrequenceTable(frequenceTable);
-		System.out.println("tree build: " + (System.currentTimeMillis() - time));
-	}
+        rootNode.writeLetters(outputStream, lettersMap);
+        rootNode.writePaths(outputStream);
+        outputStream.writeBit(true);
+    }
 
-	public CharacterTree(BitInputStream inputStream) throws IOException {
-		int letterCount = inputStream.read() + 1;
+    private ArrayList<Integer> getLetterMap() {
+        ArrayList<Integer> lettersMap = new ArrayList<Integer>(256);
 
-		ArrayList<Integer> lettersMap = getLetterMap();
-		LinkedList<Integer> letterQueue = new LinkedList<Integer>();
+        for (int i = 0; i < 256; i++) {
+            lettersMap.add(i);
+        }
+        return lettersMap;
+    }
 
-		for (int i = 0; i < letterCount; i++) {
-			int letterIndex = inputStream.readBinary(getLastSetBitIndex(lettersMap.size() - 1));
+    private int getLastSetBitIndex(int value) {
+        int bitIndex = 0;
 
-			letterQueue.add(lettersMap.get(letterIndex));
-			lettersMap.remove(letterIndex);
-		}
+        while (value > 0) {
+            value >>= 1;
+            bitIndex++;
+        }
 
-		rootNode = new Node(letterQueue, inputStream);
-	}
+        return bitIndex;
+    }
 
-	private int frequenceElements() {
-		int elements = 0;
-		for (int i = 0, l = frequenceTable.length; i < l; i++) {
-			if (frequenceTable[i] > 0) elements++;
-		}
-		return elements;
-	}
+    private class Node implements Comparable<Node> {
+        private final Integer letter;
+        private final long frequence;
+        private final Node lowerNode;
+        private final Node higherNode;
 
-	private void initFromFrequenceTable(long[] frequenceTable) {
-		this.frequenceTable = frequenceTable;
+        public Node(Integer letter, long frequenceTable) {
+            this.lowerNode = null;
+            this.higherNode = null;
+            this.letter = letter;
+            this.frequence = frequenceTable;
+        }
 
-		if (frequenceElements() < 2) {
-			throw new IllegalArgumentException("The frequence table must have at least two element.");
-		}
+        public Node(Node lowerNode, Node higherNode) {
+            this.lowerNode = lowerNode;
+            this.higherNode = higherNode;
+            this.letter = null;
+            this.frequence = lowerNode.frequence + higherNode.frequence;
+        }
 
-		ArrayList<Node> nodeList = getNodeList(frequenceTable);
-		Collections.sort(nodeList);
+        public Node(LinkedList<Integer> letterQueue, BitInputStream inputStream) throws IOException {
+            if (inputStream.readBit()) {
+                letter = letterQueue.pop();
+                frequence = 0; // unknown
+                lowerNode = null;
+                higherNode = null;
+            } else {
+                letter = null;
+                frequence = 0; // unknown
+                lowerNode = new Node(letterQueue, inputStream);
+                higherNode = new Node(letterQueue, inputStream);
+            }
+        }
 
-		while (nodeList.size() > 1) {
-			nodeList.add(new Node(nodeList.remove(0), nodeList.remove(0)));
-			Collections.sort(nodeList);
-		}
+        /**
+         * @return the letter
+         */
+        public int getLetter() {
+            return letter;
+        }
 
-		assert (nodeList.size() > 0);
+        /**
+         * @return the frequence
+         */
+        public long getFrequence() {
+            return frequence;
+        }
 
-		this.rootNode = nodeList.get(0);
+        /**
+         * @return the lowerNode
+         */
+        public Node getLowerNode() {
+            return lowerNode;
+        }
 
-		if (Main.dumpTable) {
-			System.out.println(this.rootNode.toString());
-		}
+        /**
+         * @return the higherNode
+         */
+        public Node getHigherNode() {
+            return higherNode;
+        }
 
-		pathMap = new TreeMap<Integer, Boolean[]>();
-		this.rootNode.fillPathMap(pathMap);
-	}
+        @Override
+        public int compareTo(Node comparee) {
+            return (int) (this.frequence - comparee.frequence);
+        }
 
-	private ArrayList<Node> getNodeList(long[] frequenceTable) {
-		ArrayList<Node> nodeList = new ArrayList<Node>(frequenceTable.length);
+        public boolean isLeaf() {
+            return (letter != null);
+        }
 
-		for (int i = 0, l = frequenceTable.length; i < l; i++) {
-			if (frequenceTable[i] > 0) {
-				nodeList.add(new Node(i, frequenceTable[i]));
-			}
-		}
+        public void read(BitInputStream compressedInputStream, OutputStream decompressedOutputStream)
+                throws IOException {
+            if (this.isLeaf()) {
+                decompressedOutputStream.write(this.letter);
+            } else {
+                try {
+                    if (compressedInputStream.readBit()) {
+                        lowerNode.read(compressedInputStream, decompressedOutputStream);
+                    } else {
+                        higherNode.read(compressedInputStream, decompressedOutputStream);
+                    }
+                } catch (EOFException ex) {
+                    throw ex;
+                }
+            }
+        }
 
-		Collections.sort(nodeList);
-		return nodeList;
-	}
+        public void fillPathMap(Map<Integer, Boolean[]> pathMap) {
+            fillPathMap(pathMap, new Boolean[0]);
+        }
 
-	public void read(BitInputStream compressedInputStream, OutputStream decompressedOutputStream) throws IOException {
-		try {
-			while (true) {
-				rootNode.read(compressedInputStream, decompressedOutputStream);
-			}
-		} catch (EOFException ex) {
-			// finished
-		}
-	}
+        private void fillPathMap(Map<Integer, Boolean[]> pathMap, Boolean[] prefix) {
+            if (this.isLeaf()) {
+                pathMap.put(this.letter, prefix);
+            } else {
+                Boolean[] lowerAddress = Arrays.copyOf(prefix, prefix.length + 1);
+                lowerAddress[lowerAddress.length - 1] = true;
+                lowerNode.fillPathMap(pathMap, lowerAddress);
 
-	public void write(InputStream uncompressedInputStream, BitOutputStream compressedOutputStream) throws IOException {
-		int readByte;
-		long time = System.currentTimeMillis();
-		while ((readByte = uncompressedInputStream.read()) >= 0) {
-			for (boolean value : pathMap.get(readByte)) {
-				compressedOutputStream.writeBit(value);
-			}
-		}
-		System.out.println("comressor: " + (System.currentTimeMillis() - time));
-	}
+                Boolean[] higherAddress = Arrays.copyOf(prefix, prefix.length + 1);
+                higherAddress[higherAddress.length - 1] = false;
+                higherNode.fillPathMap(pathMap, higherAddress);
+            }
+        }
 
-	public void serializeTo(BitOutputStream outputStream) throws IOException {
-		int letterCount = rootNode.countLeaves();
-		outputStream.write(letterCount - 1);
+        public void writeLetters(BitOutputStream outputStream, ArrayList<Integer> letterMap) throws IOException {
+            if (this.isLeaf()) {
+                outputStream.writeBinary(letterMap.indexOf(this.letter), getLastSetBitIndex(letterMap.size() - 1));
+                letterMap.remove(this.letter);
+            } else {
+                lowerNode.writeLetters(outputStream, letterMap);
+                higherNode.writeLetters(outputStream, letterMap);
+            }
+        }
 
-		ArrayList<Integer> lettersMap = getLetterMap();
+        public void writePaths(BitOutputStream outputStream) throws IOException {
+            if (!this.isLeaf()) {
+                outputStream.writeBit(false);
+                lowerNode.writePaths(outputStream);
+                outputStream.writeBit(true);
+                higherNode.writePaths(outputStream);
+            }
+        }
 
-		rootNode.writeLetters(outputStream, lettersMap);
-		rootNode.writePaths(outputStream);
-		outputStream.writeBit(true);
-	}
+        public int countLeaves() {
+            if (this.isLeaf()) {
+                return 1;
+            } else {
+                return lowerNode.countLeaves() + higherNode.countLeaves();
+            }
+        }
 
-	private ArrayList<Integer> getLetterMap() {
-		ArrayList<Integer> lettersMap = new ArrayList<Integer>(256);
+        @Override
+        public String toString() {
+            return toString(0);
+        }
 
-		for (int i = 0; i < 256; i++) {
-			lettersMap.add(i);
-		}
-		return lettersMap;
-	}
+        private String toString(int level) {
+            if (this.isLeaf()) {
+                return level + " - " + this.letter + " - " + this.frequence;
+            } else {
+                String lowerToString = lowerNode.toString(level + 1);
+                String higherToString = higherNode.toString(level + 1);
 
-	private int getLastSetBitIndex(int value) {
-		int bitIndex = 0;
+                return lowerToString + "\n" + higherToString;
+            }
+        }
 
-		while (value > 0) {
-			value >>= 1;
-			bitIndex++;
-		}
+        public int countDepth() {
+            if (this.isLeaf()) {
+                return 1;
+            } else {
+                int lowerDepth = lowerNode.countDepth();
+                int higherDepth = higherNode.countDepth();
 
-		return bitIndex;
-	}
+                if (lowerDepth > higherDepth) {
+                    return lowerDepth + 1;
+                } else {
+                    return higherDepth + 1;
+                }
+            }
+        }
+    }
 }

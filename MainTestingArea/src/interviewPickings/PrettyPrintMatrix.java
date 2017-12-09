@@ -10,7 +10,7 @@ public class PrettyPrintMatrix {
     }
 
     private ArrayList<ArrayList<Integer>> prettyPrint(int n) {
-        int N = 2*n - 1;
+        int N = 2 * n - 1;
         ArrayList<ArrayList<Integer>> matrix = new ArrayList<>();
         for (int i = 0; i < N; i++) {
             matrix.add(new ArrayList<>(0));

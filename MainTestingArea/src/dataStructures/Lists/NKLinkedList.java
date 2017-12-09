@@ -135,7 +135,7 @@ public class NKLinkedList<T> implements List<T> {
         for (int j = 0; j < index; j++) {
             current = current.next;
         }
-        return (T)current.getData();
+        return (T) current.getData();
     }
 
     @Override
@@ -146,7 +146,7 @@ public class NKLinkedList<T> implements List<T> {
     @Override
     public void add(int index, Object element) {
         if (index == 0) {
-            root = new ListNode((T)element, root);
+            root = new ListNode((T) element, root);
         } else {
             throw new UnsupportedOperationException();
         }
@@ -191,13 +191,13 @@ public class NKLinkedList<T> implements List<T> {
     public boolean removeAll(Collection c) {
         ListNode current = root;
         ListNode prev = root;
-            while(current!=null){
-                if (c.contains(current)) {
-                    prev.next = current.next;
-                    current = current.next;
-                }
+        while (current != null) {
+            if (c.contains(current)) {
+                prev.next = current.next;
                 current = current.next;
             }
+            current = current.next;
+        }
         return false;
     }
 

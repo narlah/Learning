@@ -1,7 +1,9 @@
 package interviewPickings.hackerRank;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 interface PerformOperation {
     boolean check(int a);
@@ -25,10 +27,10 @@ class MyMath {
         return new PerformOperation() {
             @Override
             public boolean check(int a) {
-                if (a==2) return true;
-                if (a%2==0) return false;
-                for(int i=3;i*i<=a;i+=2) {
-                    if(a%i==0)
+                if (a == 2) return true;
+                if (a % 2 == 0) return false;
+                for (int i = 3; i * i <= a; i += 2) {
+                    if (a % i == 0)
                         return false;
                 }
                 return true;
@@ -42,9 +44,9 @@ class MyMath {
             public boolean check(int a) {
                 char[] charArray = Integer.toString(a).toCharArray();
                 int length = charArray.length;
-                if (length==0) return true;
-                for (int i =0;i<length/2;i++){
-                    if (charArray[i]!=charArray[length-1-i]) return false;
+                if (length == 0) return true;
+                for (int i = 0; i < length / 2; i++) {
+                    if (charArray[i] != charArray[length - 1 - i]) return false;
                 }
                 return true;
             }

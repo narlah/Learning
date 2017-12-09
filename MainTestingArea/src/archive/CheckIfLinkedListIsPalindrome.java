@@ -42,13 +42,12 @@ public class CheckIfLinkedListIsPalindrome {
 }
 
 class simpleNode {
+    simpleNode next;
+    int data;
     public simpleNode(int a) {
         this.data = a;
         next = null;
     }
-
-    simpleNode next;
-    int data;
 
     void extedTail(simpleNode in) {
         simpleNode temp = this;

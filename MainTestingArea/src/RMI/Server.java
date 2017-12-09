@@ -9,10 +9,6 @@ public class Server implements Hello {
     public Server() {
     }
 
-    public String sayHello() {
-        return "Hello, world!";
-    }
-
     public static void main(String args[]) {
 
         try {
@@ -29,5 +25,9 @@ public class Server implements Hello {
             System.err.println("Server exception: " + e.toString());
             e.printStackTrace();
         }
+    }
+
+    public String sayHello() {
+        return "Hello, world!";
     }
 }

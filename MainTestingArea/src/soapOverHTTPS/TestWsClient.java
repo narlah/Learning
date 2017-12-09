@@ -12,9 +12,9 @@ public class TestWsClient {
     static {
         HttpsURLConnection.setDefaultHostnameVerifier((hostname, session) -> hostname.equals("127.0.0.1"));
     }
-    public static void main( final String[] args ) throws Throwable
-    {
-        String url = ( args.length > 0 ) ? args[0] : "https://127.0.0.1:4434/soapOverHTTPS";
+
+    public static void main(final String[] args) throws Throwable {
+        String url = (args.length > 0) ? args[0] : "https://127.0.0.1:4434/soapOverHTTPS";
 
 //        System.setProperty("javax.net.ssl.keyStore", "/tmp/ssl/keystore.jks");
 //        System.setProperty("javax.net.ssl.keyStorePassword", "changeit");
@@ -24,10 +24,10 @@ public class TestWsClient {
         System.setProperty("javax.net.ssl.trustStorePassword", "changeit");
 
         Service service = Service.create(
-                new URL( url + "?wsdl" ),
-                new QName( "http://soapOverHTTPS/", "HelloInterfaceImplService" ) );
-        HelloInterface helloWho = service.getPort( HelloInterface.class );
+                new URL(url + "?wsdl"),
+                new QName("http://soapOverHTTPS/", "HelloInterfaceImplService"));
+        HelloInterface helloWho = service.getPort(HelloInterface.class);
 
-        System.out.println( "\n" + helloWho.hello( args.length > 1 ? args[1] : "nikik" ) );
+        System.out.println("\n" + helloWho.hello(args.length > 1 ? args[1] : "nikik"));
     }
 }

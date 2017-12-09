@@ -12,7 +12,7 @@ public class EndOfFile {
             array.add(sc.nextLine());
         }
         for (int i = 0; i < array.size(); i++) {
-            System.out.println((i+1) + " " + array.get(i));
+            System.out.println((i + 1) + " " + array.get(i));
         }
     }
 }

@@ -4,7 +4,7 @@ import ResourceSchedulerJPM.src.com.jpm.resourceScheduler.Message;
 
 public interface MessageSchedulerInterface {
 
-	public void receiveMsg(Message msg);
+    public void receiveMsg(Message msg);
 
-	public int completeMsg(Message msg);
+    public int completeMsg(Message msg);
 }

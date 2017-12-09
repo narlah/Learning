@@ -3,11 +3,11 @@ package interviewPickings.hackerRank;
 public class DoubleCheckedSingleton {
 
 
+    private static volatile DoubleCheckedSingleton instance;
+    public String str;
+
     private DoubleCheckedSingleton() {
     }
-
-    public String str;
-    private static volatile DoubleCheckedSingleton instance;
 
     public static DoubleCheckedSingleton getSingleInstance() {
         if (instance == null) {

@@ -79,10 +79,10 @@ public class KthElementOfSinglyLinkedList {
 }
 
 class Node<T extends Comparable> {
+    Node<T> next;
+    T data;
+
     Node(T data) {
         this.data = data;
     }
-
-    Node<T> next;
-    T data;
 }

@@ -55,6 +55,20 @@ class Student {
         Student.incrementCounter();
     }
 
+    public static int getStudentsCounter() {
+        return studentsCounter;
+    }
+
+    public static int nullifyCounter() {
+        int tempCounter = studentsCounter;
+        studentsCounter = 0;
+        return tempCounter;
+    }
+
+    public static void incrementCounter() {
+        Student.studentsCounter++;
+    }
+
     //setters
     public String getFirstName() {
         return firstName;
@@ -119,20 +133,6 @@ class Student {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public static int getStudentsCounter() {
-        return studentsCounter;
-    }
-
-    public static int nullifyCounter() {
-        int tempCounter = studentsCounter;
-        studentsCounter = 0;
-        return tempCounter;
-    }
-
-    public static void incrementCounter() {
-        Student.studentsCounter++;
     }
 
     public void extractStudent() {

@@ -20,7 +20,7 @@ public class BookRepositoryImpl implements BookRepositoryInterface {
                 ISBN_DEATHLY_HALLOWS,
                 "Harry Potter and the Deathly Hallows",
                 "Sorcery and Magic."));
-		books.put(ISBN_PLAYER_OF_GAMES, new Book(
+        books.put(ISBN_PLAYER_OF_GAMES, new Book(
                 ISBN_PLAYER_OF_GAMES,
                 "The Player of Games",
                 "Jernau Morat Gurgeh. The Player of Games. Master of every board, computer and strategy."));

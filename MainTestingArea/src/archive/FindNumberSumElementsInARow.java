@@ -4,14 +4,57 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class FindNumberSumElementsInARow {
+    private static void printStartInfo(int[] mas, String Find_element) {
+        System.out.println("We are searching for : " + Find_element);
+        System.out.println(Arrays.toString(mas));
+    }
+
+    public static void main(String[] args) { // Testing Method
+        FindNumberSumElementsInARow Enclosing = new FindNumberSumElementsInARow();
+        // *************** fail constructor
+        Current current = Enclosing.new Current(null, "����� ������, ������ �����������", -1);
+        current.findCurrent();
+        current.printCurrent();
+        // *************** single element
+        int findSingleN = 110;
+        int[] singleElementTest = {-90, -10, 1, 1, 8, 100};
+        Current currenSingleElement = Enclosing.new Current(singleElementTest, "�������� �������", findSingleN);
+        printStartInfo(singleElementTest, findSingleN + "");
+        currenSingleElement.findCurrent();
+        currenSingleElement.printCurrent();
+        // *************** mass
+        Random rand = new Random();
+        final int MASS_TEST_NUM = 10000;
+        int[] massTestMatrix = new int[MASS_TEST_NUM];
+        for (int j = 0; j < MASS_TEST_NUM; j++) {
+            massTestMatrix[j] = rand.nextInt(1000);
+        }
+
+        // massTestMatrix[5] = 12;
+        // massTestMatrix[6] = 12;
+        // massTestMatrix[7] = 12;
+        int findMassN = 545454;
+        Current massTestCurrent = Enclosing.new Current(massTestMatrix, "����� ���� � 10000 �������� (1-1000)!", findMassN);
+        printStartInfo(massTestMatrix, findMassN + "");
+        massTestCurrent.findCurrent();
+        massTestCurrent.printCurrent();
+        // *************** normal
+        int findNormalN = 12;// rand.nextInt(50);
+        int[] currArray = {2, 1, 1, 2, -4, -6, 2, 2, 2, -1, 3, 3, 8, 2, 2, 1, 7, -1, 7, 7, 1, 1, 1, 1, 1, 1};
+        Current normalWorkTest = Enclosing.new Current(currArray, "�������� ������ , ������������ 2-��", findNormalN);
+        printStartInfo(currArray, findNormalN + "");
+        normalWorkTest.findCurrent();
+        normalWorkTest.printCurrent();
+
+    }
+
     class Current {
+        String currentName = null;
         private int[] massive = null;
         private int startIndex = 0, endIndex = 0;
-        private int currentSum = 0;
         // maybe the first element is our hero ?
-
+        private int currentSum = 0;
         private int findThisSum = 0;
-        String currentName = null;
 
         Current(int[] inputCurrent, String name, int fTS) {
             if (inputCurrent == null || inputCurrent.length == 0 || name == null) {
@@ -81,49 +124,5 @@ public class FindNumberSumElementsInARow {
         private FindNumberSumElementsInARow getOuterType() {
             return FindNumberSumElementsInARow.this;
         }
-    }
-
-    private static void printStartInfo(int[] mas, String Find_element) {
-        System.out.println("We are searching for : " + Find_element);
-        System.out.println(Arrays.toString(mas));
-    }
-
-    public static void main(String[] args) { // Testing Method
-        FindNumberSumElementsInARow Enclosing = new FindNumberSumElementsInARow();
-        // *************** fail constructor
-        Current current = Enclosing.new Current(null, "����� ������, ������ �����������", -1);
-        current.findCurrent();
-        current.printCurrent();
-        // *************** single element
-        int findSingleN = 110;
-        int[] singleElementTest = {-90, -10, 1, 1, 8, 100};
-        Current currenSingleElement = Enclosing.new Current(singleElementTest, "�������� �������", findSingleN);
-        printStartInfo(singleElementTest, findSingleN + "");
-        currenSingleElement.findCurrent();
-        currenSingleElement.printCurrent();
-        // *************** mass
-        Random rand = new Random();
-        final int MASS_TEST_NUM = 10000;
-        int[] massTestMatrix = new int[MASS_TEST_NUM];
-        for (int j = 0; j < MASS_TEST_NUM; j++) {
-            massTestMatrix[j] = rand.nextInt(1000);
-        }
-
-        // massTestMatrix[5] = 12;
-        // massTestMatrix[6] = 12;
-        // massTestMatrix[7] = 12;
-        int findMassN = 545454;
-        Current massTestCurrent = Enclosing.new Current(massTestMatrix, "����� ���� � 10000 �������� (1-1000)!", findMassN);
-        printStartInfo(massTestMatrix, findMassN + "");
-        massTestCurrent.findCurrent();
-        massTestCurrent.printCurrent();
-        // *************** normal
-        int findNormalN = 12;// rand.nextInt(50);
-        int[] currArray = {2, 1, 1, 2, -4, -6, 2, 2, 2, -1, 3, 3, 8, 2, 2, 1, 7, -1, 7, 7, 1, 1, 1, 1, 1, 1};
-        Current normalWorkTest = Enclosing.new Current(currArray, "�������� ������ , ������������ 2-��", findNormalN);
-        printStartInfo(currArray, findNormalN + "");
-        normalWorkTest.findCurrent();
-        normalWorkTest.printCurrent();
-
     }
 }

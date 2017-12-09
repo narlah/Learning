@@ -1,7 +1,7 @@
 package com.nkosev.HibernateDemo;
 
-import org.hibernate.Session;
 import org.hibernate.Query;
+import org.hibernate.Session;
 
 import java.util.List;
 

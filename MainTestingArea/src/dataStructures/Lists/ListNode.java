@@ -1,8 +1,8 @@
 package dataStructures.Lists;
 
 class ListNode<T> {
-    private T value;
     ListNode next;
+    private T value;
 
     ListNode(T value, ListNode next) {
         this.value = value;

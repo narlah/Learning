@@ -19,20 +19,20 @@ public class Node<T> {
         return left;
     }
 
-    public Node<T> getRight() {
-        return right;
-    }
-
-    public T getData() {
-        return data;
-    }
-
     public void setLeft(Node<T> left) {
         this.left = left;
     }
 
+    public Node<T> getRight() {
+        return right;
+    }
+
     public void setRight(Node<T> right) {
         this.right = right;
+    }
+
+    public T getData() {
+        return data;
     }
 
     public void setData(T data) {

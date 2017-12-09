@@ -5,17 +5,17 @@ import ResourceSchedulerJPM.src.com.jpm.resourceSchedulerInterfaces.MessageInter
 
 public class Gateway implements GatewayInterface {
 
-	public void send(final MessageInterface msg) {
-		Thread th = new Thread() {
-			public void run() {
-				try {
-					Thread.sleep(200);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				msg.completed();
-			}
-		};
-		th.start();
-	}
+    public void send(final MessageInterface msg) {
+        Thread th = new Thread() {
+            public void run() {
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                msg.completed();
+            }
+        };
+        th.start();
+    }
 }

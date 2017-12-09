@@ -8,16 +8,16 @@ public class MessageProxy implements java.lang.reflect.InvocationHandler {
     private Object obj;
     private MessageScheduler messageScheduler;
 
+    private MessageProxy(Object obj, MessageScheduler msgScheduler) {
+        this.obj = obj;
+        this.messageScheduler = msgScheduler;
+    }
+
     public static Object newInstance(Object obj) {
         MessageProxyHelperObject composite = (MessageProxyHelperObject) obj;
         Message msg = composite.getMsg();
         return java.lang.reflect.Proxy.newProxyInstance(msg.getClass().getClassLoader(), msg.getClass().getInterfaces(), new MessageProxy(msg,
                 composite.getMessageScheduler()));
-    }
-
-    private MessageProxy(Object obj, MessageScheduler msgScheduler) {
-        this.obj = obj;
-        this.messageScheduler = msgScheduler;
     }
 
     public Object invoke(Object proxy, Method m, Object[] args) throws Throwable {

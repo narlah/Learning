@@ -18,6 +18,18 @@ public class HashTableNK<K, V> {
         this.storage = new EntryNK[initialNumberOfElements];
     }
 
+    private static int hash(int h) {
+        return 31 * h;
+    }
+
+    private static int hash(Object o) {
+        return 27 * o.hashCode();
+    }
+
+    private static int indexFor(int h, int length) {
+        return h & (length - 1);
+    }
+
     public int lenght() {
         return currentEntries;
     }
@@ -50,7 +62,7 @@ public class HashTableNK<K, V> {
         if (paramStorage[index] == null) { //put on empty space
             paramStorage[index] = newEntry;
         } else { //find last and put there
-            EntryNK lastInList=findLast(paramStorage[index]);
+            EntryNK lastInList = findLast(paramStorage[index]);
             lastInList.next = newEntry;
             newEntry.prev = lastInList;
         }
@@ -75,9 +87,8 @@ public class HashTableNK<K, V> {
         int index = indexFor(hash(key), storage.length);
         EntryNK<K, V> current = storage[index];
         current = removeKey(current, key, index);
-        return current!=null?current.getValue():null;
+        return current != null ? current.getValue() : null;
     }
-
 
     boolean containsKey(K key) {
         EntryNK<? extends K, ? extends V> current = getElementForKey(key);
@@ -110,30 +121,18 @@ public class HashTableNK<K, V> {
         return resultSet;
     }
 
-    private static int hash(int h) {
-        return 31 * h;
-    }
-
-    private static int hash(Object o) {
-        return 27 * o.hashCode();
-    }
-
-    private static int indexFor(int h, int length) {
-        return h & (length - 1);
-    }
-
     private EntryNK<K, V> findLast(EntryNK<K, V> current) {
         while (current.next != null) {
-          current = current.next;
+            current = current.next;
         }
         return current;
     }
 
     private EntryNK<K, V> removeKey(EntryNK<K, V> current, K key, int index) {
-        while (current!= null && !current.getKey().equals(key)){
+        while (current != null && !current.getKey().equals(key)) {
             current = current.next;
         }
-        if (current!=null) {
+        if (current != null) {
             if (current.prev != null)
                 current.prev.next = current.next;
             else if (current.next != null)

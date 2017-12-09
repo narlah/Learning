@@ -28,7 +28,6 @@ class LogFileEngine {
 
     /**
      * Print the entire buffered log, after that the log file is closed
-     *
      */
     void printTheLog(boolean logFileFlag) throws IOException {
         if (!logFileFlag) {

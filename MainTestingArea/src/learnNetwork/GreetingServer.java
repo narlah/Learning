@@ -15,6 +15,16 @@ public class GreetingServer extends Thread {
         serverSocket.setSoTimeout(10000);
     }
 
+    public static void main(String[] args) {
+        int port = 2016;
+        try {
+            Thread t = new GreetingServer(port);
+            t.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void run() {
         while (true) {
             try {
@@ -33,16 +43,6 @@ public class GreetingServer extends Thread {
                 e.printStackTrace();
                 break;
             }
-        }
-    }
-
-    public static void main(String[] args) {
-        int port = 2016;
-        try {
-            Thread t = new GreetingServer(port);
-            t.start();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }

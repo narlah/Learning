@@ -8,8 +8,8 @@ public class Game2048 {
     private static final int MOVE_DOWN = 8;
 
     public final int size;
-    private final int goal;
     final int[] board;
+    private final int goal;
     private boolean gameOver;
     private boolean won;
     private int[] stack;

@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Queue;
 
-public class NKQueue implements Queue{
+public class NKQueue implements Queue {
     NKLinkedList linkedList = new NKLinkedList();
 
     @Override
@@ -41,7 +41,7 @@ public class NKQueue implements Queue{
 
     @Override
     public boolean add(Object o) {
-        linkedList.add(0,o);
+        linkedList.add(0, o);
         return true;
     }
 

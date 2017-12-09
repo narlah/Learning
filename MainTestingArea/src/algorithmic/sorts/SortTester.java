@@ -16,8 +16,8 @@ public class SortTester {
         int[] res = MergeSortComponent.sort(massive);
         System.out.println(Arrays.toString(res));
         System.out.println(res.length + " =?= " + massive.length);
-         QuickSortComponent quickSort = new QuickSortComponent();
-         System.out.println(Arrays.toString(quickSort.sort(massive)));
+        QuickSortComponent quickSort = new QuickSortComponent();
+        System.out.println(Arrays.toString(quickSort.sort(massive)));
 
         // ***************************************************************
     }

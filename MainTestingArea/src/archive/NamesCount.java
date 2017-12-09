@@ -6,6 +6,19 @@ public class NamesCount {
     private int count;
     private HashMap<String, Integer> counts = new HashMap<String, Integer>();
 
+    public static void main(String[] args) {
+        NamesCount namesCount = new NamesCount();
+
+        namesCount.addName("James");
+        namesCount.addName("John");
+        namesCount.addName("Mary");
+        namesCount.addName("Mary");
+
+        System.out.println("Fraction of Johns: " + namesCount.nameProportion("John"));
+        System.out.println("Fraction of Johns: " + namesCount.nameProportion("Gosh"));
+        System.out.println("Fraction of Marys: " + namesCount.nameProportion("Mary"));
+    }
+
     /**
      * Adds the name.
      *
@@ -32,18 +45,5 @@ public class NamesCount {
     public double nameProportion(String name) {
         if (counts.get(name) == null) return 0;
         return (double) counts.get(name) / (double) count;
-    }
-
-    public static void main(String[] args) {
-        NamesCount namesCount = new NamesCount();
-
-        namesCount.addName("James");
-        namesCount.addName("John");
-        namesCount.addName("Mary");
-        namesCount.addName("Mary");
-
-        System.out.println("Fraction of Johns: " + namesCount.nameProportion("John"));
-        System.out.println("Fraction of Johns: " + namesCount.nameProportion("Gosh"));
-        System.out.println("Fraction of Marys: " + namesCount.nameProportion("Mary"));
     }
 }

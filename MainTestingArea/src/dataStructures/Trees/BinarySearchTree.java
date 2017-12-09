@@ -12,6 +12,17 @@ public class BinarySearchTree<T extends Comparable> {
         this.root = root;
     }
 
+    public static void main(String[] args) {
+        BinarySearchTree tree = new BinarySearchTree(new Node<Integer>(null, null, 12));
+        tree.add(5).add(16).add(2).add(4).add(5).add(100).add(92).add(42); //the whole thing have to have a meaning :P
+        try {
+            tree.printTree(System.out);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public BinarySearchTree<T> add(T data) {
         Node temp = root;
         Node prev = root;
@@ -33,17 +44,6 @@ public class BinarySearchTree<T extends Comparable> {
 
     public void printTree(PrintStream out) throws IOException {
         root.printTree(out);
-    }
-
-    public static void main(String[] args) {
-        BinarySearchTree tree = new BinarySearchTree(new Node<Integer>(null, null, 12));
-        tree.add(5).add(16).add(2).add(4).add(5).add(100).add(92).add(42); //the whole thing have to have a meaning :P
-        try {
-            tree.printTree(System.out);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
     }
 }
 

@@ -7,8 +7,8 @@ public class f7 {
 
         System.out.println("Hello World");
         int var1 = 1;
-        int var2 = var1+1;
-        System.out.println(var2+10);
+        int var2 = var1 + 1;
+        System.out.println(var2 + 10);
         // ***************************************************************
     }
 }

@@ -19,10 +19,10 @@ class GenerateSeries {
         StringBuilder result = new StringBuilder();
         double current = a + Math.pow(2, 0) * b;
         for (int i = 1; i < n; i++) {
-            result.append((int)current+ " ");
+            result.append((int) current + " ");
             current = current + (b * Math.pow(2, i));
         }
-        result.append((int)current+ " ");
+        result.append((int) current + " ");
         System.out.println(result.toString());
     }
 }

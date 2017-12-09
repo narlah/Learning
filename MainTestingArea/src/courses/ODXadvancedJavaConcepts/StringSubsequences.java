@@ -39,6 +39,7 @@ public class StringSubsequences {
     public static String subsequencesA(String word) {
         return subsequencesAfter("", word);
     }
+
     public static void main(String[] args) {
         String word = "abcdehfg";
         //System.out.println(StringSubsequences.subsequences(word).substring(1));

@@ -1,9 +1,19 @@
-package interviewPickings.interviewBit;
+package interviewPickings.interviewBit.Arrays;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MaxSet {
+
+    public static void main(String[] args) {
+        MaxSet m = new MaxSet();
+        //Integer[] arr = new Integer[]{336465782, -278722862, -2145174067, 1101513929, 1315634022, -1369133069, 1059961393, 628175011, -1131176229, -859484421};
+        Integer[] arr = new Integer[]{24115, -75629, -46517, 30105, 19451, -82188, 99505, 6752, -36716, 54438, -51501, 83871, 11137, -53177, 22294, -21609, -59745, 53635, -98142, 27968, -260, 41594, 16395, 19113, 71006, -97942, 42082, -30767, 85695, -73671};
+        //Integer[] arr = new Integer[]{756898537, -1973594324, -2038664370, -184803526, 1424268980};
+        //Integer[] arr = new Integer[]{ 1, 2, 5, -7, 2, 5};
+        ArrayList<Integer> arr2 = new ArrayList(Arrays.asList(arr));
+        System.out.println("41594, 16395, 19113, 71006      <-> " + m.maxset(arr2));
+    }
 
     public ArrayList<Integer> maxset(ArrayList<Integer> a) {
         Res current = new Res();
@@ -29,6 +39,26 @@ public class MaxSet {
         return current.compareTo(result) == 1 ? current.data : result.data;
     }
 
+    public ArrayList<Integer> maxsetEditorial(ArrayList<Integer> a) {
+        long maxSum = 0;
+        long newSum = 0;
+        ArrayList<Integer> maxArray = new ArrayList<>();
+        ArrayList<Integer> newArray = new ArrayList<>();
+        for (Integer i : a) {
+            if (i >= 0) {
+                newSum += i;
+                newArray.add(i);
+            } else {
+                newSum = 0;
+                newArray = new ArrayList<>();
+            }
+            if ((maxSum < newSum) || ((maxSum == newSum) && (newArray.size() > maxArray.size()))) {
+                maxSum = newSum;
+                maxArray = newArray;
+            }
+        }
+        return maxArray;
+    }
 
     class Res implements Comparable {
         int starting_index = -1;
@@ -66,36 +96,5 @@ public class MaxSet {
                 return this.sum > in.sum ? 1 : -1;
             }
         }
-    }
-
-    public static void main(String[] args) {
-        MaxSet m = new MaxSet();
-        //Integer[] arr = new Integer[]{336465782, -278722862, -2145174067, 1101513929, 1315634022, -1369133069, 1059961393, 628175011, -1131176229, -859484421};
-        Integer[] arr = new Integer[]{24115, -75629, -46517, 30105, 19451, -82188, 99505, 6752, -36716, 54438, -51501, 83871, 11137, -53177, 22294, -21609, -59745, 53635, -98142, 27968, -260, 41594, 16395, 19113, 71006, -97942, 42082, -30767, 85695, -73671};
-        //Integer[] arr = new Integer[]{756898537, -1973594324, -2038664370, -184803526, 1424268980};
-        //Integer[] arr = new Integer[]{ 1, 2, 5, -7, 2, 5};
-        ArrayList<Integer> arr2 = new ArrayList(Arrays.asList(arr));
-        System.out.println("41594, 16395, 19113, 71006      <-> " + m.maxset(arr2));
-    }
-
-    public ArrayList<Integer> maxsetEditorial(ArrayList<Integer> a) {
-        long maxSum = 0;
-        long newSum = 0;
-        ArrayList<Integer> maxArray = new ArrayList<>();
-        ArrayList<Integer> newArray = new ArrayList<>();
-        for (Integer i : a) {
-            if (i >= 0) {
-                newSum += i;
-                newArray.add(i);
-            } else {
-                newSum = 0;
-                newArray = new ArrayList<>();
-            }
-            if ((maxSum < newSum) || ((maxSum == newSum) && (newArray.size() > maxArray.size()))) {
-                maxSum = newSum;
-                maxArray = newArray;
-            }
-        }
-        return maxArray;
     }
 }

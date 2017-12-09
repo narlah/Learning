@@ -3,30 +3,46 @@ package archive;
 import java.util.*;
 
 public class MostFrequentNumberInArray {
-    class FrequencyMatrix {
-        private int[] massive = null;
-        private String currentName = null;
-
-        // Inner class - holds the frequency and the positions where the
-        // most frequent element occurs
-        private class Element {
-            private int frequency = 0;
-            private ArrayList<Integer> positions = new ArrayList<Integer>();
-
-            public Element(int freq) {
-                this.frequency = freq;
-            }
-
-            public void increaseFreuencyByOne() {
-                frequency++;
-            }
-
-            public void addPosition(int pos) {
-                positions.add(pos);
-            }
+    public static void main(String[] args) { // Testing Method
+        MostFrequentNumberInArray Enclosing = new MostFrequentNumberInArray();
+        int[] testNormal = {4, 1, 1, 4, 2, 3, 4, 4, 1, 2, 4, 9, 3};
+        FrequencyMatrix freqMatrx = Enclosing.new FrequencyMatrix(testNormal,
+                "����� ������,  �������� ������");
+        freqMatrx.findCurrent();
+        freqMatrx.printCurrent();
+        // Single element
+        int[] singleElementTest = {1};
+        FrequencyMatrix currenSingleElement = Enclosing.new FrequencyMatrix(singleElementTest,
+                "�������� �������");
+        currenSingleElement.findCurrent();
+        currenSingleElement.printCurrent();
+        System.out.println();
+        System.out.println(Arrays.toString(singleElementTest));
+        // Mass test
+        Random rand = new Random();
+        final int MASS_TEST_NUM = 10000;
+        int[] massTestMatrix = new int[MASS_TEST_NUM];
+        for (int j = 0; j < MASS_TEST_NUM; j++) {
+            massTestMatrix[j] = rand.nextInt(1000);
         }
 
+        FrequencyMatrix massTestCurrent = Enclosing.new FrequencyMatrix(massTestMatrix,
+                "����� ���� � 10000 �������� (1-1000)!");
+        massTestCurrent.findCurrent();
+        massTestCurrent.printCurrent();
+        System.out.println();
+        System.out.println(Arrays.toString(massTestMatrix));
+        // Empty element, no name
+        FrequencyMatrix currenEmptyElement = Enclosing.new FrequencyMatrix(null, null);
+        currenEmptyElement.findCurrent();
+        currenEmptyElement.printCurrent();
+
+    }
+
+    class FrequencyMatrix {
         HashMap<Integer, Element> hashMap = new HashMap<Integer, Element>();
+        private int[] massive = null;
+        private String currentName = null;
 
         public FrequencyMatrix(int[] inputCurrent, String name) { //constructor
             if (inputCurrent == null || inputCurrent.length == 0 || name == null) {
@@ -80,41 +96,24 @@ public class MostFrequentNumberInArray {
                         + Arrays.toString(maxElement.positions.toArray()));
             }
         }
-    }
 
-    public static void main(String[] args) { // Testing Method
-        MostFrequentNumberInArray Enclosing = new MostFrequentNumberInArray();
-        int[] testNormal = {4, 1, 1, 4, 2, 3, 4, 4, 1, 2, 4, 9, 3};
-        FrequencyMatrix freqMatrx = Enclosing.new FrequencyMatrix(testNormal,
-                "����� ������,  �������� ������");
-        freqMatrx.findCurrent();
-        freqMatrx.printCurrent();
-        // Single element
-        int[] singleElementTest = {1};
-        FrequencyMatrix currenSingleElement = Enclosing.new FrequencyMatrix(singleElementTest,
-                "�������� �������");
-        currenSingleElement.findCurrent();
-        currenSingleElement.printCurrent();
-        System.out.println();
-        System.out.println(Arrays.toString(singleElementTest));
-        // Mass test
-        Random rand = new Random();
-        final int MASS_TEST_NUM = 10000;
-        int[] massTestMatrix = new int[MASS_TEST_NUM];
-        for (int j = 0; j < MASS_TEST_NUM; j++) {
-            massTestMatrix[j] = rand.nextInt(1000);
+        // Inner class - holds the frequency and the positions where the
+        // most frequent element occurs
+        private class Element {
+            private int frequency = 0;
+            private ArrayList<Integer> positions = new ArrayList<Integer>();
+
+            public Element(int freq) {
+                this.frequency = freq;
+            }
+
+            public void increaseFreuencyByOne() {
+                frequency++;
+            }
+
+            public void addPosition(int pos) {
+                positions.add(pos);
+            }
         }
-
-        FrequencyMatrix massTestCurrent = Enclosing.new FrequencyMatrix(massTestMatrix,
-                "����� ���� � 10000 �������� (1-1000)!");
-        massTestCurrent.findCurrent();
-        massTestCurrent.printCurrent();
-        System.out.println();
-        System.out.println(Arrays.toString(massTestMatrix));
-        // Empty element, no name
-        FrequencyMatrix currenEmptyElement = Enclosing.new FrequencyMatrix(null, null);
-        currenEmptyElement.findCurrent();
-        currenEmptyElement.printCurrent();
-
     }
 }

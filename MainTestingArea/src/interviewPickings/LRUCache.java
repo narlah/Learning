@@ -14,6 +14,36 @@ public class LRUCache {
         this.maxCapacity = capacity;
     }
 
+    public static void main(String[] args) {
+
+        String str = "93 11 S 9 1 G 12 S 8 3 G 7 G 11 G 9 S 13 12 G 11 G 1 S 8 14 G 2 G 14 G 11 S 11 10 S 10 6 G 3 G 3 G 12 G 7 G 2 G 11 S 11 14 S 11 12 S 3 15 G 14 G 6 G 4 S 13 3 G 11 S 4 15 G 12 G 9 S 15 9 G 4 S 5 15 S 4 4 S 9 7 G 5 S 9 13 S 11 10 S 11 12 G 12 S 7 6 S 6 2 G 1 S 15 6 G 7 S 8 8 S 14 8 G 12 G 12 S 6 15 G 2 S 2 5 S 13 15 G 13 S 6 6 G 7 G 12 G 15 S 10 8 G 6 G 5 G 5 S 14 10 G 15 G 5 G 14 G 12 S 11 15 G 5 G 2 S 9 5 S 4 7 G 13 G 2 S 7 13 G 9 G 9 S 11 5 G 6 G 4 S 6 13 G 2 S 3 15 G 13 G 4 S 6 11 G 15 G 15 G 3 G 3 G 3 ";
+        StringTokenizer tokenizer = new StringTokenizer(str, " ");
+        int operations = Integer.parseInt(tokenizer.nextElement() + "");
+        int size = Integer.parseInt(tokenizer.nextElement() + "");
+        System.out.println(operations);
+        LRUCache cache = new LRUCache(size);
+        int count = 0;
+        String result = "";
+        while (tokenizer.hasMoreElements()) {
+            if (count == 71) {
+                System.out.println(60);
+            }
+            Character op = (tokenizer.nextElement() + "").charAt(0);
+            if (op == 'S') {
+                int keyToADD = Integer.parseInt(tokenizer.nextElement() + "");
+                int valueToADD = Integer.parseInt(tokenizer.nextElement() + "");
+                cache.set(keyToADD, valueToADD);
+            }
+            if (op == 'G') {
+                int searchFor = Integer.parseInt(tokenizer.nextElement() + "");
+                String afterGet = cache.get(searchFor) + " , ";
+                result += afterGet;
+            }
+            count++;
+        }
+        System.out.println(result);
+    }
+
     public int get(int key) {
         if (map.containsKey(key)) {// miss
             Ele e = map.get(key);
@@ -78,36 +108,6 @@ public class LRUCache {
             this.value = value;
             this.key = key;
         }
-    }
-
-    public static void main(String[] args) {
-
-        String str = "93 11 S 9 1 G 12 S 8 3 G 7 G 11 G 9 S 13 12 G 11 G 1 S 8 14 G 2 G 14 G 11 S 11 10 S 10 6 G 3 G 3 G 12 G 7 G 2 G 11 S 11 14 S 11 12 S 3 15 G 14 G 6 G 4 S 13 3 G 11 S 4 15 G 12 G 9 S 15 9 G 4 S 5 15 S 4 4 S 9 7 G 5 S 9 13 S 11 10 S 11 12 G 12 S 7 6 S 6 2 G 1 S 15 6 G 7 S 8 8 S 14 8 G 12 G 12 S 6 15 G 2 S 2 5 S 13 15 G 13 S 6 6 G 7 G 12 G 15 S 10 8 G 6 G 5 G 5 S 14 10 G 15 G 5 G 14 G 12 S 11 15 G 5 G 2 S 9 5 S 4 7 G 13 G 2 S 7 13 G 9 G 9 S 11 5 G 6 G 4 S 6 13 G 2 S 3 15 G 13 G 4 S 6 11 G 15 G 15 G 3 G 3 G 3 ";
-        StringTokenizer tokenizer = new StringTokenizer(str, " ");
-        int operations = Integer.parseInt(tokenizer.nextElement() + "");
-        int size = Integer.parseInt(tokenizer.nextElement() + "");
-        System.out.println(operations);
-        LRUCache cache = new LRUCache(size);
-        int count = 0;
-        String result = "";
-        while (tokenizer.hasMoreElements()) {
-            if (count == 71) {
-                System.out.println(60);
-            }
-            Character op = (tokenizer.nextElement() + "").charAt(0);
-            if (op == 'S') {
-                int keyToADD = Integer.parseInt(tokenizer.nextElement() + "");
-                int valueToADD = Integer.parseInt(tokenizer.nextElement() + "");
-                cache.set(keyToADD, valueToADD);
-            }
-            if (op == 'G') {
-                int searchFor = Integer.parseInt(tokenizer.nextElement() + "");
-                String afterGet = cache.get(searchFor) + " , ";
-                result += afterGet;
-            }
-            count++;
-        }
-        System.out.println(result);
     }
 }
 

@@ -4,6 +4,22 @@ import java.util.*;
 
 public class MeshMessageGraphs {
 
+    public static void main(String[] args) {
+        MeshMessageGraphs mesh = new MeshMessageGraphs();
+        Map<String, String[]> network = new HashMap<>() {{
+            put("Min", new String[]{"William", "Jayden", "Omar"});
+            put("William", new String[]{"Min", "Noam"});
+            put("Jayden", new String[]{"Min", "Amelia", "Ren", "Noam"});
+            put("Ren", new String[]{"Jayden", "Omar"});
+            put("Amelia", new String[]{"Jayden", "Adam", "Miguel"});
+            put("Adam", new String[]{"Amelia", "Miguel", "Sofia", "Lucas"});
+            put("Miguel", new String[]{"Amelia", "Adam", "Liam", "Nathan"});
+        }};
+
+        System.out.println(Arrays.toString(mesh.mesh(network, "Jayden", "Adam").toArray())); //expected { "Jayden", "Amelia", "Adam" }
+        System.out.println(Arrays.toString(mesh.mesh(network, "Jayden", "Liam").toArray()));
+    }
+
     private List<String> mesh(Map<String, String[]> map, String sender, String ender) {
         Queue<String> queue = new LinkedList<>();
         queue.add(sender);
@@ -29,21 +45,5 @@ public class MeshMessageGraphs {
             }
         }
         return Collections.emptyList();
-    }
-
-    public static void main(String[] args) {
-        MeshMessageGraphs mesh = new MeshMessageGraphs();
-        Map<String, String[]> network = new HashMap<>() {{
-            put("Min", new String[]{"William", "Jayden", "Omar"});
-            put("William", new String[]{"Min", "Noam"});
-            put("Jayden", new String[]{"Min", "Amelia", "Ren", "Noam"});
-            put("Ren", new String[]{"Jayden", "Omar"});
-            put("Amelia", new String[]{"Jayden", "Adam", "Miguel"});
-            put("Adam", new String[]{"Amelia", "Miguel", "Sofia", "Lucas"});
-            put("Miguel", new String[]{"Amelia", "Adam", "Liam", "Nathan"});
-        }};
-
-        System.out.println(Arrays.toString(mesh.mesh(network, "Jayden", "Adam").toArray())); //expected { "Jayden", "Amelia", "Adam" }
-        System.out.println(Arrays.toString(mesh.mesh(network, "Jayden", "Liam").toArray()));
     }
 }

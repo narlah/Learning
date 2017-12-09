@@ -44,14 +44,13 @@ public class CheckIfTreeIsValidBinarySearchTree {
 }
 
 class StackElement<T> {
+    Node<T> node;
+    int min;
+    int max;
     StackElement(Node<T> node, int min, int max) {
         super();
         this.node = node;
         this.min = min;
         this.max = max;
     }
-
-    Node<T> node;
-    int min;
-    int max;
 }
