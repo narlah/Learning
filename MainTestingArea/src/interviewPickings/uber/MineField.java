@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 public class MineField {
     static int[][] arr = new int[][]{
-            {0, 0, 0, 1, 0},
-            {1, 0, 0, 1, 0},
+            {0, 0, 0, 0, 0},
+            {1, 0, 0, 0, 0},
             {0, 0, 0, 1, 0},
             {0, 1, 0, 1, 0},
             {0, 0, 0, 1, 0}
@@ -13,27 +13,27 @@ public class MineField {
     public final int[][] dirs = new int[][]{
             {1, 0},
             {0, 1},
-            {-1, 0},
-            {1, -1},
             {1, 1},
             {-1, -1},
+            {1, -1},
             {-1, 1},
+            {-1, 0},
             {0, -1}
     };
 
     private int[][] returnMatrix(int[][] arr) {
         int[][] result = new int[arr.length][arr[0].length];
 
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr[0].length; j++) {
-                if (arr[i][j] == 1) {
-                    int x, y;
+        for (int y = 0; y < arr[0].length; y++) {
+            for (int x = 0; x < arr.length; x++) {
+                if (arr[y][x] == 1) {
+                    int a, b;
                     for (int[] coef : dirs) {
-                        x = i + coef[0];
-                        y = j + coef[1];
-                        if (x >= arr.length || y >= arr[0].length || x < 0 || y < 0)
-                            break;
-                        result[x][y] = result[x][y] + 1;
+                        a = x + coef[0];
+                        b = y + coef[1];
+                        if (a >= arr.length || b >= arr[0].length || a < 0 || b < 0)
+                            continue;
+                        result[b][a] = result[b][a] + 1;
                     }
                 }
             }

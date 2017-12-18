@@ -23,7 +23,7 @@ public class BinaryTree {
         System.out.println(checkSuperBalancedIte(rootUnbalanced));
     }
 
-    private static TreeNode recBalance(int[] inList, int binaryBalanceFactor) {
+    public static TreeNode recBalance(int[] inList, int binaryBalanceFactor) {
         if (inList.length == 0)
             return null; // empty leaf , do nothing
         if (inList.length == 1)

@@ -6,8 +6,8 @@ import java.util.Arrays;
 public class RemoveDuplicatesInSortedList {
 
 
-    public ListNode deleteDuplicates(ListNode a) {
-        ListNode current = a;
+    public void deleteDuplicates(ListNode root) {
+        ListNode current = root;
         while (current.next != null) {
             if (current.val == current.next.val) {
                 current.next = current.next.next;
@@ -15,7 +15,6 @@ public class RemoveDuplicatesInSortedList {
                 current = current.next;
             }
         }
-        return a;
     }
 
     public static void main(String[] args) {

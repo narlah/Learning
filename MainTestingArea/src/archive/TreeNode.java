@@ -49,4 +49,8 @@ public class TreeNode {
             left.printTree(out, false, indent + (isRight ? " |      " : "        "));
         }
     }
+
+    public Integer getValue() {
+        return value;
+    }
 }
