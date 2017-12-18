@@ -25,8 +25,7 @@ public class BinaryTreePaths {
         rootBalanced.printTree(System.out);
         ArrayList<TreeNode> rootArrayList = new ArrayList<>();
         rootArrayList.add(rootBalanced);
-        ArrayList<ArrayList<TreeNode>> result = new ArrayList<>();
-        bp.getPaths(new Params(rootBalanced, 0, 25, result));
+        ArrayList<ArrayList<TreeNode>> result = bp.getPaths(new Params(rootBalanced, 25));
         for (ArrayList<TreeNode> path : result) {
             System.out.println();
             for (TreeNode t : path) {
@@ -35,14 +34,14 @@ public class BinaryTreePaths {
         }
     }
 
-    public void getPaths(Params param) {  //search for 25
+    public ArrayList<ArrayList<TreeNode>> getPaths(Params param) {  //search for 25
         if (param.getEndNode() == null)
-            return;
-        param.setSumSoFar(param.getSumSoFar() + param.endNode.getValue());
+            return param.getResult();
+        param.setSumSoFar(param.getSumSoFar() + param.getEndNode().getValue());
         param.getPathSoFar().add(param.getEndNode());
         if (param.checkSum()) {
             param.getResult().add(param.getPathSoFar());
-            return; //what if we have to continue - remove first and go on ?
+            return param.getResult(); //what if we have to continue - remove first and go on ?
         }
 
         if (param.getSumSoFar() < param.getSearchFor()) {
@@ -55,5 +54,6 @@ public class BinaryTreePaths {
                 getPaths(param.cloneToRight());
             }
         }
+        return param.getResult();
     }
 }

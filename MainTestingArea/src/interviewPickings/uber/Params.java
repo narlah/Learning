@@ -6,20 +6,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Params {
-    int sumSoFar;
-    int searchFor;
-    TreeNode endNode;
-    ArrayList<TreeNode> pathSoFar;
-    ArrayList<ArrayList<TreeNode>> result;
+    private int sumSoFar = 0;
+    private int searchFor;
+    private TreeNode endNode;
+    private ArrayList<TreeNode> pathSoFar;
+    private ArrayList<ArrayList<TreeNode>> result;
 
 
-    public Params(TreeNode endNode, int sumSoFar, int searchFor, ArrayList<ArrayList<TreeNode>> result) {
-        if (pathSoFar == null)
+    public Params(TreeNode endNode, int searchFor) {
+        if (pathSoFar == null) {
             this.pathSoFar = new ArrayList<>();
-        this.sumSoFar = sumSoFar;
+            this.result = new ArrayList<>();
+        }
         this.searchFor = searchFor;
         this.endNode = endNode;
-        this.result = result;
     }
 
     private Params(ArrayList<TreeNode> pathSoFar, TreeNode endNode, int sumSoFar, int searchFor, ArrayList<ArrayList<TreeNode>> result) {
