@@ -22,11 +22,15 @@ class Params {
         this.endNode = endNode;
     }
 
-    private Params(ArrayList<TreeNode> pathSoFar, TreeNode endNode, int sumSoFar, int searchFor, ArrayList<ArrayList<TreeNode>> result) {
+    public Params(ArrayList<TreeNode> pathSoFar, TreeNode endNode, int sumSoFar, int searchFor, ArrayList<ArrayList<TreeNode>> result) {
+        if (pathSoFar == null) {
+            this.pathSoFar = new ArrayList<>();
+        } else
+            this.pathSoFar = pathSoFar;
         this.sumSoFar = sumSoFar;
         this.searchFor = searchFor;
         this.endNode = endNode;
-        this.pathSoFar = pathSoFar;
+
         this.result = result;
     }
 

@@ -20,12 +20,15 @@ public class BinaryTreePaths {
         Arrays.sort(array);
         System.out.println(Arrays.toString(array) + "\n");
 
-        TreeNode rootBalanced = BinaryTree.recBalance(array, 2);
+        TreeNode rootBalanced = BinaryTree.recBalance(array, 3);
         BinaryTreePaths bp = new BinaryTreePaths();
         rootBalanced.printTree(System.out);
+
         ArrayList<TreeNode> rootArrayList = new ArrayList<>();
         rootArrayList.add(rootBalanced);
-        ArrayList<ArrayList<TreeNode>> result = bp.getPaths(new Params(rootBalanced, 25));
+
+        ArrayList<ArrayList<TreeNode>> result = bp.getPaths(new Params(rootBalanced, 101));
+
         for (ArrayList<TreeNode> path : result) {
             System.out.println();
             for (TreeNode t : path) {
@@ -48,10 +51,20 @@ public class BinaryTreePaths {
             getPaths(param.cloneToLeft());
             getPaths(param.cloneToRight());
         } else {
-            param.removeFirstNode();
-            if (param.getPathSoFar().size() > 0) {
-                getPaths(param.cloneToLeft());
+            TreeNode last = param.getEndNode();
+            while (param.getSumSoFar() > param.getSearchFor()) {
+                param.removeFirstNode();
+                if (param.checkSum()) {
+                    param.getResult().add(param.getPathSoFar());
+                    return param.getResult(); //what if we have to continue - remove first and go on ?
+                }
+            }
+            if (param.getPathSoFar().isEmpty()) {
+                getPaths(new Params(null, last.left, 0, param.getSearchFor(), param.getResult()));
+                getPaths(new Params(null, last.right, 0, param.getSearchFor(), param.getResult()));
+            } else {
                 getPaths(param.cloneToRight());
+                getPaths(param.cloneToLeft());
             }
         }
         return param.getResult();
