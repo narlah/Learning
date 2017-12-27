@@ -1,4 +1,4 @@
-package interviewPickings;
+package interviewPickings.interviewBit;
 
 import java.util.HashMap;
 import java.util.StringTokenizer;

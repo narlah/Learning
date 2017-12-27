@@ -27,7 +27,7 @@ public class BinaryTreePaths {
         ArrayList<TreeNode> rootArrayList = new ArrayList<>();
         rootArrayList.add(rootBalanced);
 
-        ArrayList<ArrayList<TreeNode>> result = bp.getPaths(new Params(rootBalanced, 101));
+        ArrayList<ArrayList<TreeNode>> result = bp.getPaths(new Params(rootBalanced, 12));
 
         for (ArrayList<TreeNode> path : result) {
             System.out.println();
