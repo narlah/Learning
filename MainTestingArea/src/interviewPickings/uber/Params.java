@@ -1,8 +1,10 @@
 package interviewPickings.uber;
 
 import archive.TreeNode;
+import jdk.nashorn.api.tree.Tree;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 class Params {
@@ -10,19 +12,20 @@ class Params {
     private int searchFor;
     private TreeNode endNode;
     private ArrayList<TreeNode> pathSoFar;
-    private ArrayList<ArrayList<TreeNode>> result;
 
+
+    HashMap<TreeNode, ArrayList<ArrayList<TreeNode>>> pathsPerNode;
 
     public Params(TreeNode endNode, int searchFor) {
         if (pathSoFar == null) {
             this.pathSoFar = new ArrayList<>();
-            this.result = new ArrayList<>();
         }
         this.searchFor = searchFor;
         this.endNode = endNode;
+        pathsPerNode = new HashMap<>();
     }
 
-    public Params(ArrayList<TreeNode> pathSoFar, TreeNode endNode, int sumSoFar, int searchFor, ArrayList<ArrayList<TreeNode>> result) {
+    public Params(ArrayList<TreeNode> pathSoFar, TreeNode endNode, int sumSoFar, int searchFor) { //  HashMap<TreeNode>ArrayList<ArrayList<TreeNode>>>  map
         if (pathSoFar == null) {
             this.pathSoFar = new ArrayList<>();
         } else
@@ -30,34 +33,20 @@ class Params {
         this.sumSoFar = sumSoFar;
         this.searchFor = searchFor;
         this.endNode = endNode;
-
-        this.result = result;
+        //pathsPerNode = map;
     }
 
     public Params cloneToLeft() {
-        return new Params(cloneArrayList(pathSoFar), pathSoFar.get(pathSoFar.size() - 1).left, sumSoFar, searchFor, result);
+        return new Params(cloneArrayList(pathSoFar), pathSoFar.get(pathSoFar.size() - 1).left, sumSoFar, searchFor); // pathsPerNode
     }
 
     public Params cloneToRight() {
-        return new Params(cloneArrayList(pathSoFar), pathSoFar.get(pathSoFar.size() - 1).right, sumSoFar, searchFor, result);
+        return new Params(cloneArrayList(pathSoFar), pathSoFar.get(pathSoFar.size() - 1).right, sumSoFar, searchFor); // , pathsPerNode
     }
 
     public void setSumSoFar(int sumSoFar) {
         this.sumSoFar = sumSoFar;
     }
-
-    public void setSearchFor(int searchFor) {
-        this.searchFor = searchFor;
-    }
-
-    public void setEndNode(TreeNode endNode) {
-        this.endNode = endNode;
-    }
-
-    public void setPathSoFar(ArrayList<TreeNode> pathSoFar) {
-        this.pathSoFar = pathSoFar;
-    }
-
 
     public int getSumSoFar() {
         return sumSoFar;
@@ -71,8 +60,26 @@ class Params {
         return endNode;
     }
 
+    public TreeNode getFirstNode() {
+        TreeNode first = pathSoFar.get(0);
+        if (!pathsPerNode.containsKey(first)) {
+            pathsPerNode.put(first, new ArrayList<>());
+        }
+        return pathSoFar.get(0);
+    }
+
     public ArrayList<TreeNode> getPathSoFar() {
         return pathSoFar;
+    }
+
+    public String getPathSoFarAsString() {
+        String delim = "";
+        StringBuilder sb = new StringBuilder();
+        for (TreeNode pathNode : pathSoFar) {
+            sb.append(delim).append(pathNode.getValue());
+            delim = "->";
+        }
+        return sb.toString();
     }
 
     public ArrayList<TreeNode> cloneArrayList(List<TreeNode> list) {
@@ -86,15 +93,17 @@ class Params {
     }
 
     public void removeFirstNode() {
+        if (pathSoFar.get(0) == null) return;
         sumSoFar -= pathSoFar.get(0).getValue();
         pathSoFar.remove(0);
     }
 
-    public ArrayList<ArrayList<TreeNode>> getResult() {
-        return result;
+
+    public HashMap<TreeNode, ArrayList<ArrayList<TreeNode>>> getPathsPerNode() {
+        return pathsPerNode;
     }
 
-    public void setResult(ArrayList<ArrayList<TreeNode>> result) {
-        this.result = result;
+    public void setPathsPerNode(HashMap<TreeNode, ArrayList<ArrayList<TreeNode>>> pathsPerNode) {
+        this.pathsPerNode = pathsPerNode;
     }
 }

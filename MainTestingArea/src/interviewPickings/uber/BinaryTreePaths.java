@@ -6,6 +6,8 @@ import archive.TreeNode;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.stream.Collectors;
 
 /*
 Interview Questions
@@ -16,7 +18,7 @@ Interview Questions
  */
 public class BinaryTreePaths {
     public static void main(String[] args) throws IOException {
-        int[] array = {2, 6, 11, 12, 1, 12, 19, 5, 45, 7, 99, 68, 8, 13, 20};
+        int[] array = {2, 6, 11, 12, 1, 12, 12, 23, 12, 19, 5, 45, 7, 99, 68, 8, 13, 20};
         Arrays.sort(array);
         System.out.println(Arrays.toString(array) + "\n");
 
@@ -24,49 +26,44 @@ public class BinaryTreePaths {
         BinaryTreePaths bp = new BinaryTreePaths();
         rootBalanced.printTree(System.out);
 
-        ArrayList<TreeNode> rootArrayList = new ArrayList<>();
-        rootArrayList.add(rootBalanced);
-
-        ArrayList<ArrayList<TreeNode>> result = bp.getPaths(new Params(rootBalanced, 12));
-
-        for (ArrayList<TreeNode> path : result) {
-            System.out.println();
-            for (TreeNode t : path) {
-                System.out.print("->" + t.getValue());
-            }
-        }
+        bp.getPaths(new Params(rootBalanced, 23)); // HashMap<TreeNode, ArrayList<ArrayList<TreeNode>>> allPathsPerNode =
+//        for (TreeNode keyTreeNode : allPathsPerNode.keySet()) {
+//            System.out.println("\n->      " + keyTreeNode.getValue());
+//            for (ArrayList<TreeNode> paths : allPathsPerNode.get(keyTreeNode)) {
+//                System.out.println(Arrays.toString(paths.stream().map(TreeNode::getValue).collect(Collectors.toCollection(ArrayList::new)).toArray()));
+//            }
+//        }
     }
 
-    public ArrayList<ArrayList<TreeNode>> getPaths(Params param) {  //search for 25
+    void getPaths(Params param) { //HashMap<TreeNode, ArrayList<ArrayList<TreeNode>>>
         if (param.getEndNode() == null)
-            return param.getResult();
+            return; //null
         param.setSumSoFar(param.getSumSoFar() + param.getEndNode().getValue());
         param.getPathSoFar().add(param.getEndNode());
+        TreeNode last = param.getEndNode();
+//        param.getPathsPerNode().get(param.getFirstNode()).add(param.getPathSoFar());
         if (param.checkSum()) {
-            param.getResult().add(param.getPathSoFar());
-            return param.getResult(); //what if we have to continue - remove first and go on ?
+            System.out.println(param.getPathSoFarAsString());
+            param.removeFirstNode();
         }
-
-        if (param.getSumSoFar() < param.getSearchFor()) {
-            getPaths(param.cloneToLeft());
-            getPaths(param.cloneToRight());
-        } else {
-            TreeNode last = param.getEndNode();
+        if (param.getSumSoFar() > param.getSearchFor()) {
             while (param.getSumSoFar() > param.getSearchFor()) {
                 param.removeFirstNode();
+//                if (param.getSumSoFar()>0)
+//                    param.getPathsPerNode().get(param.getFirstNode()).add(param.getPathSoFar());
                 if (param.checkSum()) {
-                    param.getResult().add(param.getPathSoFar());
-                    return param.getResult(); //what if we have to continue - remove first and go on ?
+                    System.out.println(param.getPathSoFarAsString());
                 }
             }
-            if (param.getPathSoFar().isEmpty()) {
-                getPaths(new Params(null, last.left, 0, param.getSearchFor(), param.getResult()));
-                getPaths(new Params(null, last.right, 0, param.getSearchFor(), param.getResult()));
-            } else {
-                getPaths(param.cloneToRight());
-                getPaths(param.cloneToLeft());
-            }
         }
-        return param.getResult();
+        if (param.getPathSoFar().isEmpty()) {
+            getPaths(new Params(null, last.left, 0, param.getSearchFor())); //, param.getPathsPerNode()
+            getPaths(new Params(null, last.right, 0, param.getSearchFor())); //,,param.getPathsPerNode())
+        } else {
+            getPaths(param.cloneToRight());
+            getPaths(param.cloneToLeft());
+        }
+        //return param.getPathsPerNode();
+
     }
 }
