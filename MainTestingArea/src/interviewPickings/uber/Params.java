@@ -3,8 +3,9 @@ package interviewPickings.uber;
 import archive.TreeNode;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 class Params {
     private int sumSoFar = 0;
@@ -38,6 +39,13 @@ class Params {
     public Params cloneToRight() {
         return new Params(cloneArrayList(pathSoFar), pathSoFar.get(pathSoFar.size() - 1).right, sumSoFar, searchFor);
     }
+
+    public ArrayList<TreeNode> cloneThePath() {
+        ArrayList<TreeNode> tmp = cloneArrayList(pathSoFar);
+        tmp.remove(0);
+        return tmp;
+    }
+
 
     public void setSumSoFar(int sumSoFar) {
         this.sumSoFar = sumSoFar;
@@ -83,5 +91,9 @@ class Params {
         if (pathSoFar.get(0) == null) return;
         sumSoFar -= pathSoFar.get(0).getValue();
         pathSoFar.remove(0);
+    }
+
+    public void printPathSoFar() {
+        System.out.println(Arrays.toString(pathSoFar.stream().map(TreeNode::getValue).collect(Collectors.toCollection(ArrayList::new)).toArray()));
     }
 }

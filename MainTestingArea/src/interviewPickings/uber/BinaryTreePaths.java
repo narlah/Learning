@@ -16,11 +16,12 @@ Interview Questions
     The path does not need to start or end at the root or a leaf, but it must go downwards
     (traveling only from parent nodes to child nodes).
  */
+
 public class BinaryTreePaths {
     public static HashMap<TreeNode, ArrayList<ArrayList<TreeNode>>> allPathsPerNode = new HashMap<>();
 
     public static void main(String[] args) throws IOException {
-        int[] array = {2, 6, 11, 12, 1, 23, 19, 5, 45, 7, 99, 68, 8, 13, 20, 25, 14, 15, 16};
+        int[] array = {2, 6, 11, 12, 1, 23, 19, 5, 45, 7, 99, 68, 8, 13, 20, 25, 14, 15, 16, 66, 31, 991};
         Arrays.sort(array);
         System.out.println(Arrays.toString(array) + "\n");
 
@@ -28,6 +29,7 @@ public class BinaryTreePaths {
         rootBalanced.printTree(System.out);
 
         getPaths(new Params(rootBalanced, 16));
+
         System.out.println("AllPaths:");
         getAllPaths(new Params(rootBalanced, Integer.MAX_VALUE));
         for (TreeNode keyTreeNode : allPathsPerNode.keySet()) {
@@ -42,18 +44,15 @@ public class BinaryTreePaths {
         if (param.getEndNode() == null)
             return;
         param.getPathSoFar().add(param.getEndNode());
-
-        allPathsPerNode.get(getFirstNode(param)).add(param.getPathSoFar());
-        Params paramLeft = param.cloneToLeft();
-        getAllPaths(paramLeft);
-        Params paramRight = param.cloneToRight();
-        getAllPaths(paramRight);
+        if (param.getPathSoFar().size() > 1)
+            allPathsPerNode.get(getFirstNode(param)).add(param.cloneThePath());
+        getAllPaths(param.cloneToLeft());
+        getAllPaths(param.cloneToRight());
         param.removeFirstNode();
-        if (param.getPathSoFar().size() > 0) {
-            getAllPaths(param.cloneToRight());
-            getAllPaths(param.cloneToLeft());
+        while (param.getPathSoFar().size() > 1) {
+            allPathsPerNode.get(getFirstNode(param)).add(param.cloneThePath());
+            param.removeFirstNode();
         }
-
     }
 
     public static void getPaths(Params param) {
