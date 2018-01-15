@@ -3,6 +3,7 @@ package interviewPickings.uber;
 import archive.BinaryTree;
 import archive.TreeNode;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,9 +29,9 @@ public class BinaryTreePaths {
         TreeNode rootBalanced = BinaryTree.recBalance(array, 3);
         rootBalanced.printTree(System.out);
 
-        getPaths(new Params(rootBalanced, 16));
+        getPaths(new Params(rootBalanced, 20));
 
-        System.out.println("AllPaths:");
+        System.out.println("\nAllPaths:");
         getAllPaths(new Params(rootBalanced, Integer.MAX_VALUE));
         for (TreeNode keyTreeNode : allPathsPerNode.keySet()) {
             System.out.println("\n->      " + keyTreeNode.getValue());
@@ -38,6 +39,24 @@ public class BinaryTreePaths {
                 System.out.println(Arrays.toString(paths.stream().map(TreeNode::getValue).collect(Collectors.toCollection(ArrayList::new)).toArray()));
             }
         }
+        System.out.println("\nSimple?");
+        getAllPathSimple(rootBalanced, new ArrayList<>());
+    }
+
+    public static void getAllPathSimple(TreeNode end, ArrayList<Integer> pathSoFar) {
+        if (end == null) return;
+        pathSoFar.add(end.getValue());
+        System.out.println(Arrays.deepToString(pathSoFar.toArray()));
+        if (end.left != null) {
+            getAllPathSimple(end.left, pathSoFar);
+        }
+        if (end.right != null) {
+            getAllPathSimple(end.right, pathSoFar);
+        }
+        for (int i = 1; i <= pathSoFar.size() - 1; i++) {
+            System.out.println(Arrays.toString(pathSoFar.subList(i, pathSoFar.size()).toArray()));
+        }
+        pathSoFar.remove(pathSoFar.size() - 1);
     }
 
     public static void getAllPaths(Params param) {
