@@ -53,4 +53,11 @@ public class TreeNode {
     public Integer getValue() {
         return value;
     }
+
+    @Override
+    public String toString() {
+        return "TreeNode{" +
+                "value=" + value +
+                '}';
+    }
 }
