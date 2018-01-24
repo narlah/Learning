@@ -12,13 +12,13 @@ public class SelfDividingNumbers_728 {
 
     public List<Integer> selfDividingNumbers(int left, int right) {
         List<Integer> result = new ArrayList<>();
-        int counter10 = left % 10-1;
+//        int counter10 = left % 10-1;
         for (int i = left; i <= right; i++) {
-            counter10++;
-            if (counter10 == 10) {
-                counter10 = 0;
-                continue;
-            }
+//            counter10++;
+//            if (counter10 == 10) {
+//                counter10 = 0;
+//                continue;
+//            }
             if (checkSelfDivide(i)) result.add(i);
         }
 
