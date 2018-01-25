@@ -20,6 +20,8 @@ Interview Questions
 
 public class BinaryTreePaths {
     public static HashMap<TreeNode, ArrayList<ArrayList<TreeNode>>> allPathsPerNode = new HashMap<>();
+    public static HashMap<TreeNode, ArrayList<ArrayList<TreeNode>>> allPathsPerNodeLeft = new HashMap<>();
+    public static HashMap<TreeNode, ArrayList<ArrayList<TreeNode>>> allPathsPerNodeRight = new HashMap<>();
 
     public static void main(String[] args) throws IOException {
         int[] array = {2, 6, 11, 12, 1, 23, 19, 5, 45, 7, 99, 68, 8, 13, 20, 25, 14, 15, 16, 66, 31, 991};
@@ -39,21 +41,28 @@ public class BinaryTreePaths {
                 System.out.println(Arrays.toString(paths.stream().map(TreeNode::getValue).collect(Collectors.toCollection(ArrayList::new)).toArray()));
             }
         }
+
         System.out.println("\nSimple?");
         getAllPathSimple(rootBalanced, new ArrayList<>());
     }
 
-    public static void getAllPathSimple(TreeNode end, ArrayList<Integer> pathSoFar) {
+    public static void getAllPathSimple(TreeNode end, boolean goingLeft, int sum, ArrayList<TreeNode> pathSoFar) { //true - left, false - right
         if (end == null) return;
-        pathSoFar.add(end.getValue());
+        pathSoFar.add(end);
+        sum += end.getValue();
+        if (goingLeft)
         System.out.println(Arrays.deepToString(pathSoFar.toArray()));
+        else
+
         if (end.left != null) {
-            getAllPathSimple(end.left, pathSoFar);
+            getAllPathSimple(end.left, true, sum, pathSoFar);
         }
         if (end.right != null) {
-            getAllPathSimple(end.right, pathSoFar);
+            getAllPathSimple(end.right, false, sum, pathSoFar);
         }
+        int tempSum = sum - pathSoFar.get(0).getValue();
         for (int i = 1; i <= pathSoFar.size() - 1; i++) {
+
             System.out.println(Arrays.toString(pathSoFar.subList(i, pathSoFar.size()).toArray()));
         }
         pathSoFar.remove(pathSoFar.size() - 1);
