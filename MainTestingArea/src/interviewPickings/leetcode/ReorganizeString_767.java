@@ -9,6 +9,7 @@ public class ReorganizeString_767 {
         System.out.println(reorg.reorganizeStringSolution("aaaaaaaaaaaaaaaabbbbbccccczzzzz"));
         System.out.println(reorg.reorganizeStringHeap("aaaaaaaaaaaaaaaabbbbbccccczzzzz"));
         System.out.println(reorg.reorganizeString("aaaaaaaaaaaaaaaabbbbbccccczzzzz"));
+        System.out.println(reorg.reorganizeStringMyHeap("aaab"));
     }
 
 
@@ -24,7 +25,7 @@ public class ReorganizeString_767 {
         for (int i = 0; i <= 25; i++) {
             int occurrences = alphabet[i] / 100;
             char ch = (char) (alphabet[i] % 100 + 'a');
-            if (occurrences>(N+1)/2) return "";
+            if (occurrences > (N + 1) / 2) return "";
             for (int j = 0; j < occurrences; j++) {
                 if (t >= N) t = 0;
                 ans[t] = ch;
@@ -32,6 +33,35 @@ public class ReorganizeString_767 {
             }
         }
         return String.valueOf(ans);
+    }
+
+    public String reorganizeStringMyHeap(String S) {
+        int N = S.length();
+        int[] count = new int[26];
+        for (char c : S.toCharArray()) count[c - 'a']++;
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> b[1] - a[1]);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i <= 25; i++) {
+            if (count[i]> ((N+1)/2)) return "";
+            if (count[i] > 0)
+                pq.add(new int[]{i + 'a', count[i]});
+        }
+        while (!pq.isEmpty()) {
+            int[] f = pq.poll();
+            char c = (char) f[0];
+            if (sb.length() == 0 || sb.charAt(sb.length() - 1) != c) {
+                sb.append(c);
+                if (--f[1]>0)
+                    pq.add(f);
+            } else {
+                int[] s = pq.poll();
+                sb.append((char) s[0]);
+                if (--s[1]>0)
+                    pq.add(s);
+                pq.add(f);
+            }
+        }
+        return sb.toString();
     }
 
 
