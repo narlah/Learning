@@ -1,45 +1,75 @@
 package interviewPickings.uber;
 
-import java.util.ArrayList;
+import java.util.Vector;
+import java.util.concurrent.TimeUnit;
 
 public class interviewWithUberZoom {
     public static int LIMIT = 10;
+    Vector<Transaction> lastTransactions = new Vector<>();
 
     public static void main(String args[]) throws Exception {
-        /* Enter your code here. Read input from STDIN. Print output to STDOUT */
         interviewWithUberZoom sol = new interviewWithUberZoom();
-        //sol.balancer();
+        sol.balancer();
     }
 
-//    public void balancer() {
-//
-//        long lastSecondTimer = System.time();
-//        volatile int currentTransaction = 0;
-//        ArrayList lastTransactions = new ArrayList();
-//        for (int i = 0; i < 100; i++) {
-//
-//            receive("Transaction with id : " + i, lastTransactions);
-//            //sleep ?
-//        }
-//    }
-//
-//    public static void receive(String s, ArrayList lastTransactions) {
-//        long currentMilysecond = System.time();
-//        if (lastTransactions.size() > 10 && lastTransactions.get(lastTransactions.size() - 10)).time<System.time
-//        () - 1000)
-//        throw RunTimeException("Limit reached, try again later.");
-//        //launch request
-//        currentTransaction++;
-//    }
-//
-//    class Timer implements Runable {
-//        public void run() {
-//            while (true) {
-//                Thread.sleep(1000);
-//                trimArrayList();
-//                milysecondTimer = System.time();
-//                currentTransaction = 0;
-//            }
-//        }
-//    }
+    private void balancer() throws InterruptedException {
+        Thread thread = new Thread(new Timer());
+        thread.start();
+
+        for (int i = 0; i < 100; i++) {
+            receive("Transaction with id : " + i, lastTransactions);
+            if (i < 50)
+                TimeUnit.MILLISECONDS.sleep(101);
+        }
+    }
+
+    private void receive(String s, Vector lastTransactions) {
+        long currentMillisecond = System.currentTimeMillis();
+
+        if (lastTransactions.size() > LIMIT) {
+            Transaction t = ((Transaction) lastTransactions.get(lastTransactions.size() - LIMIT));
+            System.out.println(lastTransactions.size() + " " + t.time + " " + t.data + " " + currentMillisecond + " = " + (currentMillisecond - t.time));
+        }
+        if (lastTransactions.size() > LIMIT && (currentMillisecond - ((Transaction) lastTransactions.get(lastTransactions.size() - LIMIT)).time) < 1000) {
+            System.out.println("WARNING");
+            throw new RuntimeException("Limit reached, try again later.");
+        }
+        System.out.println(s); //sending it
+        lastTransactions.add(new Transaction(s, System.currentTimeMillis()));
+    }
+
+    class Timer implements Runnable {
+        public void run() {
+            int currentTick = 0;
+            while (true) {
+                if (currentTick > 5) break;
+                try {
+                    Thread.sleep(1000);
+                    System.out.println("ticker : " + currentTick);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                currentTick++;
+                //trimArrayList should be implemented in case we run long list of course, but we can keep it as a log - lets say
+                //create empty array list while sending an old one to a new Thread that will save the content to a db or log file.
+            }
+        }
+    }
+
+    class Transaction {
+        Transaction(String data, long time) {
+            this.data = data;
+            this.time = time;
+        }
+
+        String data;
+
+        public long getTime() {
+            return time;
+        }
+
+        long time;
+    }
+
+
 }
