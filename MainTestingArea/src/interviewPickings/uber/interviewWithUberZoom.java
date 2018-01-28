@@ -1,4 +1,6 @@
 package interviewPickings.uber;
+//Our server is calling the external API using call_api that is doing the HTTP call.
+//The API provider charges us if we make more than 10 calls per second. How would you implement something that keeps us below the limit?
 
 import java.util.Vector;
 import java.util.concurrent.TimeUnit;
