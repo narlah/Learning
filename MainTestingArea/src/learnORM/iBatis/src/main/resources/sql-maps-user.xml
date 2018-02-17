@@ -13,7 +13,7 @@
     </resultMap>
 
     <select id="getUserById" parameterClass="java.lang.Integer" resultMap="userResultMap">
-        SELECT * FROM USERINFO WHERE ID = #value#
+        SELECT * FROM USERINFO WHERE ID = #val#
     </select>
 
     <select id="getMaxId" resultClass="java.lang.Integer">
@@ -26,7 +26,7 @@
     </insert>
 
     <delete id="deleteUserById" parameterClass="java.lang.Integer">
-        DELETE FROM USERINFO WHERE ID = #value#
+        DELETE FROM USERINFO WHERE ID = #val#
     </delete>
 
 </sqlMap>

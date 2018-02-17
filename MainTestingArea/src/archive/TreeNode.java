@@ -6,12 +6,16 @@ import java.io.PrintStream;
 public class TreeNode {
     public TreeNode left;
     public TreeNode right;
-    private Integer value;
+    public Integer val;
 
     public TreeNode(Integer i, TreeNode left, TreeNode right) {
-        this.value = i;
+        this.val = i;
         this.left = left;
         this.right = right;
+    }
+
+    public TreeNode(Integer val) {
+        this.val = val;
     }
 
     public void printTree(PrintStream out) throws IOException {
@@ -25,10 +29,10 @@ public class TreeNode {
     }
 
     private void printNodeValue(PrintStream out) throws IOException {
-        if (value == null) {
+        if (val == null) {
             out.print("<null>");
         } else {
-            out.print(value.toString());
+            out.print(val.toString());
         }
         out.write('\n');
     }
@@ -51,13 +55,13 @@ public class TreeNode {
     }
 
     public Integer getValue() {
-        return value;
+        return val;
     }
 
     @Override
     public String toString() {
         return "TreeNode{" +
-                "value=" + value +
+                "val=" + val +
                 '}';
     }
 }

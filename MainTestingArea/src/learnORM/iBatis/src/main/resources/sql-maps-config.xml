@@ -8,10 +8,10 @@
 
     <transactionManager type="JDBC">
         <dataSource type="SIMPLE">
-            <property name="JDBC.Driver" value="com.mysql.jdbc.Driver"/>
-            <property name="JDBC.ConnectionURL" value="jdbc:mysql://localhost:3306/TEST"/>
-            <property name="JDBC.Username" value="testusr"/>
-            <property name="JDBC.Password" value="pass"/>
+            <property name="JDBC.Driver" val="com.mysql.jdbc.Driver"/>
+            <property name="JDBC.ConnectionURL" val="jdbc:mysql://localhost:3306/TEST"/>
+            <property name="JDBC.Username" val="testusr"/>
+            <property name="JDBC.Password" val="pass"/>
         </dataSource>
     </transactionManager>
 
