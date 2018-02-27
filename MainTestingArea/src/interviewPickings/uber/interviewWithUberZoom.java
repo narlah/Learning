@@ -6,12 +6,11 @@ import java.util.Vector;
 import java.util.concurrent.TimeUnit;
 
 public class interviewWithUberZoom {
-    public static int LIMIT = 10;
-    Vector<Transaction> lastTransactions = new Vector<>();
+    private static int LIMIT = 10;
+    private Vector<Transaction> lastTransactions = new Vector<>();
 
     public static void main(String args[]) throws Exception {
-        interviewWithUberZoom sol = new interviewWithUberZoom();
-        sol.balancer();
+        new interviewWithUberZoom().balancer();
     }
 
     private void balancer() throws InterruptedException {
@@ -28,12 +27,8 @@ public class interviewWithUberZoom {
     private void receive(String s, Vector lastTransactions) {
         long currentMillisecond = System.currentTimeMillis();
 
-        if (lastTransactions.size() > LIMIT) {
-            Transaction t = ((Transaction) lastTransactions.get(lastTransactions.size() - LIMIT));
-            System.out.println(lastTransactions.size() + " " + t.time + " " + t.data + " " + currentMillisecond + " = " + (currentMillisecond - t.time));
-        }
         if (lastTransactions.size() > LIMIT && (currentMillisecond - ((Transaction) lastTransactions.get(lastTransactions.size() - LIMIT)).time) < 1000) {
-            System.out.println("WARNING");
+            System.out.println("----- WARNING -----");
             throw new RuntimeException("Limit reached, try again later.");
         }
         System.out.println(s); //sending it
@@ -64,13 +59,13 @@ public class interviewWithUberZoom {
             this.time = time;
         }
 
-        String data;
+        private String data;
 
         public long getTime() {
             return time;
         }
 
-        long time;
+        private long time;
     }
 
 

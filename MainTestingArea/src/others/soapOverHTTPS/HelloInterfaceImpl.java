@@ -1,11 +1,11 @@
-package soapOverHTTPS;
+package others.soapOverHTTPS;
 
 //  Created by narlah on 21.01.17.
 
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
-@WebService(endpointInterface = "soapOverHTTPS.HelloInterface")
+@WebService(endpointInterface = "others.soapOverHTTPS.HelloInterface")
 class HelloInterfaceImpl implements HelloInterface {
 
     @Override

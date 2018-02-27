@@ -16,7 +16,7 @@ public class ThreeSum {
         result.forEach(s -> System.out.println(Arrays.toString(s.toArray())));
     }
 
-    public List<List<Integer>> threeSum(int[] nums) {
+    private List<List<Integer>> threeSum(int[] nums) {
         Set<List<Integer>> result = new HashSet<>();
         Arrays.sort(nums);
         int n = nums.length - 1;

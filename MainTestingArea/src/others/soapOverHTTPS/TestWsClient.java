@@ -1,4 +1,4 @@
-package soapOverHTTPS;
+package others.soapOverHTTPS;
 
 //  Created by narlah on 21.01.17.
 
@@ -14,7 +14,7 @@ public class TestWsClient {
     }
 
     public static void main(final String[] args) throws Throwable {
-        String url = (args.length > 0) ? args[0] : "https://127.0.0.1:4434/soapOverHTTPS";
+        String url = (args.length > 0) ? args[0] : "https://127.0.0.1:4434/others.soapOverHTTPS";
 
 //        System.setProperty("javax.net.ssl.keyStore", "/tmp/ssl/keystore.jks");
 //        System.setProperty("javax.net.ssl.keyStorePassword", "changeit");
@@ -25,7 +25,7 @@ public class TestWsClient {
 
         Service service = Service.create(
                 new URL(url + "?wsdl"),
-                new QName("http://soapOverHTTPS/", "HelloInterfaceImplService"));
+                new QName("http://others.soapOverHTTPS/", "HelloInterfaceImplService"));
         HelloInterface helloWho = service.getPort(HelloInterface.class);
 
         System.out.println("\n" + helloWho.hello(args.length > 1 ? args[1] : "nikik"));
