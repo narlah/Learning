@@ -1,4 +1,4 @@
-package game2048;
+package others.game2048;
 
 public class Game2048 {
     private static final int SIZE_MIN = 3;

@@ -1,4 +1,4 @@
-package soapOverHTTPS;
+package others.soapOverHTTPS;
 //  Created by narlah on 21.01.17.
 
 import com.sun.net.httpserver.HttpContext;
@@ -19,17 +19,17 @@ import java.security.cert.CertificateException;
 public class TestWsServer {
     public static void main(final String[] args) {
         try {
-            String url = (args.length > 0) ? args[0] : "https://127.0.0.1:4434/soapOverHTTPS";
-            //Endpoint.publish(url, new soapOverHTTPS.HelloInterfaceImpl());
+            String url = (args.length > 0) ? args[0] : "https://127.0.0.1:4434/others.soapOverHTTPS";
+            //Endpoint.publish(url, new others.soapOverHTTPS.HelloInterfaceImpl());
 
-            Endpoint endpoint = Endpoint.create(new soapOverHTTPS.HelloInterfaceImpl());
+            Endpoint endpoint = Endpoint.create(new others.soapOverHTTPS.HelloInterfaceImpl());
 
             HttpsConfigurator configurator = getHttpsConfigurator();
 
             HttpsServer httpsServer = HttpsServer.create(new InetSocketAddress("127.0.0.1", 4434), 4434);
             httpsServer.setHttpsConfigurator(configurator);
 
-            HttpContext httpContext = httpsServer.createContext("/soapOverHTTPS");
+            HttpContext httpContext = httpsServer.createContext("/others/soapOverHTTPS");
 
             httpsServer.start();
             endpoint.publish(httpContext);

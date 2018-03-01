@@ -39,8 +39,8 @@ public class RestoreIPAddresses {
             if (i == 3 && Integer.valueOf(reminderSubs) > 255 || ((i == 2 || i == 3) && reminderSubs.charAt(0) == '0'))
                 continue;
             String newBegin = begin + reminderSubs + (dotsPlaced < 3 ? '.' : "");
-            String newReaminder = remainder.substring(i);
-            placeDotsRecursivelly(newBegin, newReaminder, result, dotsPlaced + 1);
+            String newRemainder = remainder.substring(i);
+            placeDotsRecursivelly(newBegin, newRemainder, result, dotsPlaced + 1);
         }
     }
 }

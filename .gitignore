@@ -5,3 +5,4 @@ testQR/.idea/
 *.class
 /bin/*
 **/target/*
+*.swp
