@@ -4,3 +4,4 @@ out/
 testQR/.idea/
 *.class
 /bin/*
+**/target/*
