@@ -7,8 +7,8 @@ import java.util.Vector;
 public class ElevatorControll {
     private volatile int upwardCounter = 0;
     private volatile int downwardCounter = 0;
-    private static final int FLOORS = 10;
-    private Vector<Boolean> floors = new Vector<>(FLOORS); // skyscraper eh :P
+    private static final int FLOORS = 10; // skyscraper eh :P
+    private Vector<Boolean> floors = new Vector<>(FLOORS);
     private volatile boolean goingUp = true;
     private volatile int elevatorPointer = 0;
 
@@ -19,7 +19,7 @@ public class ElevatorControll {
     }
 
     private void elevatorFlightControlStart() throws InterruptedException {
-        for (int i = 0; i < FLOORS; i++) floors.add(false); //why fill failed ?
+        for (int i = 0; i < FLOORS; i++) floors.add(false);
         Thread thread = new Thread(new AcceptRequestLoop());
         thread.start();
 
@@ -32,10 +32,9 @@ public class ElevatorControll {
 
             //moving
             boolean thisFloorIsRequested = floors.get(elevatorPointer);
-            int smallDotYouAreHere = elevatorPointer;
+            int smallDotYouAreHere = elevatorPointer; //and the answer is 42
             if (thisFloorIsRequested) floors.set(smallDotYouAreHere, false);
             if (goingUp) {
-                //System.out.println("TFR \'" + thisFloorIsRequested + "\' upwardC " + upwardCounter + " | downwardC " + elevatorPointer);
                 if (thisFloorIsRequested) {
                     upwardCounter = upwardCounter - 1;
                 }
@@ -48,16 +47,17 @@ public class ElevatorControll {
             }
             //if after moving we have nothing to do we do not move again
             if (upwardCounter == 0 && downwardCounter == 0) continue;
-            //change direction if needed
+            //change direction if needed , if we changed dir - we do not move the elevator this direction anymore
             if ((upwardCounter == 0 && goingUp) || (downwardCounter == 0 && !goingUp)) {
                 goingUp = !goingUp;
             } else if (smallDotYouAreHere >= 0 && smallDotYouAreHere < FLOORS) elevatorPointer = smallDotYouAreHere;
+
             System.out.println("going " + (goingUp ? "up -> " + elevatorPointer : elevatorPointer + " <-down ") + "  was  at " + thisFloorIsRequested + " up : " + upwardCounter + " | down : " + downwardCounter);
 
         }
     }
 
-    //Thread to accept a floor request every 1-5 seconds
+    //Thread to accept a floor request every 1-3 seconds
     class AcceptRequestLoop implements Runnable {
         @Override
         public void run() {
