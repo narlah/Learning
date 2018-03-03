@@ -11,7 +11,6 @@ public class ElevatorControll {
     private Vector<Boolean> floors = new Vector<>(FLOORS); // skyscraper eh :P
     private volatile boolean goingUp = true;
     private volatile int elevatorPointer = 0;
-    private Random r = new Random();
 
     //time to move from floor to floor - 1 second
     public static void main(String[] args) throws InterruptedException {
@@ -26,31 +25,34 @@ public class ElevatorControll {
 
 
         for (int i = 0; i < 1000; i++) {
-            Thread.sleep(200);
-            System.out.println(Arrays.toString(floors.toArray()));
+            Thread.sleep(600);
 
+            //nothing to do
             if (upwardCounter == 0 && downwardCounter == 0) continue;
-            if ((upwardCounter == 0 && goingUp) || (downwardCounter == 0 && !goingUp)) {
-                goingUp = !goingUp;
-            }
+
+            //moving
             boolean thisFloorIsRequested = floors.get(elevatorPointer);
-            int smallDotYouArehere = elevatorPointer;
+            int smallDotYouAreHere = elevatorPointer;
+            if (thisFloorIsRequested) floors.set(smallDotYouAreHere, false);
             if (goingUp) {
-                System.out.println("blq " + thisFloorIsRequested + " " + upwardCounter + " " + elevatorPointer);
+                //System.out.println("TFR \'" + thisFloorIsRequested + "\' upwardC " + upwardCounter + " | downwardC " + elevatorPointer);
                 if (thisFloorIsRequested) {
                     upwardCounter = upwardCounter - 1;
-                    if (upwardCounter == 0 && downwardCounter == 0) continue;
                 }
-                elevatorPointer++;
+                smallDotYouAreHere++;
             } else {
                 if (thisFloorIsRequested) {
                     downwardCounter = downwardCounter - 1;
-                    if (upwardCounter == 0 && downwardCounter == 0) continue;
                 }
-                elevatorPointer--;
+                smallDotYouAreHere--;
             }
-            System.out.println("going " + (goingUp ? "up " : "down ") + "->" + elevatorPointer + "  was  at " + thisFloorIsRequested + " up : " + upwardCounter + " | down : " + downwardCounter);
-            if (elevatorPointer >= 0 && elevatorPointer < FLOORS) floors.set(smallDotYouArehere, false);
+            //if after moving we have nothing to do we do not move again
+            if (upwardCounter == 0 && downwardCounter == 0) continue;
+            //change direction if needed
+            if ((upwardCounter == 0 && goingUp) || (downwardCounter == 0 && !goingUp)) {
+                goingUp = !goingUp;
+            } else if (smallDotYouAreHere >= 0 && smallDotYouAreHere < FLOORS) elevatorPointer = smallDotYouAreHere;
+            System.out.println("going " + (goingUp ? "up -> " + elevatorPointer : elevatorPointer + " <-down ") + "  was  at " + thisFloorIsRequested + " up : " + upwardCounter + " | down : " + downwardCounter);
 
         }
     }
@@ -59,17 +61,18 @@ public class ElevatorControll {
     class AcceptRequestLoop implements Runnable {
         @Override
         public void run() {
-            for (int i = 0; i < 100; i++) {
+            Random r = new Random();
+            for (int i = 0; i < 1000; i++) {
                 try {
-                    Thread.sleep((r.nextInt(5) + 1) * 1000);
+                    Thread.sleep((r.nextInt(3) + 1) * 1000);
                     int triggerFloor = r.nextInt(FLOORS - 1);
                     if (!floors.get(triggerFloor) && elevatorPointer != triggerFloor) { //lets go on adventure , btw == means elevator reopens doors and accepts people - not affecting our algorithm
+                        floors.set(triggerFloor, true);
                         if (triggerFloor > elevatorPointer)
                             upwardCounter = upwardCounter + 1;
                         else
                             downwardCounter = downwardCounter + 1;
-                        floors.set(triggerFloor, true);
-                        System.out.println(triggerFloor + " was requested / elevator is at " + elevatorPointer + " " + upwardCounter + " " + downwardCounter);
+                        System.out.println("REQUEST : " + triggerFloor + " was requested / elevator is at " + elevatorPointer + " UC " + upwardCounter + " DC" + downwardCounter + "  " + Arrays.toString(floors.toArray()));
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -77,6 +80,4 @@ public class ElevatorControll {
             }
         }
     }
-
-
 }
