@@ -1,6 +1,6 @@
 import java.io.IOException;
 
-public abstract class DeCompressor extends Base_o_mpressor {
+public abstract class DeCompressor extends Base_xpressor_abstract {
 
     public DeCompressor(String inFile, String outFile) {
         this.inFile = inFile;

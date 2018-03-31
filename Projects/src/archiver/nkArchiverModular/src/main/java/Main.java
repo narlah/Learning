@@ -10,6 +10,7 @@ public class Main {
         Shell shell = visual.initUI();
         shell.open();
         Display display = shell.getDisplay();
+
         // Set up the event loop.
         while (!shell.isDisposed()) {
             if (!display.readAndDispatch()) {
@@ -23,7 +24,7 @@ public class Main {
     // String inFile = "C:\\Programing\\forArchive.txt";
     // String outFile = "C:\\Programing\\fromArchive.txt";
     // String decompressedFile = "C:\\Programing\\decompressedFile.txt";
-    // HuffmanCompresor compressor = new HuffmanCompresor(inFile, outFile);
+    // HuffmanCompressor compressor = new HuffmanCompressor(inFile, outFile);
     // HuffmanDeCompresor deCompressor = new HuffmanDeCompresor(outFile,
     // decompressedFile);
     // try {

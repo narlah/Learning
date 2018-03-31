@@ -5,17 +5,22 @@ import java.util.Map.Entry;
 import java.util.PriorityQueue;
 import java.util.stream.Collectors;
 
-final class HuffmanCompresor extends Compressor {
+final class HuffmanCompressor extends Compressor {
     private HashMap<Character, String> codes = new HashMap<>();
+
+    public LinkedHashMap<Character, Integer> getTreeToFile() {
+        return treeToFile;
+    }
+
     private LinkedHashMap<Character, Integer> treeToFile = new LinkedHashMap<>();
 
-    HuffmanCompresor(String inFile, String outFile) {
+    HuffmanCompressor(String inFile, String outFile) {
         super(inFile, outFile);
     }
 
     @Override
     public void encode() throws IOException {
-        getFrequencesFromFile();
+        getFrequenciesFromFile();
         Node treeRoot = buildTree();
         buildCode(treeRoot, "");
 
@@ -54,7 +59,7 @@ final class HuffmanCompresor extends Compressor {
         return (HashMap<Character, String>) codes.clone();
     }
 
-    private void getFrequencesFromFile() throws IOException {
+    private void getFrequenciesFromFile() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(getInFileName()));
         String line = reader.readLine();
         try {
