@@ -109,6 +109,7 @@ class CTabHuffmanCodesTabItem {
     }
 
     void fillTable(HashMap<Character, String> hashMap, LinkedHashMap<Character, Integer> treeToFile) {
+        tableRows.clear();
         for (Map.Entry<Character, String> entry : hashMap.entrySet()) {
             TableItem item = new TableItem(table, SWT.NONE);
             String code = entry.getKey().toString();

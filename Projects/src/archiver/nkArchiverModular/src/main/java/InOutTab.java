@@ -14,7 +14,6 @@ public class InOutTab {
     private Label folderFileLabel;
     private Text textArea;
     private ProgressBar progressBar;
-    private Composite compositeInOut;
 
     InOutTab(CTabFolder folder) {
         this.tabFolder = folder;
@@ -30,7 +29,7 @@ public class InOutTab {
         CTabItem inOutTabItem = new CTabItem(tabFolder, SWT.NONE);
         inOutTabItem.setText("In - out");
 
-        compositeInOut = new Composite(tabFolder, SWT.NONE);
+        Composite compositeInOut = new Composite(tabFolder, SWT.NONE);
         compositeInOut.setLayout(null);
 
         Label folder_lbl = new Label(compositeInOut, SWT.NONE);

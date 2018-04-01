@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Objects;
 
 class VisualInterface {
     private ArchiveController controller = new ArchiveController();
@@ -16,7 +17,6 @@ class VisualInterface {
     private CTabFolder tabFolder;
     private InOutTab inoutTabItem;
     private ShowCompressorWikiTabItem showCompressorWikiTabItem;
-    private int tabSelection = 0;
     private FileDialog fd;
 
     public enum compressionTypes {
@@ -43,6 +43,7 @@ class VisualInterface {
         tabFolder = new CTabFolder(shell, SWT.BORDER);
         tabFolder.setSimple(false);
         tabFolder.setBounds(0, 30, 600, 600);
+        int tabSelection = 0;
         tabFolder.setSelection(tabSelection);
         tabFolder.setFocus();
         tabFolder.setSelectionBackground(Display.getCurrent().getSystemColor(
@@ -131,13 +132,23 @@ class VisualInterface {
         @SuppressWarnings(value = {"unused"})
         MenuItem menuItem = new MenuItem(menu, SWT.SEPARATOR);
 
+
+        MenuItem mntmNewSubmenuActions = new MenuItem(menu, SWT.CASCADE);
+        mntmNewSubmenuActions.setText("Actions");
+        Menu menu_actions = new Menu(mntmNewSubmenuActions);
+        mntmNewSubmenuActions.setMenu(menu_actions);
+
         // menu item Archive
-        MenuItem menuArchive = new MenuItem(menu, SWT.NONE);
+        MenuItem menuArchive = new MenuItem(menu_actions, SWT.NONE);
         menuArchive.addSelectionListener(new SelectionAdapter() {
             @SuppressWarnings("unchecked")
             @Override
             public void widgetSelected(SelectionEvent arg0) {
                 try {
+                    if (controller.getInFile() == null || Objects.equals(controller.getInFile(), "")) {
+                        inoutTabItem.addToTextArea("No file selected...");
+                        return;
+                    }
                     controller.compress();
                     for (int i = 0; i <= 100; i++) {
                         inoutTabItem.addPercentageToProgressBar(i);
@@ -160,7 +171,7 @@ class VisualInterface {
         menuArchive.setText("Archive");
 
         // menu item UnPack
-        MenuItem menuUnpack = new MenuItem(menu, SWT.NONE);
+        MenuItem menuUnpack = new MenuItem(menu_actions, SWT.NONE);
         menuUnpack.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent arg0) {
