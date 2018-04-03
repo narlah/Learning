@@ -1,9 +1,11 @@
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 
-class ArchiverController {
+class ArchiveController {
+
 
     private Compressor compressor;
 
@@ -22,17 +24,13 @@ class ArchiverController {
         if (compressorName != null && inFile != null && outFile != null) {
             switch (compressorName) {
                 case "Huffman":
-                    compressor = new HuffmanCompresor(inFile, outFile);
+                    compressor = new HuffmanCompressor(inFile, outFile);
                     break;
                 case "GZiPStream":
                     compressor = new GZipStreamCompresor(inFile, outFile);
                     break;
-                // case "SomethingOther":
-                // compressor = new HuffmanCompresor();
-                // break;
-
                 default:
-                    compressor = new HuffmanCompresor(inFile, outFile);
+                    compressor = new HuffmanCompressor(inFile, outFile);
                     break;
             }
             compressor.encode();
@@ -54,11 +52,11 @@ class ArchiverController {
     }
 
     /**
-     * @param extention File Extention
+     * @param extension File Extention
      */
-    String updateOutFileExtention(String extention) {
+    String updateOutFileExtension(String extension) {
         if (outFile != null) {
-            outFile = outFile.substring(0, outFile.lastIndexOf('.')) + "." + extention;
+            outFile = outFile + "." + extension;
         }
         return outFile;
     }
@@ -70,16 +68,13 @@ class ArchiverController {
     String setOutFileFromIn(String inFileFullPath) {
         Path p = Paths.get(inFileFullPath);
         Path folder = p.getParent();
-        String InFileName = p.getFileName().toString();
-        int pos = InFileName.lastIndexOf(".");
-        String newName = folder + InFileName.substring(0, pos) + ".nik";
+        String newName = folder + File.separator + p.getFileName().toString() + ".nik";
         this.outFile = newName;
         return newName;
     }
 
     HashMap<?, ?> getDataStructure() {
         return compressor.getDataStructure();
-
     }
 
     String getCompressorName() {
@@ -92,4 +87,9 @@ class ArchiverController {
     void setCompressorName(String compressorName) {
         this.compressorName = compressorName;
     }
+
+    public Compressor getCompressor() {
+        return compressor;
+    }
+
 }

@@ -70,7 +70,7 @@ public final class HuffmanDeCompresor extends DeCompressor {
     public void decode() throws IOException {
         getFrequencesFromFile();
         Node treeRoot = buildTree();
-        // testDebugbuildCode(treeRoot,""); //debug
+        // testDebugbuildCode(treeRoot,"");
 
         BinaryStdIn reader = new BinaryStdIn(new BufferedInputStream(new FileInputStream(new File(getInFileName()))));
 

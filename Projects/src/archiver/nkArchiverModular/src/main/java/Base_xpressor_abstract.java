@@ -1,12 +1,12 @@
-public abstract class Base_o_mpressor {
-    protected String inFile;
-    protected String outFile;
+public abstract class Base_xpressor_abstract {
+    String inFile;
+    String outFile;
 
-    public String getInFileName() {
+    String getInFileName() {
         return String.valueOf(inFile); // defensive copy
     }
 
-    public String getOutFileName() {
+    String getOutFileName() {
         return String.valueOf(outFile); // defensive copy
     }
 

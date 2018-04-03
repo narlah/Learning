@@ -1,9 +1,9 @@
 import java.io.IOException;
 import java.util.HashMap;
 
-public abstract class Compressor extends Base_o_mpressor {
+public abstract class Compressor extends Base_xpressor_abstract {
 
-    public Compressor(String inFile, String outFile) {
+    Compressor(String inFile, String outFile) {
         this.inFile = inFile;
         this.outFile = outFile;
     }

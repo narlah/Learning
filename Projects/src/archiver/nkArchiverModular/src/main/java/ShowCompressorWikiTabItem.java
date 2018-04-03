@@ -4,26 +4,35 @@ import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
-public class ShowCompressorWikiTabItem {
+class ShowCompressorWikiTabItem {
     private CTabFolder ctabFolderBase; // add item with info here
     private String compressorName;
     private CTabItem compressorInfoTabItem;
+    private Text label;
 
-    public ShowCompressorWikiTabItem(CTabFolder tabFolder, String compressorName) {
+    ShowCompressorWikiTabItem(CTabFolder tabFolder, String compressorName) {
         this.ctabFolderBase = tabFolder;
         this.compressorName = compressorName;
         initUI();
     }
 
     private void initUI() {
-        compressorInfoTabItem = new CTabItem(ctabFolderBase, SWT.NONE);
+        compressorInfoTabItem = new CTabItem(ctabFolderBase, SWT.BORDER);
         compressorInfoTabItem.setText("Compressor Wiki");
 
-        Composite compositeWiki = new Composite(ctabFolderBase, SWT.NONE);
+        Composite compositeWiki = new Composite(ctabFolderBase, SWT.BORDER);
         compositeWiki.setLayout(null);
-        Text label = new Text(compositeWiki, SWT.MULTI | SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
+        label = new Text(compositeWiki, SWT.MULTI | SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
         label.setEditable(false);
-        switch (compressorName) {
+        changeTo(compressorName);
+
+        label.setBounds(0, 21, 590, 470);
+        label.setEnabled(true);
+        compressorInfoTabItem.setControl(compositeWiki);
+    }
+
+    void changeTo(String selectedMethod) {
+        switch (selectedMethod) {
             case "Huffman":
                 label.setText("Huffman Coding\n\nIn computer science and information theory, a Huffman code is an optimal prefix code found using the algorithm developed by David A. Huffman while he was a Ph.D. student at MIT, and published in the 1952 paper \"A Method for the Construction of Minimum-Redundancy Codes\".[1] The process of finding and/or using such a code is called Huffman coding and is a common technique in entropy encoding, including in lossless data compression. The algorithm's output can be viewed as a variable-length code table for encoding a source symbol (such as a character in a file). Huffman's algorithm derives this table based on the estimated probability or frequency of occurrence (weight) for each possible value of the source symbol. As in other entropy encoding methods, more common symbols are generally represented using fewer bits than less common symbols. Huffman's method can be efficiently implemented, finding a code in linear time to the number of input weights if these weights are sorted.[2] However, although optimal among methods encoding symbols separately, Huffman coding is not always optimal among all compression methods."
                         + "\n\nHistory.\n"
@@ -45,12 +54,5 @@ public class ShowCompressorWikiTabItem {
             default:
                 label.setText("Empty");
         }
-        label.setBounds(0, 21, 605, 570);
-        label.setEnabled(true);
-        compressorInfoTabItem.setControl(compositeWiki);
-    }
-
-    public void dispose() {
-        compressorInfoTabItem.dispose();
     }
 }

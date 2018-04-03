@@ -5,7 +5,7 @@ import java.util.zip.GZIPOutputStream;
 public final class GZipStreamCompresor extends Compressor {
     private final static int BUFFER_SIZE = 2048;
 
-    public GZipStreamCompresor(String inFile, String outFile) {
+    GZipStreamCompresor(String inFile, String outFile) {
         super(inFile, outFile);
         // TODO Auto-generated constructor stub
     }
