@@ -18,7 +18,7 @@ public class BlockChain<T extends Serializable> {
     private final static String CRYPTO_ALGORITHM = "SHA-256";
     private LinkedList<SingleBlock> chain;
     private MessageDigest cryptoFacility;
-    private static int difficulty = 6;
+    private static int difficulty = 5;
 
     public BlockChain(T firstBlockData) {
         try {
@@ -45,6 +45,7 @@ public class BlockChain<T extends Serializable> {
 
     //Utility methods
     boolean verifyChain() {
+        //chain.get(chain.size()/2).hash = "2";
         SingleBlock currentBlock;
         SingleBlock previousBlock;
         for (int i = 1; i < chain.size(); i++) {

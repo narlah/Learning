@@ -9,45 +9,23 @@ public class Path {
 
     public static void main(String[] args) {
         // interviewPickings.Path path = new interviewPickings.Path("/a/b/c/d");
-        Path path = new Path("/");
-        System.out.println(path.cd("x").getPath());
+        Path path = new Path("/a/b/c/d");
+        path.cd("../x");
+        System.out.println(path.getPath());
     }
 
     public String getPath() {
         return path;
     }
 
-    public Path cd(String newPath) {
-        if (newPath.equals("") || newPath.equals(" ") || (newPath.startsWith("..") && this.path.length() == 1))
-            return this;
-        if (newPath.equals("..") && path.length() > 1) {
-            return new Path(this.path.substring(0, this.path.lastIndexOf("/"))); // removed
-        }
-        if (newPath.startsWith("..")) {
-            String str = newPath.substring(3); // without the ../
-            String trim = this.path.substring(0, this.path.lastIndexOf("/")); // removed
-            return new Path(trim + "/" + str);
-            //recursiveGo(newPath);
-            //return new interviewPickings.Path(this.path);
-        } else {
-            if (this.path.length() == 1) {
-                return new Path(this.path.concat(newPath));
-            } else
-                return new Path(this.path.concat("/" + newPath));
-        }
+    private void cd(String newPath) {
+        if (newPath.length() < 1) return;
 
-    }
-
-    private void recursiveGo(String newPath) {
-        if (newPath.equals("") || newPath.length() <= 1) return;
-
-        if (newPath.startsWith("../") && newPath.length() > 3 && path.length() > 2) {
-            int firstDash = newPath.substring(3).indexOf('/') - 1;
-            String str = newPath.substring(3, firstDash);
-            String trim = this.path.substring(0, this.path.lastIndexOf("/"));
-            this.path = trim + "/" + str;
-            recursiveGo(newPath.substring(3, firstDash));
-        }
-
+        if (newPath.startsWith("..") && path.length() > 2) {
+            String trimmedNewPath = newPath.substring(newPath.contains("/") ? 3 : 2);
+            path = this.path.substring(0, this.path.lastIndexOf("/"));
+            cd(trimmedNewPath);
+        } else
+            path += '/' + newPath;
     }
 }
