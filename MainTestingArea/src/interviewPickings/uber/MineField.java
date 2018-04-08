@@ -1,6 +1,6 @@
 package interviewPickings.uber;
 
-import java.util.Arrays;
+import tools.MatrixTools;
 
 public class MineField {
     static int[][] arr = new int[][]{
@@ -10,7 +10,7 @@ public class MineField {
             {0, 1, 0, 1, 0},
             {0, 0, 0, 1, 0}
     };
-    public final int[][] dirs = new int[][]{
+    final int[][] dirs = new int[][]{
             {1, 0},
             {0, 1},
             {1, 1},
@@ -43,8 +43,10 @@ public class MineField {
 
     public static void main(String[] args) {
         MineField m = new MineField();
-
-        System.out.println(Arrays.deepToString(m.returnMatrix(arr)));
+        int[][] res = m.returnMatrix(arr);
+        MatrixTools.printMatrix(arr, "Input");
+        MatrixTools.printMatrix(res, "Result");
+        //System.out.println(Arrays.deepToString());
     }
 
 }

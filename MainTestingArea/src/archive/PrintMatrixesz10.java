@@ -1,5 +1,7 @@
 package archive;
 
+import tools.MatrixTools;
+
 import java.util.Scanner;
 
 public class PrintMatrixesz10 {
@@ -88,20 +90,7 @@ public class PrintMatrixesz10 {
         }
     }
 
-    public static void printMatrix(String name) {
-        int n = matrix[0].length;
-        if (n > 0) {
-            System.out.printf("\n The filled matrix follows %s: \n ", name);
-            for (int i = 0; i < n; i++) {
-                System.out.println();
-                for (int j = 0; j < n; j++)
-                    System.out.format("%4d", matrix[i][j]);
-            }
-        } else {
-            System.out.println("The matrix is not initialized!");
-        }
-        System.out.println("\n -------------------\n ");
-    }
+
 
     public static void main(String[] args) {
         int n = readN();
@@ -109,20 +98,20 @@ public class PrintMatrixesz10 {
         matrix = new int[n][n];
 
         fillMatrixVertical();
-        printMatrix("����������");
+        MatrixTools.printMatrix(matrix, "Vertical");
 
         fillMatrixVerticalAsync();
-        printMatrix("���������� � �������� �� ��������");
+        MatrixTools.printMatrix(matrix,"Vertical Async");
 
         fillMatrixDiagonal();
-        printMatrix("����������");
+        MatrixTools.printMatrix(matrix,"Diagonal");
 
         fillMatrixDiagonalT();
-        printMatrix("���������� �������������");
+        MatrixTools.printMatrix(matrix, "Diagonal T");
 
         matrix = new int[n][n];
         SpiralFilling.fillMatrixInASpirall();
-        printMatrix("�������");
+        MatrixTools.printMatrix(matrix,"Spiral");
     }
 
     static class SpiralFilling {

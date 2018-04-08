@@ -46,7 +46,7 @@ public class MostFrequentNumberInArray {
 
         public FrequencyMatrix(int[] inputCurrent, String name) { //constructor
             if (inputCurrent == null || inputCurrent.length == 0 || name == null) {
-                String defaultName = name == null ? "Frequency Matrix" : name;
+                String defaultName = name == null ? "Frequency MatrixTools" : name;
                 System.out.printf("\n********\n%S invalid, constructor failed!\n\n", defaultName);
             } else {
                 this.massive = inputCurrent;

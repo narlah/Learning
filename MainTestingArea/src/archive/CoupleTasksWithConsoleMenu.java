@@ -18,7 +18,7 @@ public class CoupleTasksWithConsoleMenu {
             } else
                 r.next();
         }
-    }
+    }"after"
     //the 3 methods
 
     //retrace a number

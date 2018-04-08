@@ -1,5 +1,7 @@
 package archive;
 
+import tools.MatrixTools;
+
 import java.util.Scanner;
 
 public class FindSubMatrix3x3 {
@@ -31,19 +33,6 @@ public class FindSubMatrix3x3 {
         }
     }
 
-    private static void printMatrix(String name) {
-        if (n > 0) {
-            System.out.printf("\n The filled matrix follows %s: \n ", name);
-            for (int i = 0; i < n; i++) {
-                System.out.println();
-                for (int j = 0; j < m; j++)
-                    System.out.format("%4d", matrix[i][j]);
-            }
-        } else {
-            System.out.println("The matrix is not initialized!");
-        }
-        System.out.println("\n -------------------\n ");
-    }
 
     private static int sum3x3(int x, int y) {
 
@@ -75,7 +64,7 @@ public class FindSubMatrix3x3 {
         System.out.println("M:" + m);
         matrix = new int[n][m];
         fillMatrixVertical();
-        printMatrix("\"For testing purposes\"");
+        MatrixTools.printMatrix(matrix, "\"For testing purposes\"");
         int[] result = findAndPrintMax3x3();
         System.out.println("Maxsimal 3x3 minor is : " + result[0] + "positions:[" + result[1] + "," + result[2] + "]");
     }

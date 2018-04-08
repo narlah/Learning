@@ -1,5 +1,7 @@
 package interviewPickings;
 
+import tools.MatrixTools;
+
 import java.util.HashSet;
 
 public class MarkAllRowsAndCollsIfThereIsZeroSomeWhere {
@@ -9,23 +11,9 @@ public class MarkAllRowsAndCollsIfThereIsZeroSomeWhere {
     public static void main(String[] args) {
 
         MarkAllRowsAndCollsIfThereIsZeroSomeWhere main = new MarkAllRowsAndCollsIfThereIsZeroSomeWhere();
-        printMatrix("before", matrix);
+        MatrixTools.printMatrix(matrix, "before");
         main.cleanRowsCollsWhereZeroExists(matrix);
-        printMatrix("after", matrix);
-    }
-
-    private static void printMatrix(String name, int[][] matrix) {
-        if (matrix.length > 0) {
-            System.out.printf("\n The filled matrix follows %s: \n ", name);
-            for (int i = 0; i < matrix.length; i++) {
-                System.out.println();
-                for (int j = 0; j < matrix[0].length; j++)
-                    System.out.format("%4d", matrix[i][j]);
-            }
-        } else {
-            System.out.println("The matrix is not initialized!");
-        }
-        System.out.println("\n -------------------\n ");
+        MatrixTools.printMatrix(matrix, "after");
     }
 
     private void cleanRowsCollsWhereZeroExists(int[][] matrixIn) {

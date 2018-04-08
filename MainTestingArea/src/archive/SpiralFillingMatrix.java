@@ -2,42 +2,12 @@ package archive;
 
 //import java.util.Scanner;
 
+import tools.MatrixTools;
+
 public class SpiralFillingMatrix {
     private static int[][] matrix = null;
     private static int currentDir = 0;
     private static int currentNumber = 0;
-
-//	private static int readConsoleForN() {
-//		Scanner scanReader = new Scanner(System.in);
-//		while (true) {
-//			System.out.print("Please enter N (1-30): ");
-//			if (scanReader.hasNextInt()) {
-//				int n = scanReader.nextInt();
-//				if (n != 0 & n <= 30) {
-//					return n;
-//				} else {
-//					System.out.println("Nope, out of bounds, try again!");
-//				}
-//			} else {
-//				System.out.println("Nope,not an int, try again!");
-//				scanReader.next();
-//			}
-//		}
-//	}
-
-    public static void printMatrix() {
-        int n = matrix[0].length;
-        if (n > 0) {
-            System.out.println("\n The filled matrix follows : ");
-            for (int i = 0; i < n; i++) {
-                System.out.println();
-                for (int j = 0; j < n; j++)
-                    System.out.format("%4d", matrix[i][j]);
-            }
-        } else {
-            System.out.println("The matrix is not initialized!");
-        }
-    }
 
     // Main recurs. method
     private static void move(int x, int y) {
@@ -94,7 +64,7 @@ public class SpiralFillingMatrix {
             } else { // odd
                 move(n - 1, n - 1); // bottom right corner is start
             }
-            printMatrix();
+            MatrixTools.printMatrix(matrix, "SpiralFilling");
 
         }
     }
