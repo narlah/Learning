@@ -1,8 +1,8 @@
 package BlockChain;
     /*
     Started myself with using http://www.baeldung.com/sha-256-hashing-java
-    then found this  ,copied a lot , i can generate the block chain but the "mining part" is a little moot to me :P
-    https://medium.com/programmers-blockchain/create-simple-blockchain-java-tutorial-from-scratch-6eeed3cb03fa
+    then found this https://medium.com/programmers-blockchain/create-simple-blockchain-java-tutorial-from-scratch-6eeed3cb03fa
+    about mining : https://www.coindesk.com/information/how-bitcoin-mining-works/
      */
 
 import java.io.Serializable;
@@ -16,6 +16,8 @@ import java.util.LinkedList;
 public class BlockChain<T extends Serializable> {
 
     private final static String CRYPTO_ALGORITHM = "SHA-256";
+    private static final String CHARSET_NAME = "UTF-8";
+    private static final String FIRST_BLOCK_HASH = "0";
     private LinkedList<SingleBlock> chain;
     private MessageDigest cryptoFacility;
     private static int difficulty = 5;
@@ -28,7 +30,7 @@ public class BlockChain<T extends Serializable> {
         }
         chain = new LinkedList<>();
         int tmpDifficulty = difficulty;
-        SingleBlock firstBlock = new SingleBlock(firstBlockData, "0");
+        SingleBlock firstBlock = new SingleBlock(firstBlockData, FIRST_BLOCK_HASH);
         firstBlock.mineBlock();
         chain.add(firstBlock);
         difficulty = tmpDifficulty;
@@ -89,7 +91,7 @@ public class BlockChain<T extends Serializable> {
             String combined = data + previousHash + timeStamp + Long.toString(nonce);
             byte[] hash = new byte[0];
             try {
-                hash = cryptoFacility.digest(combined.getBytes("UTF-8"));
+                hash = cryptoFacility.digest(combined.getBytes(CHARSET_NAME));
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
@@ -99,12 +101,17 @@ public class BlockChain<T extends Serializable> {
                 if (hex.length() == 1) hexString.append('0');
                 hexString.append(hex);
             }
+
             return hexString.toString();
         }
 
+        /*In reality each miner will start iterating from a random point. Some miners may even try random numbers for nonce.
+        Also it’s worth noting that at the harder difficulties solutions may require more than integer.MAX_VALUE,
+        miners can then try changing the timestamp.
+         */
         void mineBlock() {
             String target = new String(new char[difficulty]).replace('\0', '0'); //Create a string with difficulty * "0"
-            //currently that is number of leading zero bytes , for more precision it should be bits
+            //currently that is number of leading zero bytes , for more precision it should be bits instead
             while (!hash.substring(0, difficulty).equals(target)) {
                 nonce++;
                 hash = createHash();
