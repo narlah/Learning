@@ -8,6 +8,8 @@ import java.util.concurrent.ThreadLocalRandom;
 public class DeckOfCards {
     public static void main(String[] args) {
         long tStart = System.nanoTime();
+        System.out.println(13280 + " " + getHash(new int[]{13, 47, 36, 21, 19, 14, 40, 42, 2, 50, 1, 51, 28, 27, 5}));
+        System.out.println(13280 + " " + getHash(new int[]{31, 18, 40, 52, 32, 22, 50, 26, 42, 2, 34, 6, 25, 29, 16}));
         int[] deck = new int[53];
         for (int i = 1; i <= 52; i++) {
             deck[i] = i;
@@ -23,18 +25,25 @@ public class DeckOfCards {
             flag++;
             int[] newDeck = deck.clone();
             shuffleArray(newDeck);
-            long hash = 0;
-            for (int j = 0; j < 10; j++) {
-                hash += newDeck[j] * (j * 10);
-            }
-            if (attempts.contains(hash)) {
-                System.out.println("Collision !!! : " + Arrays.toString(newDeck) + "  " + Arrays.toString(attempts.get(hash)));
+            long hash = getHash(newDeck);
+            if (attempts.containsKey(hash)) {
+                System.out.println("Collision !!! : \n " + hash + " \n " + Arrays.toString(newDeck) + " \n " + Arrays.toString(attempts.get(hash)));
+                System.out.println(getHash(Arrays.copyOfRange(newDeck, 0, 10)));
+                System.out.println(getHash(Arrays.copyOfRange(attempts.get(hash), 0, 10)));
                 break;
             }
             // System.out.println(hash + " " + Arrays.toString(newDeck) );
             attempts.put(hash, newDeck.clone());
         }
         System.out.println("Time " + ((System.nanoTime() - tStart) / 1_000_000_000.0));
+    }
+
+    private static long getHash(int[] newDeck) {
+        long hash = 0;
+        for (int j = 0; j < 10; j++) {
+            hash += newDeck[j] * (j * 10);
+        }
+        return hash;
     }
 
     static void shuffleArray(int[] ar) {
