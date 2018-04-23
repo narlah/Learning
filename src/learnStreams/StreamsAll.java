@@ -3,11 +3,10 @@ package learnStreams;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.summarizingDouble;
-import static java.util.stream.Collectors.toCollection;
+import static java.util.stream.Collectors.*;
 
 public class StreamsAll {
     public static void main(String[] args) {
@@ -25,7 +24,13 @@ public class StreamsAll {
         IntStream.range(12, 15).forEach(System.out::println);
 
         System.out.printf("result : %s\n%n", Arrays.stream(arr).boxed().collect(groupingBy(Function.identity())));
+        System.out.printf("result : %s\n%n", Arrays.stream(arr).boxed().collect(groupingBy(Function.identity(), Collectors.counting())));
 
+        System.out.printf("result : %s\n%n", Arrays.stream(arr).boxed().count());
+        System.out.printf("result : %s\n%n", Arrays.stream(arr).distinct().boxed().count());
+        System.out.printf("result : %s\n%n", Arrays.stream(arr).distinct().average().getAsDouble());
+
+        System.out.printf("result : %s\n%n", Arrays.stream(arr).parallel().peek(System.out::println).reduce(0, (i, j) -> i = i + j));
 
     }
 
