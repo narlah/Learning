@@ -51,9 +51,23 @@ public class AreAnagrams {
         return true;
     }
 
+    private static boolean areAnagramsPrime(String first, String second) {
+        int[] primeAlphabet = new int[]{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 113};
+        long res1 = 1;
+        for (char c : first.toCharArray()) {
+            res1 *= c == ' ' ? primeAlphabet[26] : primeAlphabet[c - 'a'];
+        }
+        long res2 = 1;
+        for (char c : second.toCharArray()) {
+            res2 *= c == ' ' ? primeAlphabet[26] : primeAlphabet[c - 'a'];
+        }
+        return res1 == res2;
+    }
+
+
     public static void main(String[] args) {
-        String inanagram = "momdad govoril kokobokojokodokomuuu kokobokojokodokomuuu kokobokojokodokomuuu";
-        String outanagram = "dadmom govolir kokookomuuubokojokod kokobokojokodokomuuu kokobokojokodokomuuu";
+        String inanagram = "rail safety";
+        String outanagram = "fairy tales";
         long long1 = System.nanoTime();
         System.out.println(areAnagrams(inanagram, outanagram));
         long long2 = System.nanoTime();
@@ -65,7 +79,15 @@ public class AreAnagrams {
         long long4 = System.nanoTime();
         double secondTime = long4 - long3;
         System.out.println("areAnagrams2 (hash) : " + secondTime);
-        System.out.println("Times slower : " + (secondTime / firstTime) * 100 + "%");
 
+        System.out.println("Times slower : " + ((int) ((secondTime / firstTime) * 100)) / 100f + " times");
+
+
+        long long5 = System.nanoTime();
+        System.out.println(areAnagramsPrime(inanagram, outanagram));
+        long long6 = System.nanoTime();
+        double thirdTime = long6 - long5;
+        System.out.println("areAnagramsPrime  : " + thirdTime);
+        //wow that was pretty fucking fast ...
     }
 }
