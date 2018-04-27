@@ -2,8 +2,8 @@ package interviewPickings.testDome;
 
 public class Username {
     public static boolean validate(String username) {
-        return username.matches("^[A-Za-z][a-zA-Z0-9.]*-?[a-zA-Z0-9.][^-$]{6,16}$"); //*[]
-        //return username.matches("^(?=.{6,16}$)[a-zA-Z][a-zA-Z\\d]*-?[A-Za-z\\d]+$"); correct one
+        //return username.matches("^[A-Za-z][a-zA-Z0-9.]*-?[a-zA-Z0-9.][^-$]{6,16}$"); //*[]
+        return username.matches("^(?=.{6,16}$)[a-zA-Z][a-zA-Z\\d]*-?[A-Za-z\\d]+$"); //correct one
     }
 
     public static void main(String[] args) {
