@@ -52,10 +52,31 @@ public class FindDuplicateBeastModeOn {
         return pointerStart;
     }
 
+    static int findDuplicateNegatives(int[] arr) {
+        int size = arr.length - 1;
+        for (int i = 0; i < size; i++) {
+            int abs = Math.abs(arr[i]);
+            if (arr[abs] > 0) {
+                arr[abs] = -arr[abs];
+            } else {
+                System.out.println(Arrays.toString(arr));
+                return abs;
+            }
+        }
+        return -1;
+    }
 
     public static void main(String[] args) {
-        int[] arr = {2, 3, 4, 5, 6, 7, 1, 1, 1, 1};
+        int[] arr = {2, 3, 4, 5, 6, 2, 7, 1};
         System.out.println(Arrays.toString(arr));
         System.out.println(findDuplicate(arr));
+        System.out.println(findDuplicateNegatives(arr));
+
+        arr = new int[]{4, 2, 3, 4, 5, 6, 7, 1};
+        System.out.println(Arrays.toString(arr));
+        System.out.println(findDuplicate(arr));
+        System.out.println(findDuplicateNegatives(arr));
+
+
     }
 }
