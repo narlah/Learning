@@ -2,42 +2,46 @@ package interviewPickings.hackerRank;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class CycleDetection {
 
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        int input = in.nextInt();
-        in = new Scanner(System.in);
-        String[] userProvided = new String[input];
-        for (int i = 0; i < input; i++) {
-            userProvided[i] = in.nextLine();
-        }
-        System.out.println(Arrays.toString(userProvided));
-
+//        Scanner in = new Scanner(System.in);
+//        int input = in.nextInt();
+//        in.nextLine();
+//        String[] userProvided = new String[input];
+//        for (int i = 0; i < input; i++) {
+//            userProvided[i] = in.nextLine();
+//        }
+        String[] userProvided = new String[]{"a", "b", "c", "f", "g", "h", "n", "m", "c", "i", "o", "p"};
+        int input = 12;
         Node root = createLinkedListWithCycle(input, userProvided);
+        System.out.println(Arrays.toString(userProvided));
         printLinkedListTestForCyclesInTwenty(root, input);
         detectCycle(root);
     }
 
     private static void printLinkedListTestForCyclesInTwenty(final Node root, int N) {
         Node tempElement = root;
-        for (int i = 0; i < N *2; i++) {
-            System.out.println(tempElement.getData());
+        for (int i = 0; i < N * 2; i++) {
+            System.out.print(tempElement.getData() + " -> ");
             tempElement = tempElement.getNext();
         }
+        System.out.println();
     }
 
     private static void detectCycle(Node root) {
-        Node turt = root, hare = root;
-        Node prev = root;
-        while (turt.equals(hare)) {
-            prev = turt;
+        Node turt = root.getNext(), hare = root.getNext().getNext();
+        while (!turt.equals(hare)) {
             turt = turt.getNext();
             hare = hare.getNext().getNext();
         }
-        System.out.println(prev.getData());
+        hare = root;
+        while (!turt.equals(hare)) {
+            turt = turt.getNext();
+            hare = hare.getNext();
+        }
+        System.out.println(turt.getData());
     }
 
     private static Node createLinkedListWithCycle(int input, String[] userProvided) {

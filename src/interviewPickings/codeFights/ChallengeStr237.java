@@ -1,4 +1,6 @@
-package interviewPickings.codefights;
+package interviewPickings.codeFights;
+
+import java.util.Arrays;
 
 /* Provided a string, your mission is to find and count all set (of indices) of characters of that the sum of their ASCII is equal to 237.
 
@@ -19,10 +21,41 @@ public class ChallengeStr237 {
 
     public static void main(String[] args) {
         ChallengeStr237 cha = new ChallengeStr237();
-        System.out.println(cha.str237("https://www.youtube.com/watch?v=mN0zPOpADL4"));
+        System.out.println(cha.str237("here is question Write a method that generates an int array as a parameter, converts the generated integers into characters and print the new char array. Array values should be in the range [0 -255]. could not convert integer to ASCII co"));
     }
 
     int str237(String str) {
+        int n = str.length();
+        int count = 0;
+        int[] arr = new int[n];
+        char[] charArr = str.toCharArray();
+        for (int i = 0; i < n; i++) {
+            arr[i] = charArr[i];
+        }
+        Arrays.sort(arr);
+
+        return isSubsetSum(arr, n, 237, count);
+
+
+    }
+
+    static int isSubsetSum(int set[], int n, int sum, int count) {
+        // Base Cases
+        if (sum == 0)
+            return ++count;
+        if (n == 0 && sum != 0)
+            return 0;
+
+        // If last element is greater than sum, then ignore it
+        if (set[n - 1] > sum)
+            return isSubsetSum(set, n - 1, sum, count);
+
+       /* else, check if sum can be obtained by any of the following
+          (a) including the last element
+          (b) excluding the last element   */
+        return count + isSubsetSum(set, n - 1, sum, count) + isSubsetSum(set, n - 1, sum - set[n - 1], count);
+    }
+/* craptastic
 //        int n = str.length();
 //        int count = 0;
 //        int[] arr = new int[n];
@@ -46,21 +79,5 @@ public class ChallengeStr237 {
 //                count++;
 //        }
 //        return count;
-
-    }
-    public static int GetCombinations(int[] set, String values, int count ) {
-        for (int i = 0; i < set.length; i++) {
-            int left = 237 - set[i];
-            if (left == 0) {
-                count++;
-            } else {
-                int[] possible = System.arraycopy(set, i,);
-                if (possible.Length > 0) {
-                    foreach (string s in GetCombinations(possible, left, vals)) {
-                        yield return s;
-                    }
-                }
-            }
-        }
-    }
+ */
 }
