@@ -33,7 +33,6 @@ public class ChallengeStr237 {
             arr[i] = charArr[i];
         }
         Arrays.sort(arr);
-
         return isSubsetSum(arr, n, 237, count);
 
 
