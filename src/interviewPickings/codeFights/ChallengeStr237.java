@@ -54,31 +54,30 @@ public class ChallengeStr237 {
           (b) excluding the last element   */
         return count + isSubsetSum(set, n - 1, sum, count) + isSubsetSum(set, n - 1, sum - set[n - 1], count);
     }
-/*
-        prev version
-        craptastic , after 30 elements its just not feasible , better learn proper dynamic programming ffs
-        int n = str.length();
-        int count = 0;
-        int[] arr = new int[n];
-        char[] charArr = str.toCharArray();
-        for (int i = 0; i < n; i++) {
-            arr[i] = charArr[i];
-        }
-        System.out.println(arr.length);
-        long N = (long) Math.pow(2d, Double.valueOf(n));
-        for (int i = 1; i < N; i++) {
-            String code = Long.toBinaryString(N | i).substring(1);
-            int val = 0;
-            for (int j = 0; j < n; j++) {
-                if (code.charAt(j) == '1') {
-                    val += arr[j];
-                    if (val > 237)
-                        break;
-                }
-            }
-            if (val == 237)
-                count++;
-        }
-        return count;
- */
+//        prev version
+//        craptastic , after 30 elements its just not feasible , better learn proper dynamic programming ffs
+//        int n = str.length();
+//        int count = 0;
+//        int[] arr = new int[n];
+//        char[] charArr = str.toCharArray();
+//        for (int i = 0; i < n; i++) {
+//            arr[i] = charArr[i];
+//        }
+//        System.out.println(arr.length);
+//        long N = (long) Math.pow(2d, Double.valueOf(n));
+//        for (int i = 1; i < N; i++) {
+//            String code = Long.toBinaryString(N | i).substring(1);
+//            int val = 0;
+//            for (int j = 0; j < n; j++) {
+//                if (code.charAt(j) == '1') {
+//                    val += arr[j];
+//                    if (val > 237)
+//                        break;
+//                }
+//            }
+//            if (val == 237)
+//                count++;
+//        }
+//        return count;
+//
 }

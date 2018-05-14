@@ -1,4 +1,5 @@
 package interviewPickings.leetcode;
+
 /*
 1 - 1 top
 2 - 1 top + 1/2 2 second row
@@ -19,10 +20,64 @@ d = (1 - sq(8*a)) / 2
 public class ChampaigneTower {
     public static void main(String[] args) {
         ChampaigneTower ct = new ChampaigneTower();
-        System.out.println(ct.champagneTower(1,1,1));
-        System.out.println(ct.champagneTower(2,1,1));
+        //System.out.println(ct.champagneTower(1, 1, 1));
+        System.out.println(ct.champagneTower(6, 2, 0)); //5
+        //System.out.println(ct.champagneTower(1, 1, 1)); //5
+        //System.out.println(ct.champagneTower(2, 1, 1)); //5
+
     }
+
     public double champagneTower(int poured, int query_row, int query_glass) {
+        if (poured >= 5050)
+            return 1;
+        if (poured <= 0)
+            return 0;
+        int rowsFull = getFullRowsDependingOnPoured(poured);
+        int x = rowsFull;
+        if (query_row < rowsFull - 1) //inside the filled range
+            return 1;
+        if (query_row > rowsFull + 1) //outside of possible pouring
+            return 0;
+
+        int cupsFull = (rowsFull * (rowsFull + 1)) / 2;
+        int p = poured - cupsFull; //wine left
+        double k = (double) p / x;
+
+        if (k <= 1 && query_row == x) {
+            if (query_glass == 0 || query_glass == query_row)
+                return k / 2;
+            else
+                return k;
+        }
+        if (k > 1 && query_row == x + 1) {
+            double l = k - 1;
+            if (query_glass == 0 || query_glass == query_row)
+                return l / 2;
+            else
+                return l;
+        }
+        return 0;
+
+    }
+
+    private int getFullRowsDependingOnPoured(int poured) {
+        int left = 1, right = 100, middle;
+        while (true) {
+            middle = (left + right) / 2;
+            int tmp = (middle * (middle + 1)) / 2;
+            if (tmp == poured)
+                return middle;
+            else if (tmp < poured) {
+                left = middle + 1;
+                if (left > right)
+                    return middle;
+            } else {
+                right = middle - 1;
+                if (left > right) {
+                    return middle - 1;
+                }
+            }
 
         }
+    }
 }

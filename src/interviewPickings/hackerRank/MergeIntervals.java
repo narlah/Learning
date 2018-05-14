@@ -33,7 +33,8 @@ public class MergeIntervals {
         minEndTimes.offer(userProvided.get(0)[1]);
         for (int i = 1; i < userProvided.size(); i++) {
             if (userProvided.get(i)[0] <= minEndTimes.peek()) {
-                minEndTimes.poll();
+                int a = minEndTimes.poll();
+                System.out.println(a + " " + i + " " + userProvided.get(i)[0]);
                 input--;
             }
             minEndTimes.offer(userProvided.get(i)[1]);
