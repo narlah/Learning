@@ -6,16 +6,20 @@ public class CheckIfItIsPalindrome {
 
 //        Scanner sc = new Scanner(System.in);
 //        String a = sc.next();
-        String a = "magzdzgam";
+        CheckIfItIsPalindrome check = new CheckIfItIsPalindrome();
+        check.checkPalindrome("magzdzgam");
+
+    }
+
+    boolean checkPalindrome(String a) {
         int len = a.length();
         int half = len / 2;
         for (int i = 0; i < half; i++) {
             if (a.charAt(i) != a.charAt(len - i - 1)) {
-                System.out.println("No");
-                return;
+                return false;
             }
         }
-        System.out.println("Yes");
-
+        return true;
     }
+
 }
