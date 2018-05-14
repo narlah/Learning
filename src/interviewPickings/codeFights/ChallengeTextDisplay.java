@@ -26,18 +26,20 @@ public class ChallengeTextDisplay {
             //backspace, delete, home, end, and the left & right arrow keys, in addition to alphanumeric characters and punctuation.
             //08 bs,127 del, end 35, home 36, left arrow 	37, right arrow 	39
             switch (i) {
-                case (35): {
+                case (36): {
                     cursorIndex = -1;
                     break;
                 }
 
-                case (36): {
+                case (35): {
                     cursorIndex = dl.size() - 1;
                     break;
                 }
                 case (8): {
-                    cursorIndex--;
-                    dl.remove(cursorIndex);
+                    if (dl.size() > 0) {
+                        cursorIndex--;
+                        dl.remove(cursorIndex);
+                    }
                     break;
                 }
                 case (127): {
@@ -46,7 +48,8 @@ public class ChallengeTextDisplay {
                     break;
                 }
                 case (37): {
-                    cursorIndex--;
+                    if (cursorIndex > 0)
+                        cursorIndex--;
                     break;
                 }
                 case (39): {
@@ -68,7 +71,7 @@ public class ChallengeTextDisplay {
 
             strB.append((char) listI.next().intValue());
         }
-        return strB.toString().toLowerCase();
+        return strB.toString().toLowerCase().replaceAll("^[^A-Za-z0-9 _.,!\"\'/$]*$", "");
     }
 
 
