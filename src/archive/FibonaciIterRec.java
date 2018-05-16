@@ -1,5 +1,5 @@
 package archive;
-
+import java.math.BigInteger;
 public class FibonaciIterRec {
 
     public static int fibonacci(int n) {
@@ -10,13 +10,13 @@ public class FibonaciIterRec {
         }
     }
 
-    public static int fibonacciIter(int n) {
+    public static long fibonacciIter(int n) {
         if (n < 2) {
             return n;
         } else {
-            int sum = 0;
-            int nMinus1 = 1;
-            int nMinus2 = 1;
+            long sum = 0;
+            long nMinus1 = 1;
+            long nMinus2 = 1;
             for (int i = 2; i < n; i++) {
                 sum = nMinus1 + nMinus2;
                 nMinus2 = nMinus1;
@@ -27,16 +27,35 @@ public class FibonaciIterRec {
         }
     }
 
+    public static double fibonaciFormula(int n) {
+        double sqrt5 = Math.sqrt(5);
+        return (1 / sqrt5) * Math.pow((1 + sqrt5) / 2, n) - (1 / sqrt5) * Math.pow(((1 - sqrt5) / 2), n);
+    }
+
+//    public static String fibonaciFormula(int n, int k) {
+//        if (n < k) {
+//            return "1";
+//        }
+//        double sqrt5 = Math.sqrt(5);
+//        BigInteger f = new BigInteger("0");
+//        BigInteger s = new BigInteger("0");
+//        f = Math.pow((1 + sqrt5) / k, n);
+//        s = Math.pow(((1 - sqrt5) / k), n);
+//        return BigInteger ((1 / sqrt5) *  - (1 / sqrt5) * );
+//    }
+
+
     public static void main(String[] args) {
         // ***************************f6**********************************
-        long t1 = System.nanoTime();
-        System.out.println(fibonacci(35));
-        long t2 = System.nanoTime();
-        System.out.println("Time takes for iterative : " + (t2 - t1));
+        //long t1 = System.nanoTime();
+        //System.out.println(fibonacci(1000));
+       // long t2 = System.nanoTime();
+        //System.out.println("Time takes for iterative : " + (t2 - t1));
         long i1 = System.nanoTime();
-        System.out.println(fibonacciIter(35));
+        System.out.println(fibonacciIter(48));
         long i2 = System.nanoTime();
         System.out.println("Time takes for iterative : " + (i2 - i1));
+        System.out.println((int) fibonaciFormula(48));
         // ***************************************************************
     }
 }
