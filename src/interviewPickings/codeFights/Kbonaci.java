@@ -4,14 +4,10 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 
 public class Kbonaci {
-
-
-
     public static void main(String[] args) {
         Kbonaci kb = new Kbonaci();
-        System.out.println(kb.kbonacci(5, 100));
-        System.out.println(kb.GKbonacci(5, 100));
-
+        System.out.println(kb.kbonacci(2, 6));
+        System.out.println(kb.JoroKbonacci(10, 65));
     }
 
 
@@ -34,7 +30,7 @@ public class Kbonaci {
         return res.toString();
     }
 
-    public String GKbonacci(int k, int n) {
+    public String JoroKbonacci(int k, int n) {
         final BigInteger one = new BigInteger("1");
         final BigInteger two = new BigInteger("2");
         if (k < 1 || k > n) {
