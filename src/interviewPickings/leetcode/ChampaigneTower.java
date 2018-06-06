@@ -20,11 +20,13 @@ d = (1 - sq(8*a)) / 2
 public class ChampaigneTower {
     public static void main(String[] args) {
         ChampaigneTower ct = new ChampaigneTower();
-        System.out.println(ct.champagneTower(1000000000, 99, 99)); //.5
+        System.out.println(ct.champagneTower(1000000000000000000000000000000d, 99, 99)); //.5
+        System.out.println(ct.champagneTowerOfficial(1000000000, 99, 99)); //.5
+
         //wtf why 1000000000 is 99/99 is 0 ?!?!?!?!
     }
 
-    public double champagneTower(int poured, int query_row, int query_glass) {
+    public double champagneTower(double poured, int query_row, int query_glass) {
         if (poured == 0) return 0;
         double[] pyramid = new double[5050];
         int[] rowIndexes = new int[100];
@@ -52,6 +54,15 @@ public class ChampaigneTower {
         }
         return Math.min(1, pyramid[rowIndexes[query_row] + query_glass]);
 
+    }
+
+    public double champagneTowerOfficial(int poured, int query_row, int query_glass) {
+        double[] dp = new double[101];
+        dp[0] = poured;
+        for (int row = 1; row <= query_row; row++)
+            for (int i = row; i >= 0; i--)
+                dp[i + 1] += dp[i] = Math.max(0.0, (dp[i] - 1) / 2);
+        return Math.min(dp[query_glass], 1.0);
     }
 //        if (poured >= 5050)
 //            return 1;
