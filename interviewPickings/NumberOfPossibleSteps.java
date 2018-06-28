@@ -9,7 +9,6 @@ public class NumberOfPossibleSteps {
 
     private int getNumberOfPossibleStepsInN(int n, int[] steps) {
         if (steps.length == 0) return 0;  // what happen if we have negative steps , 2 forward , one backwards ?
-
         return recSteps(0, 0, steps, n);
 
     }

@@ -21,39 +21,53 @@ public class ChallengeStr237 {
 
     public static void main(String[] args) {
         ChallengeStr237 cha = new ChallengeStr237();
-        System.out.println(cha.str237("here is question Write a method that generates an int array as a parameter, converts the generated integers into characters and print the new char array. Array values should be in the range [0 -255]. could not convert integer to ASCII co"));
+        System.out.println(cha.str237("here is question Write a method that generates an int array as a parameter, converts the generated integers into characters " +
+                "and print the new char array. Array values should be in the range [0 -255]. could not convert integer to ASCII co"));
     }
 
-    int str237(String str) {
-        int n = str.length();
-        int count = 0;
-        int[] arr = new int[n];
-        char[] charArr = str.toCharArray();
-        for (int i = 0; i < n; i++) {
-            arr[i] = charArr[i];
+    static int str237(String S) {
+        int[] D = new int[238];
+        D[0] = 1;
+        for (int i = 0; i < S.length(); i++) {
+            int c = S.charAt(i);
+            for (int x = 238; x > c; ) {
+                x--;
+                D[x] += D[x - c];
+            }
         }
-        Arrays.sort(arr);
-        return isSubsetSum(arr, n, 237, count);
-
-
+        return D[237];
     }
 
-    static int isSubsetSum(int set[], int n, int sum, int count) {
-        // Base Cases
-        if (sum == 0)
-            return ++count;
-        if (n == 0 && sum != 0)
-            return 0;
-
-        // If last element is greater than sum, then ignore it
-        if (set[n - 1] > sum)
-            return isSubsetSum(set, n - 1, sum, count);
-
-       /* else, check if sum can be obtained by any of the following
-          (a) including the last element
-          (b) excluding the last element   */
-        return count + isSubsetSum(set, n - 1, sum, count) + isSubsetSum(set, n - 1, sum - set[n - 1], count);
-    }
+//    int str237(String str) {
+//        int n = str.length();
+//        int count = 0;
+//        int[] arr = new int[n];
+//        char[] charArr = str.toCharArray();
+//        for (int i = 0; i < n; i++) {
+//            arr[i] = charArr[i];
+//        }
+//        Arrays.sort(arr);
+//        return isSubsetSum(arr, n, 237, count);
+//
+//
+//    }
+//
+//    static int isSubsetSum(int set[], int n, int sum, int count) {
+//        // Base Cases
+//        if (sum == 0)
+//            return ++count;
+//        if (n == 0 && sum != 0)
+//            return 0;
+//
+//        // If last element is greater than sum, then ignore it
+//        if (set[n - 1] > sum)
+//            return isSubsetSum(set, n - 1, sum, count);
+//
+//       /* else, check if sum can be obtained by any of the following
+//          (a) including the last element
+//          (b) excluding the last element   */
+//        return count + isSubsetSum(set, n - 1, sum, count) + isSubsetSum(set, n - 1, sum - set[n - 1], count);
+//    }
 //        prev version
 //        craptastic , after 30 elements its just not feasible , better learn proper dynamic programming ffs
 //        int n = str.length();
@@ -81,3 +95,71 @@ public class ChallengeStr237 {
 //        return count;
 //
 }
+
+/*
+public class Str237 {
+    static int str237(String S) {
+        int[] D = new int[238];
+        D[0] = 1;
+        for (int i = 0; i < S.length(); i++) {
+            int c = S.charAt(i);
+            for (int x = 238; x > c;) {
+                x--;
+                D[x] += D[x - c];
+            }
+        }
+        return D[237];
+    }
+    public static void main(String[] args) {
+        System.out.println(str237("Hello world!"));// 1
+        System.out.println(str237("Hello world!!"));// 2
+    }
+}
+
+Разгледах го мръсника - озползва факта като гледа назад докъде мойе да докара 1-цата като я събира към отместването  което е стоиноста на текущата стоиност
+
+сложноста е пак 0^2
+    static int str237(String S) {
+        int[] D = new int[238];
+        D[0] = 1;
+        for (int i = 0; i < S.length(); i++) {
+            int c = S.charAt(i);
+            for (int x = 237; x >= c; x--) {
+                D[x] += D[x - c];
+            }
+        }
+        return D[237];
+    }
+
+
+и тука мисленето е ж друга посока - не е да се направят всичките подмножества които дават сума N  а колко колко от числата могат да доведат до сума N
+и е лакомо за памет
+
+
+
+public class StrSubsum {
+
+    static int strSubsum(String S, int sum) {
+
+        int[] D = new int[sum+1];
+
+        D[0] = 1;
+
+        for (int i = 0; i < S.length(); i++) {
+
+            int c = S.charAt(i);
+
+            for (int x = sum; x >= c; x--) {
+
+                D[x] += D[x - c];
+            }
+        }
+        return D[sum];
+    }
+
+    public static void main(String[] args) {
+        System.out.println(strSubsum("Hello world!",237));// 1
+        System.out.println(strSubsum("Hello world!!",237));// 2
+    }
+}
+ */
