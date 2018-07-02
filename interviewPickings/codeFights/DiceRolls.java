@@ -3,7 +3,7 @@ package interviewPickings.codeFights;
 public class DiceRolls {
     public static void main(String[] args) {
         System.out.println();
-        D
+
     }
 
 //    int diceRolls(int[][] dice, int sum) {
