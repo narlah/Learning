@@ -23,4 +23,4 @@ public class ChangeStringReflection {
         valueField.set(s, "Mutable String".toCharArray());
         System.out.println(s);
     }
-}
+} //http://www.javacreed.com/how-to-modify-a-string-without-creating-a-new-one/
