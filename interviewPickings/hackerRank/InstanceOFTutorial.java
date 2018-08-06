@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-class Student {
+class Student_1 {
 }
 
 class Rockstar {
@@ -19,7 +19,7 @@ public class InstanceOFTutorial {
     static String count(ArrayList mylist) {
         int a = 0, b = 0, c = 0;
         for (Object element : mylist) {
-            if (element instanceof Student)
+            if (element instanceof Student_1)
                 a++;
             if (element instanceof Rockstar)
                 b++;
@@ -35,7 +35,7 @@ public class InstanceOFTutorial {
         int t = sc.nextInt();
         for (int i = 0; i < t; i++) {
             String s = sc.next();
-            if (s.equals("Student")) mylist.add(new Student());
+            if (s.equals("Student_1")) mylist.add(new Student_1());
             if (s.equals("Rockstar")) mylist.add(new Rockstar());
             if (s.equals("Hacker")) mylist.add(new Hacker());
         }
