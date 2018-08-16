@@ -23,7 +23,7 @@ public class HashTableNK<K, V> {
     }
 
     private static int hash(Object o) {
-        return 27 * o.hashCode();
+        return 27 * o.hashCode(); // for strings you can do hash = hash*31 + charAt(i);
     }
 
     private static int indexFor(int h, int length) {

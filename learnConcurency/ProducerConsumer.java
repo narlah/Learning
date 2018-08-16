@@ -40,7 +40,9 @@ public class ProducerConsumer {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            queue.add(random.nextInt(10));
+            int current = random.nextInt(10);
+            System.out.println(current);
+            queue.add(current);
         }
     }
 
