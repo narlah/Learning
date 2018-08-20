@@ -33,7 +33,7 @@ public class SemaphoreUsingMutex {
     public void goToTeller(int number) throws InterruptedException {
         semaphore.acquire();
         System.out.println("teller accepts client number " + number);
-        Thread.sleep(random.nextInt(10)*1000);
+        Thread.sleep(random.nextInt(10) * 1000);
         System.out.println(number + " released");
         semaphore.release();
     }
@@ -46,7 +46,7 @@ class MySemaphore {
         this.semaphore = new AtomicInteger(semaphore);
     }
 
-    public synchronized void  acquire() throws InterruptedException {
+    public synchronized void acquire() throws InterruptedException {
         while (semaphore.get() == 0)
             wait();
         semaphore.decrementAndGet();
