@@ -44,11 +44,84 @@ public class Fill2dMatrixSorted {
         MatrixTools.printMatrix(ff.matrix, "---");
         int[] arr = new int[]{1, 11, 12, 13, 14, 48};
         for (int s : arr) {
-            System.out.println(s + " : " + ff.findXInMatrix(ff.matrix, s));
+            System.out.println(s + " : " + ff.findXInMatrixLinear(ff.matrix, s));
+        }
+
+        for (int s : arr) {
+            ff.findXInMatrixBSearch(ff.matrix, s);
+            //System.out.println(s + " : " + ff.findXInMatrixBSearch(ff.matrix, s));
         }
     }
 
-    private String findXInMatrix(int[][] matrix, int searchFor) {
+    private void findXInMatrixBSearch(int[][] matrix, int searchFor) {
+        int maxX = matrix.length - 1;
+        int maxY = matrix[0].length - 1;
+        //return recBSearch(matrix, 0,maxY, 0 , maxX, searchFor);
+        searchOfficial(matrix, 0, maxY, 0, maxX, searchFor);
+
+    }
+
+    private String recBSearch(int[][] arr, int fromCol, int toCol, int fromRow, int toRow, int searchFor) {
+        String res = "";
+        int midCol = fromCol + (toCol - fromCol) / 2;
+        int midRow = fromRow + (toRow - fromRow) / 2;
+        int midVal = arr[midCol][midRow];
+        if (midVal == searchFor) {
+            return "Found at " + midCol + " " + midRow;
+        }
+        if (midRow != toRow && midCol != toCol)
+            res += recBSearch(arr, fromCol, midCol, midRow, toRow, searchFor);
+        if (midVal > searchFor && midRow - 1 >= fromCol) {
+            res += recBSearch(arr, fromCol, toCol, fromRow - 1, midRow, searchFor);
+        } else if (midCol + 1 <= toRow) { // midVal < searchFor
+            res += recBSearch(arr, midCol + 1, toCol, fromRow, toRow, searchFor);
+        }
+        return res;
+    }
+
+
+    public static void searchOfficial(int[][] mat, int fromRow, int toRow,
+                                      int fromCol, int toCol, int key) {
+        // Find middle and compare with middle
+        int midCol = fromCol + (toCol - fromCol) / 2;
+        int midRow = fromRow + (toRow - fromRow) / 2;
+        int midVal = mat[midRow][midCol];
+        if (midVal == key) // If key is present at middle
+            System.out.println("Found " + key + " at " + midRow +
+                    " " + midCol);
+        else {
+            // right-up quarter of matrix is searched in all cases.
+            // Provided it is different from current call
+            if (midRow != toRow || midCol != fromCol)
+                searchOfficial(mat, fromRow, midRow, midCol, toCol, key);
+
+            // Special case for iteration with 1*2 matrix
+            // mat[midRow][midCol] and mat[midRow][midCol+1] are only two elements.
+            // So just check second element
+            if (fromRow == toRow && fromCol + 1 == toCol)
+                if (mat[fromRow][toCol] == key)
+                    System.out.println("Found " + key + " at " +
+                            fromRow + " " + toCol);
+
+            // If middle key is lesser then search lower horizontal
+            // matrix and right hand side matrix
+            if (midVal < key) {
+                // search lower horizontal if such matrix exists
+                if (midRow + 1 <= toRow)
+                    searchOfficial(mat, midRow + 1, toRow, fromCol, toCol, key);
+            }
+
+            // If middle key is greater then search left vertical
+            // matrix and right hand side matrix
+            else {
+                // search left vertical if such matrix exists
+                if (midCol - 1 >= fromCol)
+                    searchOfficial(mat, fromRow, toRow, fromCol, midCol - 1, key);
+            }
+        }
+    }
+
+    private String findXInMatrixLinear(int[][] matrix, int searchFor) {
         int maxX = matrix.length - 1;
         int x = 0;
         int y = matrix[0].length - 1;

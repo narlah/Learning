@@ -1,4 +1,4 @@
-package learnORM.HibernateExample.src.main.java.com.nkosev.HibernateDemo;
+package learnORM.com.nkosev.HibernateDemo;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
