@@ -23,7 +23,7 @@ public class QuickSortComponent {
         int pivot = numbers[low + (high - low) / 2];
 
         // Divide into two lists
-        while (i <ij) {
+        while (i < j) {
             // If tihe current value from the left list is smaller then the pivot
             // element then get the next element from the left list
             while (numbers[i] < pivot) {
