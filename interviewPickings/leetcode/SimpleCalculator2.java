@@ -25,6 +25,6 @@ public class SimpleCalculator2 {
 
     public static void main(String[] args) {
         SimpleCalculator2 sim = new SimpleCalculator2();
-        System.out.println(sim.calculate("45"));
+        System.out.println(sim.calculate("45+12*5"));
     }
 }
