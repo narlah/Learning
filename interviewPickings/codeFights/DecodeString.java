@@ -63,4 +63,32 @@ public class DecodeString {
         return sb.toString();
     }
 
+
+    String decodeStringShal2Answer(String s) {
+        Stack<Integer> intStack = new Stack();
+        Stack<StringBuilder> strStack = new Stack();
+        StringBuilder curr = new StringBuilder();
+        int k = 0;
+
+        for (char ch : s.toCharArray()) {
+            if (Character.isDigit(ch)) {
+                k = k * 10 + ch - '0';
+            } else if (ch == '[') {
+                intStack.push(k);
+                strStack.push(curr);
+                curr = new StringBuilder();
+                k = 0;
+            } else if (ch == ']') {
+                StringBuilder tmp = curr;
+                curr = strStack.pop();
+                for (int i = intStack.pop(); i > 0; i--) {
+                    curr.append(tmp);
+                }
+            } else {
+                curr.append(ch);
+            }
+        }
+        return curr.toString();
+    }
+
 }
