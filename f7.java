@@ -1,3 +1,6 @@
+import java.util.Arrays;
+import java.util.StringTokenizer;
+
 public class f7 {
     // ***************************f6**********************************
 
@@ -11,13 +14,15 @@ public class f7 {
     }
 
     private static int a() {
-        try {
-            System.out.println(1);
-            return 5;
-        } finally {
-            System.out.println(2);
-            return 4;
-        }
+        String z = "[[a]{b}[[c]d]()]";
+        String regEx = "(?<=[{}()\\[\\]])|(?=[{}()\\[\\]])";
+        System.out.println(Arrays.toString(z.split(regEx)));
+        StringTokenizer st = new StringTokenizer(z, "[]{}()");
 
+
+        while (st.hasMoreTokens()) {
+            System.out.println(st.nextToken());
+        }
+        return 0;
     }
 }

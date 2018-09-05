@@ -1,8 +1,5 @@
 package interviewPickings.leetcode;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class SpareChange {
     public static void main(String[] args) {
         SpareChange sp = new SpareChange();
