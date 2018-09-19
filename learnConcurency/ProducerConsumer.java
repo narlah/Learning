@@ -5,7 +5,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 public class ProducerConsumer {
-    private BlockingQueue<Integer> queue = new ArrayBlockingQueue<>(10);
+    private BlockingQueue<Integer> queue = new ArrayBlockingQueue<>(1);
 
     public static void main(String[] args) throws InterruptedException {
         ProducerConsumer pr = new ProducerConsumer();
@@ -41,7 +41,7 @@ public class ProducerConsumer {
                 e.printStackTrace();
             }
             int current = random.nextInt(10);
-            System.out.println(current);
+            System.out.println("prod : " + current);
             queue.add(current);
         }
     }
@@ -53,7 +53,7 @@ public class ProducerConsumer {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.printf(String.valueOf(queue.remove()));
+            System.out.printf("cnsm : " + String.valueOf(queue.remove()) + "\n");
         }
     }
 

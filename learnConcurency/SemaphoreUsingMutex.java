@@ -7,11 +7,17 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 //idea - counters at bank tellers (3 counters, 10 people waiting, one semaphore)
 public class SemaphoreUsingMutex {
-    MySemaphore semaphore = new MySemaphore(3);
+    int capacity = 3;
+    MySemaphore semaphore;
+
+    public SemaphoreUsingMutex(int capacity) {
+        this.capacity = capacity;
+        semaphore = new MySemaphore(capacity);
+    }
     Random random = new Random();
 
     public static void main(String[] args) {
-        SemaphoreUsingMutex SS = new SemaphoreUsingMutex();
+        SemaphoreUsingMutex SS = new SemaphoreUsingMutex(3);
         SS.startExecutor();
     }
 
@@ -39,21 +45,4 @@ public class SemaphoreUsingMutex {
     }
 }
 
-class MySemaphore {
-    private AtomicInteger semaphore;
 
-    public MySemaphore(int semaphore) {
-        this.semaphore = new AtomicInteger(semaphore);
-    }
-
-    public synchronized void acquire() throws InterruptedException {
-        while (semaphore.get() == 0)
-            wait();
-        semaphore.decrementAndGet();
-    }
-
-    public synchronized void release() {
-        semaphore.incrementAndGet();
-        this.notify();
-    }
-}
