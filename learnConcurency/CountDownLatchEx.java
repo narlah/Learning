@@ -6,7 +6,7 @@ public class CountDownLatchEx {
     public static void main(String[] args) {
         final CountDownLatch countdown = new CountDownLatch(1);
         for (int i = 0; i < 10; ++ i){
-            Thread racecar = new Thread(() -> {
+            Thread racecar =  new Thread(() -> {
                 try {
                     countdown.await(); //all threads waiting
                 } catch (InterruptedException e) {

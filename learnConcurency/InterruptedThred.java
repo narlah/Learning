@@ -40,7 +40,8 @@ public class InterruptedThred {
                 }
 //                try {
 //                    Thread.sleep(1);
-//                } catch (InterruptedException e) {
+//
+//     } catch (InterruptedException e) {
 //                    System.out.println("We have been interrupted");
 //                    break;
 //                }
