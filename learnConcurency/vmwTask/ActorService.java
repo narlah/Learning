@@ -1,12 +1,19 @@
 package learnConcurency.vmwTask;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
+
 public class ActorService {
 
-    public Actor registerActor(String actorId) {
-        return null;
+    private ConcurrentHashMap<String, Actor> actorRepo = new ConcurrentHashMap<>();
+
+    public void registerActor(Actor actor) {
+        if (!actorRepo.contains(actor)){
+            actorRepo.put(actor.actorID,actor);
+        }
     }
 
-    public void sendMessage(Message message){
+    public void sendMessage(Message message) {
 
     }
 }
