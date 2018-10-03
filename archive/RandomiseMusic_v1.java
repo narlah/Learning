@@ -21,7 +21,7 @@ public class RandomiseMusic_v1 {
         String filePath;
         String newName;
 
-        // Main cycle , we shuffle , change the names, and rename the file
+        // MainLoopVM cycle , we shuffle , change the names, and rename the file
         for (int i = 0; i < vectorLenght; i++) {
             File currentFile = AllMusicFiles.elementAt(i);
             String originalName = currentFile.getName();
@@ -103,7 +103,7 @@ public class RandomiseMusic_v1 {
 
     }
 
-    // Main method
+    // MainLoopVM method
     public static void main(String[] args) {
         try {
 

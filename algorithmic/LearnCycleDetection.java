@@ -12,7 +12,7 @@ public class LearnCycleDetection {
 
     // *************************************************************************************************
     private static void detectCycleFloyd(Node root) {
-        // Main phase of algorithm: finding a repetition x_i = x_2i
+        // MainLoopVM phase of algorithm: finding a repetition x_i = x_2i
         // The hare moves twice as quickly as the tortoise and
         // the distance between them increases by 1 at each step.
         // Eventually they will both be inside the cycle and then,

@@ -9,7 +9,7 @@ public class SpiralFillingMatrix {
     private static int currentDir = 0;
     private static int currentNumber = 0;
 
-    // Main recurs. method
+    // MainLoopVM recurs. method
     private static void move(int x, int y) {
         int n = matrix[0].length;
 
