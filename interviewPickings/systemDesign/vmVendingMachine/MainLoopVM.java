@@ -18,16 +18,33 @@ public class MainLoopVM {
         VendingMachine vm = new VendingMachine();
         Scanner scanner = new Scanner(System.in);
         int choice;
+        System.out.println(vm.listMenu());
+        String mainMenuString = createMainMenu();
+        System.out.print(mainMenuString);
         while (true) {
-            System.out.println(createMainMenu());
             choice = readIntConsole(scanner);
             switch (choice) {
                 case 0:
-                    System.out.println("Exiting ...");
-                    return;
+                    System.out.print(mainMenuString);
+                    break;
                 case 1:
                     System.out.println(vm.listMenu());
                     break;
+                case 2:
+                    int article = readIntConsole(scanner);
+                    int moneyIn = readIntConsole(scanner);
+                    VendingItem vitem = vm.getItem(article);
+                    float price = vitem.getPrice();
+                    if (moneyIn < price) {
+                        System.out.println("Not enough minerals! Try again");
+                        break;
+                    }
+                    System.out.println(String.format("You bought item %s for %.2f and you have %.2f change. Have a nice day!",
+                            vitem.getName(), vitem.getPrice(), moneyIn - vitem.getPrice()));
+                    break;
+                case 9:
+                    System.out.println("Exiting ...");
+                    return;
                 default:
                     System.out.println("Do nothing, try something else instead!");
             }
@@ -35,9 +52,8 @@ public class MainLoopVM {
     }
 
     private String createMainMenu() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("0 exits \n1 lists\nRest Do nothing.\nEnter your choice :");
-        return sb.toString();
+        return "0 print help \n1 lists \n2 buys id with X money ex: <2 3 5> - [buys article id 3 with 5$ note] \n" +
+                "9 exits\nRest Do nothing.\nEnter your choice : ";
     }
 
     private int readIntConsole(Scanner scanReader) {
@@ -45,7 +61,7 @@ public class MainLoopVM {
         while (true) {
             if (scanReader.hasNextInt()) {
                 int n = scanReader.nextInt();
-                if (n != 0 & n <= 9) {
+                if (n >= 0 & n <= 100) {
                     return n;
                 } else {
                     System.out.println("Nope, out of bounds, try again!");
