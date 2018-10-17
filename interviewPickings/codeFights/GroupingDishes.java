@@ -2,6 +2,7 @@ package interviewPickings.codeFights;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class GroupingDishes {
     public static void main(String[] args) {
@@ -36,9 +37,19 @@ public class GroupingDishes {
                 }).forEach(res::add);
         Collections.sort(res, Comparator.comparing(a -> a[0]));
         return res.toArray(new String[res.size()][]);
+    }
 
+    String[][] groupingDishesOfficial(String[][] dishes) {
+        //https://app.codesignal.com/interview-practice/task/xrFgR63cw7Nch4vXo/solutions/etktiesx69B9dF3rZ
+        return Arrays.stream(dishes)
+                .flatMap(d -> Arrays.stream(d).skip(1).map(i -> new AbstractMap.SimpleEntry(i, d[0])))
+                .collect(Collectors.groupingBy(
+                        Map.Entry::getKey, TreeMap::new, Collectors.mapping(Map.Entry::getValue, Collectors.toList())))
+                .entrySet()
+                .stream()
+                .filter(e -> e.getValue().size() > 1)
+                .map(e -> Stream.concat(Stream.of(e.getKey()), e.getValue().stream().sorted()).toArray(String[]::new))
+                .toArray(String[][]::new);
     }
 
 }
-
-
