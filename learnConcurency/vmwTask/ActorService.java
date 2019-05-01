@@ -8,16 +8,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class ActorService {
 
-    Object executorsLock = new Object();
-    AtomicInteger messageCounter = new AtomicInteger(0);
+    private final Object executorsLock = new Object();
+    private AtomicInteger messageCounter = new AtomicInteger(0);
     private int capacity = 5;
     private ConcurrentHashMap<String, Actor> actorRepo = new ConcurrentHashMap<>();
     private ConcurrentHashMap<String, ConcurrentLinkedQueue<Message>> messageQueues = new ConcurrentHashMap<>();
     private ConcurrentHashMap<String, Boolean> actorsLocked = new ConcurrentHashMap<>();
-
-    public ActorService() {
-        runTheMainLoop();
-    }
 
     public ActorService(int capacity) {
         this.capacity = capacity;
@@ -25,6 +21,7 @@ public class ActorService {
     }
 
     public void registerActor(Actor actor) {
+
         if (!actorRepo.contains(actor)) {
             actorRepo.put(actor.actorID, actor);
             messageQueues.put(actor.actorID, new ConcurrentLinkedQueue<>());
@@ -34,10 +31,16 @@ public class ActorService {
 
     public void sendMessage(Message message) {
         boolean flag = false;
-        if (messageCounter.get() == 0)
+
+        ConcurrentLinkedQueue<Message> concurrentQueue = messageQueues.get(message.actorId);
+        concurrentQueue.add(message);
+
+        if (messageCounter.get() == 0 || concurrentQueue.size() == 1 ) {
             flag = true;
-        messageQueues.get(message.actorId).add(message);
+        }
+
         messageCounter.incrementAndGet();
+
         if (flag) {
             synchronized (executorsLock) {
                 executorsLock.notifyAll();
@@ -61,7 +64,7 @@ public class ActorService {
                 }
                 for (String actorKey : messageQueues.keySet()) {
                     ConcurrentLinkedQueue<Message> actorQueue = messageQueues.get(actorKey);
-                    if (actorsLocked.get(actorKey) == false && actorQueue.size() > 0) {
+                    if (!actorsLocked.get(actorKey) && actorQueue.size() > 0) {
                         actorsLocked.put(actorKey, true);
                         final Message message = actorQueue.poll();
                         executor.execute(() -> {
