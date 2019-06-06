@@ -48,9 +48,9 @@ public class HeapSort {
         }
     }
 
-    public static void main(String[] args) { //testing main
+    public static void main(String[] args) { //testing Main
         int[] a1 = {4, 1, 3, 2, 16, 9, 10, 14, 8, 7};  //example array
-        sort(a1); //calling main sort method, returns nada uses global array pointer and work on it
+        sort(a1); //calling Main sort method, returns nada uses global array pointer and work on it
         for (int anA1 : a1) { //print out
             System.out.print(anA1 + " ");
         }

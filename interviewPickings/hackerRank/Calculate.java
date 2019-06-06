@@ -55,7 +55,7 @@ class Calculate {
 //
 //public class PrettyPrintMatrix {
 //
-//    public static void main(String[] args) {
+//    public static void Main(String[] args) {
 //        DoNotTerminate.forbidExit();
 //        try {
 //            Calculate cal = new Calculate();
@@ -94,7 +94,7 @@ class Calculate {
 //        }
 //
 //
-//    } //end of main
+//    } //end of Main
 //} //end of PrettyPrintMatrix
 //
 ///**

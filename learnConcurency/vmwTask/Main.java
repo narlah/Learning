@@ -3,7 +3,7 @@ package learnConcurency.vmwTask;
 public class Main {
     public static void main(String[] args) throws InterruptedException {
 
-        ActorService service = new ActorService(5);
+    ActorService service = new ActorService(5);
 
         for (int i = 0; i < 10; i++) {
             service.registerActor(new Actor("Actor" + i));

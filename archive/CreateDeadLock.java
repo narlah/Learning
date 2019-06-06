@@ -10,8 +10,8 @@ public class CreateDeadLock extends Thread {
 
         myThread.start();
         yourThread.start();
-        System.out.println("At the end of main");
-    } // end method main
+        System.out.println("At the end of Main");
+    } // end method Main
 
     private static class MyThread extends Thread {
         public void run() {

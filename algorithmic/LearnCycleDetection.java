@@ -55,7 +55,7 @@ public class LearnCycleDetection {
 
     // *************************************************************************************************
     private static void detectCycleBrent(Node root) {
-        // main phase: search successive powers of two
+        // Main phase: search successive powers of two
         int power = 1, lam = 1;
         Node tortoise = root;
         Node hare = root.getNext(); // x0) is the element/node next to x0.

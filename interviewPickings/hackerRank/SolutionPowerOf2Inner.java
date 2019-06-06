@@ -32,7 +32,7 @@ public class SolutionPowerOf2Inner {
         catch (DoNotTerminate.ExitTrappedException e) {
             System.out.println("Unsuccessful Termination!!");
         }
-    }//end of main
+    }//end of Main
 
     static class Inner {
         private class Private {

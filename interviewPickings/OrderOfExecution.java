@@ -18,9 +18,9 @@ public class OrderOfExecution extends SuperChild {
     }
 
     public static void main(String[] args) {
-        System.out.println("in main entrace");
+        System.out.println("in Main entrace");
         OrderOfExecution o = new OrderOfExecution();
-        System.out.println("out of main entrace");
+        System.out.println("out of Main entrace");
     }
 }
 

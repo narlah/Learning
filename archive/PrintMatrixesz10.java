@@ -55,14 +55,14 @@ public class PrintMatrixesz10 {
     public static void fillMatrixDiagonal() {
         int n = matrix[0].length;
         int counter = 1;
-        //lower left part + main diagonal from 0,0
+        //lower left part + Main diagonal from 0,0
         for (int i = n - 1, times = 1; i >= 0; i--, times++) {
             for (int diag = 0; diag < times; diag++) {
                 matrix[i + diag][diag] = counter;
                 counter++;
             }
         }
-        //upper right part without the main diagonal
+        //upper right part without the Main diagonal
         for (int i = 0, times = n - 1; i < n - 1; i++, times--) {
             for (int diag = 1; diag <= times; diag++) {
                 matrix[diag - 1][i + diag] = counter;
@@ -74,14 +74,14 @@ public class PrintMatrixesz10 {
     public static void fillMatrixDiagonalT() {
         int n = matrix[0].length;
         int counter = 1;
-        //lower left part + main diagonal from 0,0
+        //lower left part + Main diagonal from 0,0
         for (int i = n - 1, times = 1; i >= 0; i--, times++) {
             for (int diag = 0; diag < times; diag++) {
                 matrix[diag][i + diag] = counter;
                 counter++;
             }
         }
-        //upper right part without the main diagonal
+        //upper right part without the Main diagonal
         for (int i = 0, times = n - 1; i < n - 1; i++, times--) {
             for (int diag = 1; diag <= times; diag++) {
                 matrix[i + diag][diag - 1] = counter;

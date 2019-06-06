@@ -81,7 +81,7 @@ public class CanadianStandoff {
         System.out.println("Canadian2 passed");
 
     }
-    public static void main(String[] args) {
+    public static void Main(String[] args) {
         CanadianStandoff canadianStandoff = new CanadianStandoff();
         canadianStandoff.canada1();
         canadianStandoff.canada2();

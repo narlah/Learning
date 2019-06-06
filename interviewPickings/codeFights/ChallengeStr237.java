@@ -110,7 +110,7 @@ public class Str237 {
         }
         return D[237];
     }
-    public static void main(String[] args) {
+    public static void Main(String[] args) {
         System.out.println(str237("Hello world!"));// 1
         System.out.println(str237("Hello world!!"));// 2
     }
@@ -157,7 +157,7 @@ public class StrSubsum {
         return D[sum];
     }
 
-    public static void main(String[] args) {
+    public static void Main(String[] args) {
         System.out.println(strSubsum("Hello world!",237));// 1
         System.out.println(strSubsum("Hello world!!",237));// 2
     }

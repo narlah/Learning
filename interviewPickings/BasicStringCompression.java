@@ -3,7 +3,7 @@ package interviewPickings;
 public class BasicStringCompression {
     public static void main(String[] args) {
         BasicStringCompression main = new BasicStringCompression();
-        // System.out.println(main.compressString("aabccccccdddddddddkkklzmpaaaaa"));
+        // System.out.println(Main.compressString("aabccccccdddddddddkkklzmpaaaaa"));
         String s = "aabcdejjjjjjjjjjjjjjjjjjjjjjjjjzza     a";
         String result = main.compressString(s);
         System.out.println();

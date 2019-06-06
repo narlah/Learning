@@ -82,5 +82,5 @@ public class SieveOfAtkin {
                 } // end if
             } // end if
         } // end for
-    } // end main
+    } // end Main
 } // end class SieveOfAtkin
