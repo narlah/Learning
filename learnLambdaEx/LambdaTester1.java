@@ -1,6 +1,6 @@
 package learnLambdaEx;
 
-public class LambdaTester1 {
+public class          LambdaTester1 {
     public static void main(String args[]) {
         LambdaTester1 tester = new LambdaTester1();
 
@@ -9,7 +9,7 @@ public class LambdaTester1 {
 
         //with out type declaration
         MathOperation subtraction = (a, b) -> a - b;
-
+ 
         //with return statement along with curly braces
         MathOperation multiplication = (int a, int b) -> {
             return a * b;
